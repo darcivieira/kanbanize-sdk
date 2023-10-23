@@ -1,0 +1,7 @@
+site_name: Kanbanize SDK
+repo_url: https://github.com/darcivieira/kanbanize-sdk
+repo_name: Kanbanize SDK
+edit_uri: tree/main
+
+theme:
+  name: material
