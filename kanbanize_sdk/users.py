@@ -26,8 +26,7 @@ class Users(GenericRequestMethod):
         This method is responsible to invite a user to the platform.
 
         Parameters:
-            body: It's a dataclass object that provide the essential request
-            body needed to invite an user to the platform.
+            body: It's a dataclass object that provide the essential request body needed to invite an user to the platform.
 
         Returns:
             An user object with the basic information data
