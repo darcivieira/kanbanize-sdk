@@ -1,6 +1,6 @@
-site_name: Kanbanize SDK
+site_name: Kanbanize-sdk
 repo_url: https://github.com/darcivieira/kanbanize-sdk
-repo_name: Kanbanize SDK
+repo_name: Kanbanize-sdk
 edit_uri: tree/main
 
 theme:

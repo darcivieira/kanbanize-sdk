@@ -4,6 +4,18 @@ version = "0.1.0"
 description = ""
 authors = ["darcivieira <darcivieira.junior@gmail.com>"]
 readme = "README.md"
+packages = [{include = "kanbanize_sdk"}]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3.10",
+    "Environment :: Plugins"
+
+]
+
+[tool.poetry.urls]
+"Docs" = "https://kanbanize-sdk.readthedocs.io/en/latest/"
+"GitHub" = "https://github.com/darcivieira/kanbanize-sdk/tree/main"
 
 [tool.poetry.dependencies]
 python = "^3.10"
