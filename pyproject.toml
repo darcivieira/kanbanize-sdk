@@ -4,7 +4,7 @@ version = "0.1.3"
 description = "Kanbanize-sdk is a python library for interacting with the official Kanbanize tool environment in version 2."
 authors = ["darcivieira <darcivieira.junior@gmail.com>"]
 readme = "README.md"
-license = "MIT License (MIT)"
+license = "MIT"
 packages = [{include = "kanbanize_sdk"}]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
