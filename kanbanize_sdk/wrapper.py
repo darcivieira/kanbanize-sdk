@@ -14,20 +14,20 @@ class DefaultOptions(TypedDict):
 class KanbanizeSession(Session):
     def __init__(self, options: DefaultOptions, **kwargs):
         self.__uri = f'https://{options.get("subdomain")}.kanbanize.com/api/v2'
-        self.headers = CaseInsensitiveDict(
-            {
-                'Content-Type': 'application/json',
-                'apikey': options.get("api_key")
-            }
-        )
+        self.__api_key = options.get("api_key")
         super(KanbanizeSession, self).__init__(**kwargs)
 
     @property
     def uri(self):
         return self.__uri
 
+    @property
+    def api_key(self):
+        return self.__api_key
+
     def request(self, method, url=None, data=None, headers=None, **kwargs) -> Response:
-        return super(KanbanizeSession, self).request(method, url=self.uri + url, data=data, headers=self.headers, **kwargs)
+        headers = {'Content-Type': 'application/json', 'apikey': self.api_key}
+        return super(KanbanizeSession, self).request(method, url=self.uri + url, data=data, headers=headers, **kwargs)
 
     def send(self, request, **kwargs):
         r = super().send(request, **kwargs)
