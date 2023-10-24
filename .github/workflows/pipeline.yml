@@ -21,7 +21,7 @@ jobs:
         run: poetry install --without doc
 
       - name: Run tests
-        run: poetry run pytest -v --cov-report=xml
+        run: poetry run pytest -s -x --cov=kanbanize_sdk -vv --cov-report=xml
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
