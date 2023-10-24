@@ -4,7 +4,7 @@ from .dataclasses import UsersListParams, UsersInsertBody, UsersUpdateBody
 
 class Users(GenericRequestMethod):
 
-    __endpoint = '/users'
+    endpoint = '/users'
 
     def list(self, params: UsersListParams | None = None):
         params = params.to_dict() if params else None

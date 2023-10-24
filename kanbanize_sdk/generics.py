@@ -4,14 +4,10 @@ from .wrapper import KanbanizeSession
 
 class GenericRequestMethod(metaclass=ABCMeta):
 
-    __endpoint = ''
+    endpoint = ''
 
     def __init__(self, service: KanbanizeSession, *args, **kwargs):
         self.service = service
-
-    @property
-    def endpoint(self):
-        return self.__endpoint
 
     @abstractmethod
     def insert(self, *args, **kwargs):
