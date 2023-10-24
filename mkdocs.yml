@@ -5,3 +5,9 @@ edit_uri: tree/main
 
 theme:
   name: material
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [kanbanize_sdk]
