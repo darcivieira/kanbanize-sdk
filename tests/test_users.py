@@ -1,4 +1,3 @@
-import requests_mock
 from kanbanize_sdk import kanbanize, UsersInsertBody, UsersUpdateBody
 
 
