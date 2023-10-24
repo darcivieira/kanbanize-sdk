@@ -32,3 +32,32 @@ class UsersUpdateBody:
 
     def to_dict(self):
         return {key: value for key, value in self.__dict__.items() if value is not None}
+
+
+@dataclass
+class TeamsListParams:
+    team_ids: Optional[List] = None
+    name: Optional[str] = None
+    fields: Optional[List] = None
+    expand: Optional[List] = None
+
+    def to_dict(self):
+        return {key: value for key, value in self.__dict__.items() if value is not None}
+
+
+@dataclass
+class TeamsInsertBody:
+    name: str
+    description: Optional[str] = None
+
+    def to_dict(self):
+        return {key: value for key, value in self.__dict__.items() if value is not None}
+
+
+@dataclass
+class TeamsUpdateBody:
+    name: Optional[str] = None
+    description: Optional[str] = None
+
+    def to_dict(self):
+        return {key: value for key, value in self.__dict__.items() if value is not None}
