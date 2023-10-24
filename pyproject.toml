@@ -1,9 +1,10 @@
 [tool.poetry]
 name = "kanbanize-sdk"
 version = "0.1.0"
-description = ""
+description = "Kanbanize-sdk is a python library for interacting with the official Kanbanize tool environment in version 2."
 authors = ["darcivieira <darcivieira.junior@gmail.com>"]
 readme = "README.md"
+license = "MIT License (MIT)"
 packages = [{include = "kanbanize_sdk"}]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
