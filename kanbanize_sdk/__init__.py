@@ -7,7 +7,7 @@ from .dataclasses import (
 )
 
 
-class kanbanize:
+class Kanbanize:
     def __init__(self, options):
         self.service = KanbanizeSession(options)
 
