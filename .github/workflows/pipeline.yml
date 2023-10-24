@@ -1,0 +1,24 @@
+name: Kanbanize-sdk
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v4
+
+      - name: Install python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install poetry
+        run: pip install poetry
+
+      - name: Install project dependencies
+        run: poetry install --without doc
+
+      - name: Run tests
+        run: poetry pytest -v
