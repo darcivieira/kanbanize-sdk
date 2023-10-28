@@ -1,6 +1,7 @@
 from .wrapper import KanbanizeSession
 from .users import Users
 from .teams import Teams
+from .managed_workspaces import ManagedWorkspaces
 
 
 class Kanbanize:
@@ -12,3 +13,6 @@ class Kanbanize:
 
     def teams(self):
         return Teams(self.service)
+
+    def managedWorkspace(self):
+        return ManagedWorkspaces(self.service)
