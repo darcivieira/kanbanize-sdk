@@ -61,3 +61,49 @@ class TeamsUpdateBody:
 
     def to_dict(self):
         return {key: value for key, value in self.__dict__.items() if value is not None}
+
+
+@dataclass
+class BoardsListParams:
+    board_ids: Optional[List] = None
+    workspace_ids: Optional[List] = None
+    is_archived: Optional[Literal[0, 1]] = None
+    if_assigned: Optional[Literal[0, 1]] = None
+    fields: Optional[List] = None
+    expand: Optional[List] = None
+
+    def to_dict(self):
+        return {key: value for key, value in self.__dict__.items() if value is not None}
+
+
+@dataclass
+class BoardsInsertBody:
+    workspace_id: int
+    name: str
+    description: str
+
+    def to_dict(self):
+        return {key: value for key, value in self.__dict__.items() if value is not None}
+
+
+@dataclass
+class BoardsUpdateBody:
+    name: Optional[str] = None
+    description: Optional[str] = None
+    is_archived: Optional[Literal[0, 1]] = None
+
+    def to_dict(self):
+        return {key: value for key, value in self.__dict__.items() if value is not None}
+
+
+@dataclass
+class BoardSettingsUpdateBody:
+    size_type: Optional[int] = None
+    allow_exceeding: Optional[int] = None
+    autoarchive_cards_after: Optional[int] = None
+    limit_type: Optional[int] = None
+    allow_repeating_custom_card_ids: Optional[int] = None
+    is_discard_reason_required: Optional[int] = None
+
+    def to_dict(self):
+        return {key: value for key, value in self.__dict__.items() if value is not None}
