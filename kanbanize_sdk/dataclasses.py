@@ -1,5 +1,6 @@
 from typing import Literal, List, Optional
 from dataclasses import dataclass
+from datetime import date, datetime
 
 
 @dataclass
@@ -61,3 +62,49 @@ class TeamsUpdateBody:
 
     def to_dict(self):
         return {key: value for key, value in self.__dict__.items() if value is not None}
+
+
+@dataclass
+class WorkspacesListParams:
+    workspace_ids: Optional[List] = None
+    type: Optional[Literal[1, 2]] = None
+    is_archived: Optional[Literal[0, 1]] = None
+    if_workspace_manager: Optional[Literal[0, 1]] = None
+    if_assigned_to_boards: Optional[Literal[0, 1]] = None
+    board_filter_is_archived: Optional[Literal[0, 1]] = None
+    board_filter_if_assigned: Optional[Literal[0, 1]] = None
+    fields: Optional[List] = None
+    expand: Optional[List] = None
+
+    def to_dict(self):
+        return {key: value for key, value in self.__dict__.items() if value is not None}
+
+@dataclass
+class WorkspacesInsertBody:
+    name: str
+    type: Literal[1, 2]
+
+    def to_dict(self):
+        return {key: value for key, value in self.__dict__.items() if value is not None}
+
+
+@dataclass
+class WorkspacesUpdateBody:
+    name: Optional[str] = None
+    is_archived: Optional[Literal[0, 1]] = None
+
+    def to_dict(self):
+        return {key: value for key, value in self.__dict__.items() if value is not None}
+    
+@dataclass
+class WorkspaceHistoryListParams:
+    workspace_ids: Optional[List] = None
+    user_ids: Optional[List] = None
+    event_types: Optional[List] = None
+    from_: Optional[datetime] = None
+    to: Optional[datetime] = None
+    from_date: Optional[date] = None
+    to_date: Optional[date] = None
+    page: Optional[int] = None
+    per_page: Optional[int] = None
+

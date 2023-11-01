@@ -5,5 +5,9 @@ from .dataclasses import (
     UsersUpdateBody,
     TeamsInsertBody,
     TeamsUpdateBody,
-    TeamsListParams
+    TeamsListParams,
+    WorkspacesListParams,
+    WorkspacesInsertBody,
+    WorkspacesUpdateBody,
+    WorkspaceHistoryListParams
 )

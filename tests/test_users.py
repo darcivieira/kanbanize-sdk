@@ -45,7 +45,7 @@ def test_invite_user(requests_mock):
     test_json = {
         'data': {
             'user_id': 1,
-            'email': 'teste@teste.com',
+            'email': 'teste@teste123.com',
             'username': 'teste',
             'realname': 'Teste',
             'avatar': 'url.avatar',

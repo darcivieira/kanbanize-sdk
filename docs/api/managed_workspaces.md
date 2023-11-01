@@ -1,1 +1,1 @@
-::: managedWorkspaces
+::: managed_workspaces
