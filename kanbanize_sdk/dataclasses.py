@@ -75,10 +75,7 @@ class WorkspacesListParams:
     board_filter_if_assigned: Optional[Literal[0, 1]] = None
 
     def to_dict(self):
-        return {
-            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
-            for key, value in self.__dict__.items() if value is not None
-        }
+        return {key: value for key, value in self.__dict__.items() if value is not None}
 
 @dataclass
 class WorkspacesInsertBody:
