@@ -63,7 +63,7 @@ class Users(GenericRequestMethod):
         This method is responsible to remove an user from the platform.
 
         Parameters:
-            user_id: Teste
+            user_id: An integer parameter that represents the user identification.
 
         """
         self.service.delete(self.endpoint + f'/{user_id}')
