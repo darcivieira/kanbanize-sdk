@@ -38,6 +38,4 @@ def test_list_board_history(requests_mock):
     }
     requests_mock.get('https://teste.kanbanize.com/api/v2/boards/history', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
-    aaa = service.board_history().list()
-    print(aaa)
     assert service.board_history().list() == response

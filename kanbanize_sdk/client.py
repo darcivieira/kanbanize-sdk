@@ -10,6 +10,7 @@ from .board_settings import BoardSettings
 from .board_structure import BoardStructure
 from .board_structure_revisions import BoardStructureRevisions
 from .board_history import BoardHistory
+from .workflows import Workflows
 
 
 class Kanbanize:
@@ -48,3 +49,6 @@ class Kanbanize:
 
     def board_history(self):
         return BoardHistory(self.service)
+
+    def workflows(self):
+        return Workflows(self.service)

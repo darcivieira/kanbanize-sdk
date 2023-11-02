@@ -48,6 +48,7 @@ markers = [
     "managed_workspaces",
     "workspace_managers",
     "workspaces_history",
+    "workflows",
 ]
 
 [build-system]

@@ -138,7 +138,8 @@ class BoardsUpdateBody:
 
     def to_dict(self):
         return {key: value for key, value in self.__dict__.items() if value is not None}
-    
+
+
 @dataclass
 class BoardSettingsUpdateBody:
     size_type: Optional[int] = None
@@ -150,7 +151,8 @@ class BoardSettingsUpdateBody:
 
     def to_dict(self):
         return {key: value for key, value in self.__dict__.items() if value is not None}
-    
+
+
 @dataclass
 class BoardHistoryListParams:
     board_ids: Optional[List] = None
@@ -162,6 +164,36 @@ class BoardHistoryListParams:
     to_date: Optional[datetime.date] = None
     page: Optional[int] = None
     per_page: Optional[int] = None
+
+    def to_dict(self):
+        return {
+            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
+            for key, value in self.__dict__.items() if value is not None
+        }
+
+
+@dataclass
+class WorkflowsInsetBody:
+    position: int
+    is_enabled: int
+    is_collapsible: int
+    name: str
+    _type: int
+
+    def to_dict(self):
+        return {
+            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
+            for key, value in self.__dict__.items() if value is not None
+        }
+
+
+@dataclass
+class WorkflowsUpdateBody:
+    position: Optional[int] = None
+    is_enabled: Optional[int] = None
+    is_collapsible: Optional[int] = None
+    name: Optional[str] = None
+    _type: Optional[int] = None
 
     def to_dict(self):
         return {

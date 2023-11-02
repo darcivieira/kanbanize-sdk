@@ -2,7 +2,6 @@ from kanbanize_sdk.workspaces import Workspaces
 from .dataclasses import WorkspaceHistoryListParams
 
 
-
 class WorkspaceHistory(Workspaces):
     """
     Class responsible to make calls to Kanbanize Workspace histories endpoints

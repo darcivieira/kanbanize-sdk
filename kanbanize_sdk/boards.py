@@ -8,7 +8,7 @@ class Boards(GenericRequestMethod):
     """
     endpoint = '/boards'
 
-    def list(self, params: BoardsListParams | None = None) -> list:
+    def list(self, params: BoardsListParams | None = None, **kwargs) -> list:
         """
         This method is responsible to list all board in the platform.
 
@@ -23,7 +23,7 @@ class Boards(GenericRequestMethod):
 
     def insert(self, body: BoardsInsertBody) -> dict:
         """
-        This method is responsible to invite a board to the platform.
+        This method is responsible to insert a board to the platform.
 
         Parameters:
             body: It's a dataclass object that provide the essential request body needed to invite an board to the platform.
@@ -63,7 +63,7 @@ class Boards(GenericRequestMethod):
         This method is responsible to remove an board from the platform.
 
         Parameters:
-            board_id: Teste
+            board_id: An integer parameter that represents the board identification.
 
         """
         return self.service.delete(self.endpoint + f'/{board_id}')
