@@ -77,6 +77,7 @@ class WorkspacesListParams:
     def to_dict(self):
         return {key: value for key, value in self.__dict__.items() if value is not None}
 
+
 @dataclass
 class WorkspacesInsertBody:
     name: str
@@ -85,6 +86,7 @@ class WorkspacesInsertBody:
     def to_dict(self):
         return {key: value for key, value in self.__dict__.items() if value is not None}
 
+
 @dataclass
 class WorkspacesUpdateBody:
     name: Optional[str] = None
@@ -92,6 +94,7 @@ class WorkspacesUpdateBody:
 
     def to_dict(self):
         return {key: value for key, value in self.__dict__.items() if value is not None}
+
     
 @dataclass
 class WorkspaceHistoryListParams:
@@ -110,6 +113,7 @@ class WorkspaceHistoryListParams:
             key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
             for key, value in self.__dict__.items() if value is not None
         }
+
     
 class BoardsListParams:
     board_ids: Optional[List] = None
@@ -122,6 +126,7 @@ class BoardsListParams:
     def to_dict(self):
         return {key: value for key, value in self.__dict__.items() if value is not None}
 
+
 @dataclass
 class BoardsInsertBody:
     workspace_id: int
@@ -130,6 +135,8 @@ class BoardsInsertBody:
 
     def to_dict(self):
         return {key: value for key, value in self.__dict__.items() if value is not None}
+
+
 @dataclass
 class BoardsUpdateBody:
     name: Optional[str] = None
