@@ -35,6 +35,17 @@ mkdocs-material = "^9.4.6"
 mkdocstrings = "^0.23.0"
 mkdocstrings-python = "^1.7.3"
 
+[tool.pytest.ini_options]
+markers = [
+    "users",
+    "teams",
+    "boards",
+    "board_settings",
+    "board_structure",
+    "board_structure_revisions",
+    "board_history",
+]
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

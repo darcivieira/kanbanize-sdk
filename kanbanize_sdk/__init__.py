@@ -5,5 +5,10 @@ from .dataclasses import (
     UsersUpdateBody,
     TeamsInsertBody,
     TeamsUpdateBody,
-    TeamsListParams
+    TeamsListParams,
+    BoardsInsertBody,
+    BoardsUpdateBody,
+    BoardsListParams,
+    BoardSettingsUpdateBody,
+    BoardHistoryListParams,
 )
