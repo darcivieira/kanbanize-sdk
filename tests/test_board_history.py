@@ -1,87 +1,43 @@
-from kanbanize_sdk import Kanbanize, UsersInsertBody, UsersUpdateBody
+from pytest import mark
+from kanbanize_sdk import Kanbanize
 
 
-def test_list_users(requests_mock):
+@mark.board_history
+def test_list_board_history(requests_mock):
     test_json = {
+        'pagination': {
+          'all_pages': 0,
+          'current_page': 0,
+          'results_per_page': 0
+        },
         'data': [
             {
-                'user_id': 1,
-                'email': 'teste@teste.com',
-                'username': 'teste',
-                'realname': 'Teste',
-                'avatar': 'url.avatar',
-                'is_enabled': 0,
-                'is_confirmed': 0,
-                'is_tfa_enabled': 0,
-                'registration_date': '2023-10-24'
+                'history_id': 0,
+                'board_id': 0,
+                'event_type': 'teste',
+                'user_id': 0,
+                'details': {},
+                'time': '2023-11-02',
             }
         ]
     }
-    requests_mock.get('https://teste.kanbanize.com/api/v2/users', json=test_json)
-    service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
-    assert service.users().list() == test_json.get('data')
-
-
-def test_get_user(requests_mock):
-    test_json = {
-        'data': {
-            'user_id': 1,
-            'email': 'teste@teste.com',
-            'username': 'teste',
-            'realname': 'Teste',
-            'avatar': 'url.avatar',
-            'is_enabled': 0,
-            'is_confirmed': 0,
-            'is_tfa_enabled': 0,
-            'registration_date': '2023-10-24'
-        }
+    response = {
+        'all_pages': 0,
+        'current_page': 0,
+        'results_per_page': 0,
+        'data': [
+            {
+                'history_id': 0,
+                'board_id': 0,
+                'event_type': 'teste',
+                'user_id': 0,
+                'details': {},
+                'time': '2023-11-02',
+            }
+        ]
     }
-    requests_mock.get('https://teste.kanbanize.com/api/v2/users/1', json=test_json)
+    requests_mock.get('https://teste.kanbanize.com/api/v2/boards/history', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
-    assert service.users().get(user_id=1) == test_json.get('data')
-
-
-def test_invite_user(requests_mock):
-    test_json = {
-        'data': {
-            'user_id': 1,
-            'email': 'teste@teste.com',
-            'username': 'teste',
-            'realname': 'Teste',
-            'avatar': 'url.avatar',
-            'is_enabled': 0,
-            'is_confirmed': 0,
-            'is_tfa_enabled': 0,
-            'registration_date': '2023-10-24'
-        }
-    }
-    requests_mock.post('https://teste.kanbanize.com/api/v2/users', json=test_json)
-    service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
-    body = UsersInsertBody(email='teste@teste.com')
-    assert service.users().insert(body) == test_json.get('data')
-
-
-def test_update_user(requests_mock):
-    test_json = {
-        'data': {
-            'user_id': 1,
-            'email': 'teste@teste.com',
-            'username': 'teste',
-            'realname': 'Teste',
-            'avatar': 'url.avatar',
-            'is_enabled': 0,
-            'is_confirmed': 0,
-            'is_tfa_enabled': 0,
-            'registration_date': '2023-10-24'
-        }
-    }
-    requests_mock.patch('https://teste.kanbanize.com/api/v2/users/1', json=test_json)
-    service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
-    body = UsersUpdateBody(is_enabled=1)
-    assert service.users().update(1, body) == test_json.get('data')
-
-
-def test_delete_user(requests_mock):
-    requests_mock.delete('https://teste.kanbanize.com/api/v2/users/1', status_code=204)
-    service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
-    assert service.users().delete(1) == None
+    aaa = service.board_history().list()
+    print(aaa)
+    assert service.board_history().list() == response

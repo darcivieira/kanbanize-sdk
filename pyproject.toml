@@ -37,8 +37,13 @@ mkdocstrings-python = "^1.7.3"
 
 [tool.pytest.ini_options]
 markers = [
+    "users",
     "teams",
-    "boards"
+    "boards",
+    "board_settings",
+    "board_structure",
+    "board_structure_revisions",
+    "board_history",
 ]
 
 [build-system]

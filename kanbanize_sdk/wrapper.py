@@ -63,7 +63,13 @@ class KanbanizeSession(Session):
 
         if r.status_code in [200, 204]:
             response = json.loads(r.content) if r.status_code == 200 else None
-            return response.get('data') if response else None
+            if response:
+                if response.get('pagination'):
+                    new_response = response.pop('pagination')
+                    new_response.update(response)
+                    return new_response
+                return response.get('data')
+            return None
 
         response = json.loads(r.content) \
             if r.status_code in [400, 401, 403, 404, 409, 429] else status_message.get(r.status_code)
