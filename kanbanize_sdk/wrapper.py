@@ -29,12 +29,32 @@ class KanbanizeSession(Session):
         headers = {'Content-Type': 'application/json', 'apikey': self.api_key}
         return super(KanbanizeSession, self).request(method, url=self.uri + url, data=data, headers=headers, **kwargs)
 
-    def send(self, request, **kwargs):
-        r = super().send(request, **kwargs)
+    def get(self, url, **kwargs) -> dict | list:
+        r = super().get(url, **kwargs)
         return self.__middleware_response(r)
 
+    def post(self, url, data=None, json=None, **kwargs) -> dict:
+        r = super().post(url, data=None, json=None, **kwargs)
+        return self.__middleware_response(r)
+
+    def put(self, url, data=None, **kwargs) -> dict:
+        r = super().put(url, data=None, **kwargs)
+        return self.__middleware_response(r)
+
+    def patch(self, url, data=None, **kwargs) -> dict:
+        r = super().patch(url, data=None, **kwargs)
+        return self.__middleware_response(r)
+
+    def delete(self, url, **kwargs) -> None:
+        r = super().delete(url, **kwargs)
+        return self.__middleware_response(r)
+
+    # def send(self, request, **kwargs) -> dict:
+    #     r = super().send(request, **kwargs)
+    #     return self.__middleware_response(r)
+
     @staticmethod
-    def __middleware_response(r: Response) -> Any:
+    def __middleware_response(r: Response) -> dict | None | list:
         status_message = {
             500: {'code': 500, 'message': 'The request failed due to an internal server error.'},
             503: {'code': 503, 'message': 'The service is temporarily unavailable.'},

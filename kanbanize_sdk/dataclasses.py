@@ -1,5 +1,6 @@
 from typing import Literal, List, Optional
 from dataclasses import dataclass
+from datetime import datetime
 
 
 @dataclass
@@ -107,3 +108,22 @@ class BoardSettingsUpdateBody:
 
     def to_dict(self):
         return {key: value for key, value in self.__dict__.items() if value is not None}
+
+
+@dataclass
+class BoardHistoryListParams:
+    board_ids: Optional[List] = None
+    user_ids: Optional[List] = None
+    event_types: Optional[List] = None
+    _from: Optional[datetime] = None
+    to: Optional[datetime] = None
+    from_date: Optional[datetime.date] = None
+    to_date: Optional[datetime.date] = None
+    page: Optional[int] = None
+    per_page: Optional[int] = None
+
+    def to_dict(self):
+        return {
+            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
+            for key, value in self.__dict__.items() if value is not None
+        }

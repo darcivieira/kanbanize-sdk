@@ -1,9 +1,8 @@
 from .boards import Boards
-from .dataclasses import BoardSettingsUpdateBody
 from .utils import private
 
 
-class BoardSettings(Boards):
+class BoardStructureRevisions(Boards):
     """
     Class responsible to make calls to Kanbanize boards endpoints
     """
@@ -11,6 +10,8 @@ class BoardSettings(Boards):
     list = private
 
     insert = private
+
+    update = private
 
     delete = private
 
@@ -24,17 +25,17 @@ class BoardSettings(Boards):
         Returns:
             A searched board object
         """
-        return self.service.get(self.endpoint + f'/{board_id}/settings')
+        return self.service.get(self.endpoint + f'/{board_id}/structureRevisions')
 
-    def update(self, board_id: int, body: BoardSettingsUpdateBody) -> dict:
+    def get_revision(self, board_id: int, revision: int) -> dict:
         """
-        This method is responsible to update an board in the platform.
+        This method is responsible to get one board from the platform.
 
         Parameters:
             board_id: An integer parameter that represents the board identification.
-            body: It's a dataclass object that represent the body option to be updated.
+            revision: An integer parameter that represents the revision identification.
 
         Returns:
-            The updated board object
+            A searched board object
         """
-        return self.service.patch(self.endpoint + f'/{board_id}/settings', data=body.to_dict())
+        return self.service.get(self.endpoint + f'/{board_id}/structureRevisions/{revision}')

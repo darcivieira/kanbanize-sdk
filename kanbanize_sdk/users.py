@@ -66,4 +66,4 @@ class Users(GenericRequestMethod):
             user_id: Teste
 
         """
-        return self.service.delete(self.endpoint + f'/{user_id}')
+        self.service.delete(self.endpoint + f'/{user_id}')
