@@ -1,11 +1,20 @@
-from .generics import GenericRequestMethod
+from kanbanize_sdk.users import Users
+from .utils import private
 
 
-class ManagedWorkspaces(GenericRequestMethod):
+
+class ManagedWorkspaces(Users):
     """
     Class responsible to make calls to Kanbanize managed korkpaces endpoints
     """
-    endpoint = '/users'
+
+    insert = private
+
+    get = private
+
+    update = private
+
+    delete = private
 
     def list(self, user_id: int) -> list:
         """
