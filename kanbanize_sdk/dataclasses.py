@@ -155,6 +155,12 @@ class BoardSettingsUpdateBody:
 
 @dataclass
 class BoardHistoryListParams:
+    """
+    Set here a documentation
+
+    Parameters:
+        board_ids: It's a list of integer number and can be not specified
+    """
     board_ids: Optional[List] = None
     user_ids: Optional[List] = None
     event_types: Optional[List] = None
@@ -174,6 +180,9 @@ class BoardHistoryListParams:
 
 @dataclass
 class WorkflowsInsetBody:
+    """
+    Set here a documentation
+    """
     position: int
     is_enabled: int
     is_collapsible: int
@@ -189,6 +198,9 @@ class WorkflowsInsetBody:
 
 @dataclass
 class WorkflowsUpdateBody:
+    """
+    Set here a documentation
+    """
     position: Optional[int] = None
     is_enabled: Optional[int] = None
     is_collapsible: Optional[int] = None
