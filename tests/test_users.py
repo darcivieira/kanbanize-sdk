@@ -1,4 +1,5 @@
 from kanbanize_sdk import Kanbanize, UsersInsertBody, UsersUpdateBody
+from pytest import mark
 
 @mark.users
 def test_list_users(requests_mock):

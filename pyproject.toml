@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "kanbanize-sdk"
-version = "0.2.0"
+version = "0.2.2"
 description = "Kanbanize-sdk is a python library for interacting with the official Kanbanize tool environment in version 2."
 authors = ["darcivieira <darcivieira.junior@gmail.com>"]
 readme = "README.md"
@@ -34,6 +34,21 @@ pytest-cov = "^4.1.0"
 mkdocs-material = "^9.4.6"
 mkdocstrings = "^0.23.0"
 mkdocstrings-python = "^1.7.3"
+
+[tool.pytest.ini_options]
+markers = [
+    "users",
+    "teams",
+    "boards",
+    "board_settings",
+    "board_structure",
+    "board_structure_revisions",
+    "board_history",
+    "workspaces",
+    "managed_workspaces",
+    "workspace_managers",
+    "workspaces_history",
+]
 
 [build-system]
 requires = ["poetry-core"]

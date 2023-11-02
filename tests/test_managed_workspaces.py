@@ -1,6 +1,7 @@
 from kanbanize_sdk import Kanbanize
+from pytest import mark
 
-
+@mark.managed_workspaces
 def test_list_managed_workspaces(requests_mock):
     test_json = {
         "data": [

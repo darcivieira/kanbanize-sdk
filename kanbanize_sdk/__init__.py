@@ -9,5 +9,10 @@ from .dataclasses import (
     WorkspacesListParams,
     WorkspacesInsertBody,
     WorkspacesUpdateBody,
-    WorkspaceHistoryListParams
+    WorkspaceHistoryListParams,
+    BoardsInsertBody,
+    BoardsUpdateBody,
+    BoardsListParams,
+    BoardSettingsUpdateBody,
+    BoardHistoryListParams,
 )

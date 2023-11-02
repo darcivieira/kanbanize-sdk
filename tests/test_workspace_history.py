@@ -1,13 +1,9 @@
 from kanbanize_sdk import Kanbanize
+from pytest import mark
 
-
+@mark.workspaces_history
 def test_list_workspaces_history(requests_mock):
     test_json = {
-        "pagination": {
-            "all_pages": 1,
-            "current_page": 1,
-            "results_per_page": 10
-        },
         "data": [
             {
             "history_id": 0,
