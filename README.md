@@ -1,6 +1,6 @@
 # Welcome to Kanbanize SDK
 [![Documentation Status](https://readthedocs.org/projects/kanbanize-sdk/badge/?version=latest)](https://kanbanize-sdk.readthedocs.io/en/latest/?badge=latest)
-[![CI](https://github.com/darcivieira/kanbanize-sdk/actions/workflows/pipeline.yaml/badge.svg)](https://github.com/darcivieira/kanbanize-sdk/actions/workflows/pipeline.yaml)
+[![CI](https://github.com/darcivieira/kanbanize-sdk/actions/workflows/pipeline.yml/badge.svg)](https://github.com/darcivieira/kanbanize-sdk/actions/workflows/pipeline.yml)
 [![codecov](https://codecov.io/gh/darcivieira/kanbanize-sdk/graph/badge.svg?token=XF8VZQYSCH)](https://codecov.io/gh/darcivieira/kanbanize-sdk)
 [![PyPI version](https://badge.fury.io/py/kanbanize-sdk.svg)](https://badge.fury.io/py/kanbanize-sdk)
 
