@@ -27,7 +27,7 @@ def test_insert_workspaces(requests_mock):
     }
     requests_mock.post('https://teste.kanbanize.com/api/v2/workspaces', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
-    body = WorkspacesInsertBody(name='teste', type=1)
+    body = WorkspacesInsertBody(name='teste', _type=1)
     assert service.workspaces().insert(body) == test_json.get('data')
 
 def test_get_workspaces(requests_mock):
