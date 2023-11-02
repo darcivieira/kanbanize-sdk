@@ -44,6 +44,10 @@ markers = [
     "board_structure",
     "board_structure_revisions",
     "board_history",
+    "workspaces",
+    "managed_workspaces",
+    "workspace_managers",
+    "workspaces_history",
 ]
 
 [build-system]
