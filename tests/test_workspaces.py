@@ -36,7 +36,7 @@ def test_get_workspaces(requests_mock):
             {
                 "type": 1,
                 "is_archived": 0,
-                "name": "string"
+                "name": "teste"
             }
         
     }

@@ -9,7 +9,7 @@ def test_get_workspaces_managers(requests_mock):
                 }
             ]
     }
-    requests_mock.get('https://teste.kanbanize.com/api/v2/workspaces/1/managers/2', json=test_json)
+    requests_mock.get('https://teste.kanbanize.com/api/v2/workspaces/1/managers/56', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     assert service.workspace_managers().list(workspace_id=1, user_id=2) == test_json.get('data')
 

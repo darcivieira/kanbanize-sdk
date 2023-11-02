@@ -12,7 +12,7 @@ def test_list_workspaces_history(requests_mock):
             {
             "history_id": 0,
             "workspace_id": 0,
-            "event_type": "string",
+            "event_type": "teste",
             "user_id": 0,
             "details": {},
             "time": "2023-11-01"
