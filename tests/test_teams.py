@@ -66,4 +66,4 @@ def test_update_team(requests_mock):
 def test_delete_team(requests_mock):
     requests_mock.delete('https://teste.kanbanize.com/api/v2/teams/1', status_code=204)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
-    assert service.teams().delete(1) == None
+    assert service.teams().delete(1) is None

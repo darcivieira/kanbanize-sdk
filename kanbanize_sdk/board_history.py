@@ -3,7 +3,7 @@ from .dataclasses import BoardHistoryListParams
 from .utils import private
 
 
-class BoardStructure(Boards):
+class BoardHistory(Boards):
     """
     Class responsible to make calls to Kanbanize board structure endpoints
     """
