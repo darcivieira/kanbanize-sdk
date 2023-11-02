@@ -1,5 +1,6 @@
 from kanbanize_sdk.workspaces import Workspaces
 from .dataclasses import WorkspaceHistoryListParams
+from .utils import private
 
 
 
@@ -8,10 +9,11 @@ class WorkspaceHistory(Workspaces):
     Class responsible to make calls to Kanbanize Workspace histories endpoints
     """
 
-    # post= private
-    # insert = private
-    # get = private
-    # update = private
+    insert = private
+
+    get = private
+    
+    update = private
 
     def list(self, params: WorkspaceHistoryListParams | None = None) -> list:
         """

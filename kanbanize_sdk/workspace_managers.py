@@ -1,4 +1,5 @@
 from kanbanize_sdk.workspaces import Workspaces
+from .utils import private
 
 
 
@@ -6,8 +7,7 @@ class WorkspaceManagers(Workspaces):
     """
     Class responsible to make calls to Kanbanize Workspace managers endpoints
     """
-
-    # post= private
+    post = private
 
     def list(self, workspace_id: int) -> list:
         """
