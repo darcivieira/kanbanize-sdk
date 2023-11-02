@@ -5,7 +5,7 @@ from .utils import private
 
 class BoardHistory(Boards):
     """
-    Class responsible to make calls to Kanbanize board structure endpoints
+    Class responsible to make calls to Kanbanize board history endpoints
     """
 
     get = private
@@ -18,10 +18,10 @@ class BoardHistory(Boards):
 
     def list(self, params: BoardHistoryListParams | None = None) -> list:
         """
-        This method is responsible to list all board in the platform.
+        This method is responsible to list all board history in the platform.
 
         Parameters:
-            params: It's a dataclass object that provide all possible parameters to be used to list the boards.
+            params: It's a dataclass object that provide all possible parameters to be used to list the board history.
 
         Returns:
             An array of objects that represents the boards

@@ -5,7 +5,7 @@ from .utils import private
 
 class BoardSettings(Boards):
     """
-    Class responsible to make calls to Kanbanize boards endpoints
+    Class responsible to make calls to Kanbanize board settings endpoints
     """
 
     list = private
@@ -16,7 +16,7 @@ class BoardSettings(Boards):
 
     def get(self, board_id: int) -> dict:
         """
-        This method is responsible to get one board from the platform.
+        This method is responsible to get one board settings from the platform.
 
         Parameters:
             board_id: An integer parameter that represents the board identification.
@@ -28,7 +28,7 @@ class BoardSettings(Boards):
 
     def update(self, board_id: int, body: BoardSettingsUpdateBody) -> dict:
         """
-        This method is responsible to update an board in the platform.
+        This method is responsible to update one board settings in the platform.
 
         Parameters:
             board_id: An integer parameter that represents the board identification.

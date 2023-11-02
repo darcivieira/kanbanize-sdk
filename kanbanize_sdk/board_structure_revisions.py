@@ -4,7 +4,7 @@ from .utils import private
 
 class BoardStructureRevisions(Boards):
     """
-    Class responsible to make calls to Kanbanize boards endpoints
+    Class responsible to make calls to Kanbanize board structure revisions endpoints
     """
 
     list = private

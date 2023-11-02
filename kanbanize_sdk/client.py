@@ -4,7 +4,7 @@ from .teams import Teams
 from .boards import Boards
 from .board_settings import BoardSettings
 from .board_structure import BoardStructure
-from .board_struture_revisions import BoardStructureRevisions
+from .board_structure_revisions import BoardStructureRevisions
 from .board_history import BoardHistory
 
 
