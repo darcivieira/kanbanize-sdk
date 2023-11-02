@@ -5,7 +5,7 @@ from .utils import private
 
 class ManagedWorkspaces(Users):
     """
-    Class responsible to make calls to Kanbanize managed korkpaces endpoints
+    Class responsible to make calls to Kanbanize managed workpaces endpoints
     """
 
     insert = private
