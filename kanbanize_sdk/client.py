@@ -12,7 +12,8 @@ from .endpoints import (
     BoardStructureRevisions,
     BoardHistory,
     Workflows,
-    Lanes
+    Lanes,
+    Columns,
 )
 
 
@@ -58,3 +59,6 @@ class Kanbanize:
 
     def lanes(self):
         return Lanes(self.service)
+
+    def columns(self):
+        return Columns(self.service)

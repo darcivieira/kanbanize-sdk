@@ -19,7 +19,6 @@ class Columns(GenericRequestMethod):
 
         Returns:
             An array of objects that represents the columns
-
         """
         return self.service.get(
             self.endpoint + f'/{board_id}/columns',
@@ -38,7 +37,7 @@ class Columns(GenericRequestMethod):
         Returns:
             A column object with the basic information data.
         """
-        return self.service.get(self.endpoint + f'/{board_id}/columns', data=body.to_dict())
+        return self.service.post(self.endpoint + f'/{board_id}/columns', data=body.to_dict())
 
     def get(self, board_id: int, column_id: int, *args, **kwargs):
         """

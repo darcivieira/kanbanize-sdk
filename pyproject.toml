@@ -50,6 +50,7 @@ markers = [
     "workspaces_history",
     "workflows",
     "lanes",
+    "columns",
 ]
 
 [build-system]

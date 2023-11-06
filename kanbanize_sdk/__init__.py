@@ -21,4 +21,7 @@ from .dataclasses import (
     LanesInsertBody,
     LanesUpdateBody,
     LanesListParams,
+    ColumnsListParams,
+    ColumnsInsertBody,
+    ColumnsUpdateBody,
 )
