@@ -14,6 +14,7 @@ from .endpoints import (
     Workflows,
     Lanes,
     Columns,
+    CellLimits,
 )
 
 
@@ -62,3 +63,6 @@ class Kanbanize:
 
     def columns(self):
         return Columns(self.service)
+
+    def cell_limits(self):
+        return CellLimits(self.service)

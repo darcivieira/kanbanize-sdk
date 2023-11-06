@@ -1,5 +1,44 @@
-from .boards import Boards
+from kanbanize_sdk.utils import private
+from kanbanize_sdk.dataclasses import CellLimitsUpdateBody
+
+from .generics import GenericRequestMethod
 
 
-class CellLimits(Boards):
-    ...
+class CellLimits(GenericRequestMethod):
+    """
+    Class responsible to make calls to Kanbanize cell limits endpoints
+    """
+    endpoint = '/boards'
+
+    get = private
+
+    delete = private
+
+    insert = private
+
+    def list(self, board_id: int, *args, **kwargs):
+        """
+        This method is responsible to list all cell limits from the board into the platform.
+
+        Parameters:
+            board_id: An integer parameter that represents the selected board object.
+
+        Returns:
+            An array with multiples cell limit objects
+
+        """
+        return self.service.get(self.endpoint + f'/{board_id}/cellLimits')
+
+    def update(self, board_id: int, body: CellLimitsUpdateBody, *args, **kwargs):
+        """
+        This method is responsible to update one cell limit from the board into the platform.
+
+        Parameters:
+            board_id: An integer that represents the selected board object.
+            body: It's a dataclass object that provide all needed request body to update a cell limit object.
+
+        Returns:
+             An cell limit object with the basic information data.
+
+        """
+        return self.service.put(self.endpoint + f'/{board_id}/cellLimits', data=body.to_dict())

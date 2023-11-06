@@ -24,4 +24,5 @@ from .dataclasses import (
     ColumnsListParams,
     ColumnsInsertBody,
     ColumnsUpdateBody,
+    CellLimitsUpdateBody,
 )

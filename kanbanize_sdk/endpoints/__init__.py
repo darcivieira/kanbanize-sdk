@@ -12,3 +12,4 @@ from .board_history import BoardHistory
 from .workflows import Workflows
 from .lanes import Lanes
 from .columns import Columns
+from .cell_limits import CellLimits

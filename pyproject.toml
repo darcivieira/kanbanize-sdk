@@ -51,6 +51,7 @@ markers = [
     "workflows",
     "lanes",
     "columns",
+    "cell_limits",
 ]
 
 [build-system]
