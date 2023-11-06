@@ -204,6 +204,23 @@ class WorkflowsInsetBody:
 
 
 @dataclass
+class WorkflowsCopyBody:
+    """
+    Set here a documentation
+    """
+    name: str
+    to_board_id: int
+    copy_service_level_expectations: int
+    copy_column_checklist_items: int
+
+    def to_dict(self):
+        return {
+            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
+            for key, value in self.__dict__.items() if value is not None
+        }
+
+
+@dataclass
 class WorkflowsUpdateBody:
     """
     Set here a documentation

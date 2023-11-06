@@ -15,4 +15,7 @@ from .dataclasses import (
     BoardsListParams,
     BoardSettingsUpdateBody,
     BoardHistoryListParams,
+    WorkflowsUpdateBody,
+    WorkflowsInsetBody,
+    WorkflowsCopyBody,
 )

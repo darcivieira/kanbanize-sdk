@@ -1,5 +1,5 @@
 from .generics import GenericRequestMethod
-from .dataclasses import WorkflowsInsetBody, WorkflowsUpdateBody
+from .dataclasses import WorkflowsInsetBody, WorkflowsUpdateBody, WorkflowsCopyBody
 
 
 class Workflows(GenericRequestMethod):
@@ -71,15 +71,16 @@ class Workflows(GenericRequestMethod):
         """
         return self.service.delete(self.endpoint + f'/{board_id}/workflows/{workflow_id}')
 
-    def copy(self, board_id: int, workflow_id: int) -> dict:
+    def copy(self, board_id: int, workflow_id: int, body: WorkflowsCopyBody) -> dict:
         """
         This method is responsible to make a copy of one workflow from the board into the platform.
 
         Parameters:
             board_id: An integer parameter that represents the board identification.
             workflow_id: An integer parameter that represents the workflow identification.
+            body: It's a dataclass object that represent the body option to be coped.
 
         Returns:
             A workflow object with the basic information data
         """
-        return self.service.post(self.endpoint + f'/{board_id}/workflows/{workflow_id}/copy')
+        return self.service.post(self.endpoint + f'/{board_id}/workflows/{workflow_id}/copy', data=body.to_dict())
