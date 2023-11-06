@@ -1,5 +1,5 @@
-from .generics import GenericRequestMethod
-from .dataclasses import TeamsListParams, TeamsInsertBody, TeamsUpdateBody
+from kanbanize_sdk.endpoints.generics import GenericRequestMethod
+from kanbanize_sdk.dataclasses import TeamsListParams, TeamsInsertBody, TeamsUpdateBody
 
 
 class Teams(GenericRequestMethod):

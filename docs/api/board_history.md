@@ -1,1 +1,1 @@
-::: board_history
+::: endpoints.board_history

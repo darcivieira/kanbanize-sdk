@@ -1,5 +1,5 @@
-from .generics import GenericRequestMethod
-from .dataclasses import UsersListParams, UsersInsertBody, UsersUpdateBody
+from kanbanize_sdk.endpoints.generics import GenericRequestMethod
+from kanbanize_sdk.dataclasses import UsersListParams, UsersInsertBody, UsersUpdateBody
 
 
 class Users(GenericRequestMethod):

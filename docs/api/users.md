@@ -1,1 +1,1 @@
-::: users
+::: endpoints.users

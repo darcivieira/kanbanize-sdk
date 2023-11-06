@@ -1,1 +1,1 @@
-::: workspace_managers
+::: endpoints.workspace_managers

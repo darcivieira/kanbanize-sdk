@@ -1,5 +1,5 @@
-from .generics import GenericRequestMethod
-from .dataclasses import WorkflowsInsetBody, WorkflowsUpdateBody, WorkflowsCopyBody
+from kanbanize_sdk.endpoints.generics import GenericRequestMethod
+from kanbanize_sdk.dataclasses import WorkflowsInsetBody, WorkflowsUpdateBody, WorkflowsCopyBody
 
 
 class Workflows(GenericRequestMethod):
@@ -26,7 +26,7 @@ class Workflows(GenericRequestMethod):
 
         Parameters:
             board_id: An integer parameter that represents the board identification.
-            body: It's a dataclass object that provide the essential request body needed to invite an board to the platform.
+            body: It's a dataclass object that provide the essential request body needed to add a board to the platform.
 
         Returns:
             A workflow object with the basic information data

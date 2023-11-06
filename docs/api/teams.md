@@ -1,1 +1,1 @@
-::: teams
+::: endpoints.teams

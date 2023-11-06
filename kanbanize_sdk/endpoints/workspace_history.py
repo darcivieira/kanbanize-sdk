@@ -1,5 +1,5 @@
-from kanbanize_sdk.workspaces import Workspaces
-from .dataclasses import WorkspaceHistoryListParams
+from kanbanize_sdk.endpoints.workspaces import Workspaces
+from kanbanize_sdk.dataclasses import WorkspaceHistoryListParams
 
 
 class WorkspaceHistory(Workspaces):

@@ -1,1 +1,1 @@
-::: board_structure_revisions
+::: endpoints.board_structure_revisions

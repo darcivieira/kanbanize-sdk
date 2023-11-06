@@ -1,5 +1,5 @@
-from .generics import GenericRequestMethod
-from .dataclasses import BoardsListParams, BoardsInsertBody, BoardsUpdateBody
+from kanbanize_sdk.endpoints.generics import GenericRequestMethod
+from kanbanize_sdk.dataclasses import BoardsListParams, BoardsInsertBody, BoardsUpdateBody
 
 
 class Boards(GenericRequestMethod):

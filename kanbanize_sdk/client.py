@@ -1,16 +1,19 @@
 from .wrapper import KanbanizeSession
-from .users import Users
-from .teams import Teams
-from .managed_workspaces import ManagedWorkspaces
-from .workspaces import Workspaces
-from .workspace_managers import WorkspaceManagers
-from .workspace_history import WorkspaceHistory
-from .boards import Boards
-from .board_settings import BoardSettings
-from .board_structure import BoardStructure
-from .board_structure_revisions import BoardStructureRevisions
-from .board_history import BoardHistory
-from .workflows import Workflows
+from .endpoints import (
+    Users,
+    Teams,
+    ManagedWorkspaces,
+    Workspaces,
+    WorkspaceManagers,
+    WorkspaceHistory,
+    Boards,
+    BoardSettings,
+    BoardStructure,
+    BoardStructureRevisions,
+    BoardHistory,
+    Workflows,
+    Lanes
+)
 
 
 class Kanbanize:
@@ -52,3 +55,6 @@ class Kanbanize:
 
     def workflows(self):
         return Workflows(self.service)
+
+    def lanes(self):
+        return Lanes(self.service)

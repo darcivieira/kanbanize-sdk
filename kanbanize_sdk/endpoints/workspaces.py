@@ -1,5 +1,5 @@
-from .generics import GenericRequestMethod
-from .dataclasses import WorkspacesListParams, WorkspacesInsertBody, WorkspacesUpdateBody
+from kanbanize_sdk.endpoints.generics import GenericRequestMethod
+from kanbanize_sdk.dataclasses import WorkspacesListParams, WorkspacesInsertBody, WorkspacesUpdateBody
 
 
 class Workspaces(GenericRequestMethod):

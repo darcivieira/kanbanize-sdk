@@ -1,6 +1,6 @@
 from .boards import Boards
-from .dataclasses import BoardHistoryListParams
-from .utils import private
+from kanbanize_sdk.dataclasses import BoardHistoryListParams
+from kanbanize_sdk.utils import private
 
 
 class BoardHistory(Boards):

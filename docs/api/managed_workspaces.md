@@ -1,1 +1,1 @@
-::: managed_workspaces
+::: endpoints.managed_workspaces

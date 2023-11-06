@@ -1,4 +1,4 @@
-from kanbanize_sdk.workspaces import Workspaces
+from kanbanize_sdk.endpoints.workspaces import Workspaces
 
 
 

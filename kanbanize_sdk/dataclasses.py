@@ -236,3 +236,45 @@ class WorkflowsUpdateBody:
             key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
             for key, value in self.__dict__.items() if value is not None
         }
+
+
+@dataclass
+class LanesListParams:
+    fields: Optional[List[str]]
+
+    def to_dict(self):
+        return {
+            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
+            for key, value in self.__dict__.items() if value is not None
+        }
+
+
+@dataclass
+class LanesInsertBody:
+    workflow_id: int
+    parent_lane_id: int
+    position: int
+    name: str
+    description: Optional[str]
+    color: str
+
+    def to_dict(self):
+        return {
+            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
+            for key, value in self.__dict__.items() if value is not None
+        }
+
+
+@dataclass
+class LanesUpdateBody:
+    parent_lane_id: Optional[int]
+    position: Optional[int]
+    name: Optional[str]
+    description: Optional[str]
+    color: Optional[str]
+
+    def to_dict(self):
+        return {
+            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
+            for key, value in self.__dict__.items() if value is not None
+        }

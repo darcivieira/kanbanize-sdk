@@ -1,5 +1,5 @@
 from .boards import Boards
-from .utils import private
+from kanbanize_sdk.utils import private
 
 
 class BoardStructureRevisions(Boards):

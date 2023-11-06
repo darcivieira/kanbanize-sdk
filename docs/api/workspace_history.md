@@ -1,1 +1,1 @@
-::: workspace_history
+::: endpoints.workspace_history

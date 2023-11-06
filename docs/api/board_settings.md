@@ -1,1 +1,1 @@
-::: board_settings
+::: endpoints.board_settings

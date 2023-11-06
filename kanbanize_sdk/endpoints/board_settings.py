@@ -1,6 +1,6 @@
 from .boards import Boards
-from .dataclasses import BoardSettingsUpdateBody
-from .utils import private
+from kanbanize_sdk.dataclasses import BoardSettingsUpdateBody
+from kanbanize_sdk.utils import private
 
 
 class BoardSettings(Boards):

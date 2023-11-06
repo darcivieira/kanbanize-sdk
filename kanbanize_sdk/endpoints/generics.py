@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from .wrapper import KanbanizeSession
+from kanbanize_sdk.wrapper import KanbanizeSession
 
 
 class GenericRequestMethod(metaclass=ABCMeta):

@@ -1,1 +1,1 @@
-::: workflows
+::: endpoints.workflows

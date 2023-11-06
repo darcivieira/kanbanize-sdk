@@ -1,4 +1,4 @@
-from .generics import GenericRequestMethod
+from kanbanize_sdk.endpoints.generics import GenericRequestMethod
 
 
 class ManagedWorkspaces(GenericRequestMethod):
