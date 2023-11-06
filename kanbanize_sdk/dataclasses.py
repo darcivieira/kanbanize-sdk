@@ -267,11 +267,11 @@ class LanesInsertBody:
 
 @dataclass
 class LanesUpdateBody:
-    parent_lane_id: Optional[int]
-    position: Optional[int]
-    name: Optional[str]
-    description: Optional[str]
-    color: Optional[str]
+    parent_lane_id: Optional[int] = None
+    position: Optional[int] = None
+    name: Optional[str] = None
+    description: Optional[str] = None
+    color: Optional[str] = None
 
     def to_dict(self):
         return {

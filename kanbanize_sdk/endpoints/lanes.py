@@ -10,7 +10,7 @@ class Lanes(GenericRequestMethod):
 
     endpoint = '/boards'
 
-    def list(self, board_id: int, params: LanesListParams, *args, **kwargs) -> list:
+    def list(self, board_id: int, params: LanesListParams | None = None, *args, **kwargs) -> list:
         """
         This method is responsible to list all lanes from a board in the platform.
 
@@ -21,7 +21,7 @@ class Lanes(GenericRequestMethod):
         Returns:
             An array of objects that represents the workflows
         """
-        return self.service.get(self.endpoint + f'/{board_id}/lanes')
+        return self.service.get(self.endpoint + f'/{board_id}/lanes', params=params)
 
     def insert(self, board_id: int, body: LanesInsertBody, *args, **kwargs) -> dict:
         """

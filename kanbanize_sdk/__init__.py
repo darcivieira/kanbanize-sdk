@@ -18,4 +18,7 @@ from .dataclasses import (
     WorkflowsUpdateBody,
     WorkflowsInsetBody,
     WorkflowsCopyBody,
+    LanesInsertBody,
+    LanesUpdateBody,
+    LanesListParams,
 )
