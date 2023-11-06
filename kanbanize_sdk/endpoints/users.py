@@ -18,8 +18,10 @@ class Users(GenericRequestMethod):
         Returns:
             An array of objects that represents the users
         """
-        params = params.to_dict() if params else None
-        return self.service.get(self.endpoint, params=params)
+        return self.service.get(
+            self.endpoint,
+            params=params.to_dict() if isinstance(params, UsersListParams) else params
+        )
 
     def insert(self, body: UsersInsertBody) -> dict:
         """

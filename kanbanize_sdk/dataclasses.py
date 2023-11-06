@@ -255,8 +255,8 @@ class LanesInsertBody:
     parent_lane_id: int
     position: int
     name: str
-    description: Optional[str]
     color: str
+    description: Optional[str] = None
 
     def to_dict(self):
         return {
@@ -270,6 +270,50 @@ class LanesUpdateBody:
     parent_lane_id: Optional[int] = None
     position: Optional[int] = None
     name: Optional[str] = None
+    description: Optional[str] = None
+    color: Optional[str] = None
+
+    def to_dict(self):
+        return {
+            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
+            for key, value in self.__dict__.items() if value is not None
+        }
+
+
+@dataclass
+class ColumnsListParams(LanesListParams):
+    ...
+
+
+@dataclass
+class ColumnsInsertBody:
+    workflow_id: int
+    section: int
+    parent_column_id: int
+    position: int
+    name: str
+    limit: int
+    cards_per_row: int
+    flow_type: int
+    description: Optional[str] = None
+    color: Optional[str] = None
+
+    def to_dict(self):
+        return {
+            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
+            for key, value in self.__dict__.items() if value is not None
+        }
+
+
+@dataclass
+class ColumnsUpdateBody:
+    section: Optional[int] = None
+    parent_column_id: Optional[int] = None
+    position: Optional[int] = None
+    name: Optional[str] = None
+    limit: Optional[int] = None
+    cards_per_row: Optional[int] = None
+    flow_type: Optional[int] = None
     description: Optional[str] = None
     color: Optional[str] = None
 

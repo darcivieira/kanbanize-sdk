@@ -19,7 +19,7 @@ class Lanes(GenericRequestMethod):
             params: It's a dataclass object that provide all possible parameters to be used to list the lanes.
 
         Returns:
-            An array of objects that represents the workflows
+            An array of objects that represents the lanes
         """
         return self.service.get(self.endpoint + f'/{board_id}/lanes', params=params)
 
