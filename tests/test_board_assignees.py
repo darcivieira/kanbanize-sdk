@@ -1,97 +1,49 @@
 from pytest import mark
-from kanbanize_sdk import Kanbanize, MergedAreasInsertBody, MergedAreasUpdateBody
+from kanbanize_sdk import Kanbanize, BoardAssigneesUpdateBody
 
 
 @mark.board_assignees
-def test_list_merged_areas(requests_mock):
+def test_list_board_assignees(requests_mock):
     test_json = {
         'data': [
             {
-                "area_id": 0,
-                "board_id": 0,
-                "primary_column_id": 0,
-                "limit": 0,
-                "lane_ids": [
-                    0
-                ],
-                "column_ids": [
-                    0
-                ]
+                "user_id": 0,
+                "role_id": 0,
             }
         ]
     }
-    requests_mock.get('https://teste.kanbanize.com/api/v2/boards/1/mergedAreas', json=test_json)
+    requests_mock.get('https://teste.kanbanize.com/api/v2/boards/1/userRoles', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
-    assert service.merged_areas().list(board_id=1) == test_json.get('data')
+    assert service.board_assignees().list(board_id=1) == test_json.get('data')
 
 
 @mark.board_assignees
 def test_get_merged_area(requests_mock):
     test_json = {
         'data': {
-            "area_id": 0,
-            "board_id": 0,
-            "primary_column_id": 0,
-            "limit": 0,
-            "lane_ids": [
-                0
-            ],
-            "column_ids": [
-                0
-            ]
+            "role_id": 0,
         }
     }
-    requests_mock.get('https://teste.kanbanize.com/api/v2/boards/1/mergedAreas/1', json=test_json)
+    requests_mock.get('https://teste.kanbanize.com/api/v2/boards/1/userRoles/1', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
-    assert service.merged_areas().get(board_id=1, area_id=1) == test_json.get('data')
-
-
-@mark.board_assignees
-def test_insert_merged_area(requests_mock):
-    test_json = {
-        'data': {
-            "area_id": 0,
-            "board_id": 0,
-            "primary_column_id": 0,
-            "limit": 0,
-            "lane_ids": [
-                0
-            ],
-            "column_ids": [
-                0
-            ]
-        }
-    }
-    requests_mock.post('https://teste.kanbanize.com/api/v2/boards/1/mergedAreas', json=test_json)
-    service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
-    body = MergedAreasInsertBody(lane_ids=[0], column_ids=[0], primary_column_id=0, limit=0)
-    assert service.merged_areas().insert(1, body) == test_json.get('data')
+    assert service.board_assignees().get(board_id=1, user_id=1) == test_json.get('data')
 
 
 @mark.board_assignees
 def test_update_merged_area(requests_mock):
     test_json = {
         'data': {
-            "area_id": 0,
-            "board_id": 0,
-            "primary_column_id": 0,
-            "limit": 0,
-            "lane_ids": [
-                0
-            ],
-            "column_ids": [
-                0
-            ]
+            "role_id": 0
         }
     }
-    requests_mock.patch('https://teste.kanbanize.com/api/v2/boards/1/mergedAreas/1', json=test_json)
+    requests_mock.put('https://teste.kanbanize.com/api/v2/boards/1/userRoles/1', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
-    body = MergedAreasUpdateBody(lane_ids=[0])
-    assert service.merged_areas().update(1, 1, body) == test_json.get('data')
+    body = BoardAssigneesUpdateBody(role_id=0)
+    assert service.board_assignees().update(1, 1, body) == test_json.get('data')
 
 
 @mark.board_assignees
 def test_delete_merged_area(requests_mock):
-    requests_mock.delete('https://teste.kanbanize.com/api/v2/boards/1/mergedAreas/1', status_code=204)
+    requests_mock.delete('https://teste.kanbanize.com/api/v2/boards/1/userRoles/1', status_code=204)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
-    assert service.merged_areas().delete(1, 1) is None
+    assert service.board_assignees().delete(1, 1) is None

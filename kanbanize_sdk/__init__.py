@@ -27,4 +27,5 @@ from .dataclasses import (
     CellLimitsUpdateBody,
     MergedAreasUpdateBody,
     MergedAreasInsertBody,
+    BoardAssigneesUpdateBody,
 )
