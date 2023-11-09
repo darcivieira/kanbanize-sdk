@@ -367,3 +367,8 @@ class LaneSectionLimitsUpdateBody(BaseDataClasse):
     lane_id: int
     section: list
     limit: int
+
+
+@dataclass
+class BoardAssigneesUpdateBody(BaseDataClasse):
+    role_id: int
