@@ -16,7 +16,7 @@ class CellLimits(GenericRequestMethod):
 
     insert = private
 
-    def list(self, board_id: int, *args, **kwargs):
+    def list(self, board_id: int, *args, **kwargs) -> list:
         """
         This method is responsible to list all cell limits from the board into the platform.
 
@@ -29,7 +29,7 @@ class CellLimits(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{board_id}/cellLimits')
 
-    def update(self, board_id: int, body: CellLimitsUpdateBody, *args, **kwargs):
+    def update(self, board_id: int, body: CellLimitsUpdateBody, *args, **kwargs) -> dict:
         """
         This method is responsible to update one cell limit from the board into the platform.
 

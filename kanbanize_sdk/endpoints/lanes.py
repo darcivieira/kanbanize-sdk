@@ -37,7 +37,7 @@ class Lanes(GenericRequestMethod):
         """
         return self.service.post(self.endpoint + f'/{board_id}/lanes', data=body.to_dict())
 
-    def get(self, board_id: int, lane_id: int, *args, **kwargs):
+    def get(self, board_id: int, lane_id: int, *args, **kwargs) -> dict:
         """
         This method is responsible to get a lane from the board into the platform.
 
