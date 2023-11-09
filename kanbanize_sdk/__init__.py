@@ -25,4 +25,6 @@ from .dataclasses import (
     ColumnsInsertBody,
     ColumnsUpdateBody,
     CellLimitsUpdateBody,
+    MergedAreasUpdateBody,
+    MergedAreasInsertBody,
 )

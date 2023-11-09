@@ -4,6 +4,15 @@ from datetime import datetime
 
 
 @dataclass
+class BaseDataClasse:
+    def to_dict(self):
+        return {
+            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
+            for key, value in self.__dict__.items() if value is not None
+        }
+
+
+@dataclass
 class UsersListParams:
     user_ids: Optional[List] = None
     is_enabled: Optional[Literal[0, 1]] = None
@@ -335,3 +344,19 @@ class CellLimitsUpdateBody:
             key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
             for key, value in self.__dict__.items() if value is not None
         }
+
+
+@dataclass
+class MergedAreasInsertBody(BaseDataClasse):
+    lane_ids: list
+    column_ids: list
+    primary_column_id: int
+    limit: int
+
+
+@dataclass
+class MergedAreasUpdateBody(BaseDataClasse):
+    lane_ids: Optional[List] = None
+    column_ids: Optional[List] = None
+    primary_column_id: Optional[int] = None
+    limit: Optional[int] = None

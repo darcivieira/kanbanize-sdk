@@ -52,6 +52,7 @@ markers = [
     "lanes",
     "columns",
     "cell_limits",
+    "merged_areas",
 ]
 
 [build-system]

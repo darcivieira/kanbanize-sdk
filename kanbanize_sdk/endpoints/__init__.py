@@ -13,3 +13,4 @@ from .workflows import Workflows
 from .lanes import Lanes
 from .columns import Columns
 from .cell_limits import CellLimits
+from .merged_areas import MergedAreas
