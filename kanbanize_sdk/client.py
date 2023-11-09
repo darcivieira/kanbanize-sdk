@@ -1,4 +1,3 @@
-from .wrapper import KanbanizeSession
 from .endpoints import (
     Users,
     Teams,
@@ -17,7 +16,21 @@ from .endpoints import (
     CellLimits,
     MergedAreas,
     LaneSectionLimits,
+    BoardAssignees,
+    BoardTeams,
+    BoardTags,
+    BoardVisibleStandardFields,
+    BoardStickers,
+    BoardCustomFields,
+    BoardDiscardReasons,
+    BoardCardTypes,
+    BoardCustomFieldAllowedValues,
+    BoardCustomFieldDefaultContributors,
+    BoardChildParentCards,
+    BoardCardTemplates,
+    BoardBlockReasons,
 )
+from .wrapper import KanbanizeSession
 
 
 class Kanbanize:
@@ -72,6 +85,44 @@ class Kanbanize:
     def merged_areas(self):
         return MergedAreas(self.service)
 
-
     def lane_section_limits(self):
         return LaneSectionLimits(self.service)
+
+    def board_assignees(self):
+        return BoardAssignees(self.service)
+
+    def board_teams(self):
+        return BoardTeams(self.service)
+
+    def board_tags(self):
+        return BoardTags(self.service)
+
+    def board_visible_standard_fields(self):
+        return BoardVisibleStandardFields(self.service)
+
+    def board_stickers(self):
+        return BoardStickers(self.service)
+
+    def board_custom_fields(self):
+        return BoardCustomFields(self.service)
+
+    def board_custom_field_default_contributors(self):
+        return BoardCustomFieldDefaultContributors(self.service)
+
+    def board_custom_field_allowed_values(self):
+        return BoardCustomFieldAllowedValues(self.service)
+
+    def board_discard_reasons(self):
+        return BoardDiscardReasons(self.service)
+
+    def board_card_types(self):
+        return BoardCardTypes(self.service)
+
+    def board_card_templates(self):
+        return BoardCardTemplates(self.service)
+
+    def board_child_parent_cards(self):
+        return BoardChildParentCards(self.service)
+
+    def board_block_reasons(self):
+        return BoardBlockReasons(self.service)
