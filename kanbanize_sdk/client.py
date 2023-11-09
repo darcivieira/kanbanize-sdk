@@ -16,6 +16,7 @@ from .endpoints import (
     Columns,
     CellLimits,
     MergedAreas,
+    LaneSectionLimits,
 )
 
 
@@ -70,3 +71,7 @@ class Kanbanize:
 
     def merged_areas(self):
         return MergedAreas(self.service)
+
+
+    def lane_section_limits(self):
+        return LaneSectionLimits(self.service)

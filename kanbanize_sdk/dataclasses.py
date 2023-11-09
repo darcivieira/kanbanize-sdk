@@ -360,3 +360,10 @@ class MergedAreasUpdateBody(BaseDataClasse):
     column_ids: Optional[List] = None
     primary_column_id: Optional[int] = None
     limit: Optional[int] = None
+
+
+@dataclass
+class LaneSectionLimitsUpdateBody(BaseDataClasse):
+    lane_id: int
+    section: list
+    limit: int

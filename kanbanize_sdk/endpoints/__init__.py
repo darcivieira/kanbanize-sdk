@@ -14,3 +14,4 @@ from .lanes import Lanes
 from .columns import Columns
 from .cell_limits import CellLimits
 from .merged_areas import MergedAreas
+from .lane_section_limits import LaneSectionLimits
