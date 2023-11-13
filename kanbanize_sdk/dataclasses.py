@@ -384,3 +384,19 @@ class BoardStickersInsertBody(BaseDataClasse):
 class BoardStickersUpdateBody(BaseDataClasse):
     limit_per_board: Optional[int] = None
     limit_per_card: Optional[int] = None
+
+
+@dataclass
+class BoardCardTypesInsertBody(BaseDataClasse):
+    icon_type: int
+    icon_id: int
+    color: str
+    card_color_sync: int
+
+
+@dataclass
+class BoardCardTypesUpdateBody(BaseDataClasse):
+    icon_type: Optional[int] = None
+    icon_id: Optional[int] = None
+    color: Optional[str] = None
+    card_color_sync: Optional[int] = None

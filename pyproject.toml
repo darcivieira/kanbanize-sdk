@@ -60,6 +60,7 @@ markers = [
     "board_stickers",
     "board_tags",
     "board_card_templates",
+    "board_card_types",
 ]
 
 [build-system]

@@ -31,4 +31,6 @@ from .dataclasses import (
     BoardStickersUpdateBody,
     LaneSectionLimitsUpdateBody,
     BoardStickersInsertBody,
+    BoardCardTypesInsertBody,
+    BoardCardTypesUpdateBody,
 )
