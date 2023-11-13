@@ -59,6 +59,7 @@ markers = [
     "board_discard_reasons",
     "board_stickers",
     "board_tags",
+    "board_card_templates",
 ]
 
 [build-system]
