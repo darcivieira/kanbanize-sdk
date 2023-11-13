@@ -35,4 +35,6 @@ from .dataclasses import (
     BoardCardTypesUpdateBody,
     BoardCustomFieldsInsertBody,
     BoardCustomFieldsUpdateBody,
+    BoardCustomFieldAllowedValuesInsertBody,
+    BoardCustomFieldAllowedValuesUpdateBody,
 )

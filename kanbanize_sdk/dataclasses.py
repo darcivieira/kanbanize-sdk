@@ -427,3 +427,15 @@ class BoardCustomFieldsUpdateBody(BoardCustomFieldsInsertBody):
     value_is_required: Optional[int] = None
     default_value: Optional[str] = None
     inherit_default_value: Optional[int] = None
+
+
+@dataclass
+class BoardCustomFieldAllowedValuesInsertBody(BaseDataClasse):
+    position: int
+    is_default: int
+
+
+@dataclass
+class BoardCustomFieldAllowedValuesUpdateBody(BoardCustomFieldAllowedValuesInsertBody):
+    position: Optional[int] = None
+    is_default: Optional[int] = None
