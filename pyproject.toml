@@ -61,6 +61,7 @@ markers = [
     "board_tags",
     "board_card_templates",
     "board_card_types",
+    "board_custom_fields",
 ]
 
 [build-system]

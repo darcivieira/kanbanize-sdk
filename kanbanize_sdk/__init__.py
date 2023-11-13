@@ -33,4 +33,6 @@ from .dataclasses import (
     BoardStickersInsertBody,
     BoardCardTypesInsertBody,
     BoardCardTypesUpdateBody,
+    BoardCustomFieldsInsertBody,
+    BoardCustomFieldsUpdateBody,
 )

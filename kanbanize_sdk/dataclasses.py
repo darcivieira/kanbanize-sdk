@@ -400,3 +400,30 @@ class BoardCardTypesUpdateBody(BaseDataClasse):
     icon_id: Optional[int] = None
     color: Optional[str] = None
     card_color_sync: Optional[int] = None
+
+
+@dataclass
+class BoardCustomFieldsInsertBody(BaseDataClasse):
+    is_always_present: int
+    position: int
+    display_width: int
+    prefix: str
+    suffix: str
+    unique_values: int
+    value_is_required: int
+    default_value: str
+    inherit_default_value: int
+    color: Optional[str] = None
+
+
+@dataclass
+class BoardCustomFieldsUpdateBody(BoardCustomFieldsInsertBody):
+    is_always_present: Optional[int] = None
+    position: Optional[int] = None
+    display_width: Optional[int] = None
+    prefix: Optional[str] = None
+    suffix: Optional[str] = None
+    unique_values: Optional[int] = None
+    value_is_required: Optional[int] = None
+    default_value: Optional[str] = None
+    inherit_default_value: Optional[int] = None
