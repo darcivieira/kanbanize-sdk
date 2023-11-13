@@ -63,6 +63,7 @@ markers = [
     "board_card_types",
     "board_custom_fields",
     "board_custom_field_allowed_values",
+    "board_custom_field_default_contributors",
 ]
 
 [build-system]
