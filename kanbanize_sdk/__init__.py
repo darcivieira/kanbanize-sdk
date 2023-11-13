@@ -37,4 +37,5 @@ from .dataclasses import (
     BoardCustomFieldsUpdateBody,
     BoardCustomFieldAllowedValuesInsertBody,
     BoardCustomFieldAllowedValuesUpdateBody,
+    BoardTeamsUpdateBody,
 )

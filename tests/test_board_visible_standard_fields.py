@@ -21,21 +21,21 @@ def test_list_board_visible_standard_fields(requests_mock):
 
 
 @mark.board_visible_standard_fields
-def test_get_merged_area(requests_mock):
+def test_get_visible_standard_fields(requests_mock):
     requests_mock.get('https://teste.kanbanize.com/api/v2/boards/1/visibleStandardFields/1', status_code=204)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     assert service.board_visible_standard_fields().get(1, 1) is None
 
 
 @mark.board_visible_standard_fields
-def test_update_merged_area(requests_mock):
+def test_update_visible_standard_fields(requests_mock):
     requests_mock.put('https://teste.kanbanize.com/api/v2/boards/1/visibleStandardFields/1', status_code=204)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     assert service.board_visible_standard_fields().update(1, 1) is None
 
 
 @mark.board_visible_standard_fields
-def test_delete_merged_area(requests_mock):
+def test_delete_visible_standard_fields(requests_mock):
     requests_mock.delete('https://teste.kanbanize.com/api/v2/boards/1/visibleStandardFields/1', status_code=204)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     assert service.board_visible_standard_fields().delete(1, 1) is None

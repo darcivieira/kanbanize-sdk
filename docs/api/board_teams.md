@@ -1,0 +1,1 @@
+::: endpoints.board_teams

@@ -439,3 +439,8 @@ class BoardCustomFieldAllowedValuesInsertBody(BaseDataClasse):
 class BoardCustomFieldAllowedValuesUpdateBody(BoardCustomFieldAllowedValuesInsertBody):
     position: Optional[int] = None
     is_default: Optional[int] = None
+
+
+@dataclass
+class BoardTeamsUpdateBody(BaseDataClasse):
+    role_id: int
