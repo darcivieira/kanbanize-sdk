@@ -55,6 +55,7 @@ markers = [
     "merged_areas",
     "lane_section_limits",
     "board_assignees",
+    "board_block_reasons",
 ]
 
 [build-system]

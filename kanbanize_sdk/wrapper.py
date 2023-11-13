@@ -29,7 +29,7 @@ class KanbanizeSession(Session):
         headers = {'Content-Type': 'application/json', 'apikey': self.api_key}
         return super(KanbanizeSession, self).request(method, url=self.uri + url, data=data, headers=headers, **kwargs)
 
-    def get(self, url, **kwargs) -> dict | list:
+    def get(self, url, **kwargs) -> Any:
         r = super().get(url, **kwargs)
         return self.__middleware_response(r)
 
