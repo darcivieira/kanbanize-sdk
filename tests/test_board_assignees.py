@@ -18,7 +18,7 @@ def test_list_board_assignees(requests_mock):
 
 
 @mark.board_assignees
-def test_get_merged_area(requests_mock):
+def test_get_board_assignees(requests_mock):
     test_json = {
         'data': {
             "role_id": 0,
@@ -30,7 +30,7 @@ def test_get_merged_area(requests_mock):
 
 
 @mark.board_assignees
-def test_update_merged_area(requests_mock):
+def test_update_board_assignees(requests_mock):
     test_json = {
         'data': {
             "role_id": 0
@@ -43,7 +43,7 @@ def test_update_merged_area(requests_mock):
 
 
 @mark.board_assignees
-def test_delete_merged_area(requests_mock):
+def test_delete_board_assignees(requests_mock):
     requests_mock.delete('https://teste.kanbanize.com/api/v2/boards/1/userRoles/1', status_code=204)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     assert service.board_assignees().delete(1, 1) is None

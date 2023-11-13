@@ -58,6 +58,7 @@ markers = [
     "board_block_reasons",
     "board_discard_reasons",
     "board_stickers",
+    "board_tags",
 ]
 
 [build-system]
