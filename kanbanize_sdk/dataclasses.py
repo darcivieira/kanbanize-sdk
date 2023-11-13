@@ -372,3 +372,15 @@ class LaneSectionLimitsUpdateBody(BaseDataClasse):
 @dataclass
 class BoardAssigneesUpdateBody(BaseDataClasse):
     role_id: int
+
+
+@dataclass
+class BoardStickersInsertBody(BaseDataClasse):
+    limit_per_board: int
+    limit_per_card: int
+
+
+@dataclass
+class BoardStickersUpdateBody(BaseDataClasse):
+    limit_per_board: Optional[int] = None
+    limit_per_card: Optional[int] = None

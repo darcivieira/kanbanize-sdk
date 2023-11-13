@@ -57,6 +57,7 @@ markers = [
     "board_assignees",
     "board_block_reasons",
     "board_discard_reasons",
+    "board_stickers",
 ]
 
 [build-system]

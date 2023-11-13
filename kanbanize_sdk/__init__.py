@@ -28,4 +28,7 @@ from .dataclasses import (
     MergedAreasUpdateBody,
     MergedAreasInsertBody,
     BoardAssigneesUpdateBody,
+    BoardStickersUpdateBody,
+    LaneSectionLimitsUpdateBody,
+    BoardStickersInsertBody,
 )
