@@ -28,7 +28,7 @@ class BoardCardTemplates(GenericRequestMethod):
 
         Parameters:
             board_id: An integer parameter that represents the board identification.
-            template_id: An integer parameter that represents the reason identification.
+            template_id: An integer parameter that represents the template identification.
 
         Returns:
             A board card template object with the basic information data.
@@ -42,7 +42,7 @@ class BoardCardTemplates(GenericRequestMethod):
 
         Parameters:
             board_id: An integer parameter that represents the board identification.
-            template_id: An integer parameter that represents the reason identification.
+            template_id: An integer parameter that represents the template identification.
         """
         return self.service.put(self.endpoint + f'/{board_id}/cardTemplates/{template_id}')
 
@@ -53,7 +53,7 @@ class BoardCardTemplates(GenericRequestMethod):
 
         Parameters:
             board_id: An integer parameter that represents the board identification.
-            template_id: An integer parameter that represents the reason identification.
+            template_id: An integer parameter that represents the template identification.
         """
         return self.service.delete(self.endpoint + f'/{board_id}/cardTemplates/{template_id}')
 

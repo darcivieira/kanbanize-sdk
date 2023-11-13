@@ -64,6 +64,7 @@ markers = [
     "board_custom_fields",
     "board_custom_field_allowed_values",
     "board_custom_field_default_contributors",
+    "board_visible_standard_fields",
 ]
 
 [build-system]
