@@ -16,7 +16,7 @@ class BoardHistory(Boards):
 
     delete = private
 
-    def list(self, params: BoardHistoryListParams | None = None) -> list:
+    def list(self, params: BoardHistoryListParams | dict | None = None, *args, **kwargs) -> list:
         """
         This method is responsible to list all board history in the platform.
 
@@ -26,5 +26,7 @@ class BoardHistory(Boards):
         Returns:
             An array of objects that represents the boards
         """
-        params = params.to_dict() if params else None
+
+        params = params.to_dict() if isinstance(params, BoardHistoryListParams) else params
+
         return self.service.get(self.endpoint + '/history', params=params)

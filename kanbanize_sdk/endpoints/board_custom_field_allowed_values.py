@@ -41,7 +41,7 @@ class BoardCustomFieldAllowedValues(GenericRequestMethod):
                board_id: int,
                field_id: int,
                value_id: int,
-               body: BoardCustomFieldAllowedValuesInsertBody,
+               body: BoardCustomFieldAllowedValuesInsertBody | dict,
                *args,
                **kwargs) -> dict:
 
@@ -59,15 +59,18 @@ class BoardCustomFieldAllowedValues(GenericRequestMethod):
               An object that represents the board custom field allowed value.
 
         """
+
+        payload = body.to_dict() if isinstance(body, BoardCustomFieldAllowedValuesInsertBody) else body
+
         return self.service.put(
-            self.endpoint + f'/{board_id}/customFields/{field_id}/allowedValues/{value_id}', data=body.to_dict()
+            self.endpoint + f'/{board_id}/customFields/{field_id}/allowedValues/{value_id}', data=payload
         )
 
     def update(self,
                board_id: int,
                field_id: int,
                value_id: int,
-               body: BoardCustomFieldAllowedValuesUpdateBody,
+               body: BoardCustomFieldAllowedValuesUpdateBody | dict,
                *args,
                **kwargs) -> dict:
 
@@ -81,8 +84,11 @@ class BoardCustomFieldAllowedValues(GenericRequestMethod):
             body: It's a dataclass object that provide the essential request body needed to update a board custom field allowed values to the
                 board into the platform.
         """
+
+        payload = body.to_dict() if isinstance(body, BoardCustomFieldAllowedValuesUpdateBody) else body
+
         return self.service.patch(
-            self.endpoint + f'/{board_id}/customFields/{field_id}/allowedValues/{value_id}', data=body.to_dict()
+            self.endpoint + f'/{board_id}/customFields/{field_id}/allowedValues/{value_id}', data=payload
         )
 
     def delete(self, board_id: int, field_id: int, value_id: int, *args, **kwargs) -> None:

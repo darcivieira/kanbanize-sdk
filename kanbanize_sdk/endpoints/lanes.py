@@ -10,7 +10,7 @@ class Lanes(GenericRequestMethod):
 
     endpoint = '/boards'
 
-    def list(self, board_id: int, params: LanesListParams | None = None, *args, **kwargs) -> list:
+    def list(self, board_id: int, params: LanesListParams | dict | None = None, *args, **kwargs) -> list:
         """
         This method is responsible to list all lanes from a board in the platform.
 
@@ -21,9 +21,12 @@ class Lanes(GenericRequestMethod):
         Returns:
             An array of objects that represents the lanes
         """
+
+        params = params.to_dict() if isinstance(params, LanesListParams) else params
+
         return self.service.get(self.endpoint + f'/{board_id}/lanes', params=params)
 
-    def insert(self, board_id: int, body: LanesInsertBody, *args, **kwargs) -> dict:
+    def insert(self, board_id: int, body: LanesInsertBody | dict, *args, **kwargs) -> dict:
         """
         This method is responsible to insert a lane to the board into the platform.
 
@@ -35,7 +38,10 @@ class Lanes(GenericRequestMethod):
         Returns:
             A lane object with the basic information data
         """
-        return self.service.post(self.endpoint + f'/{board_id}/lanes', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, LanesInsertBody) else body
+
+        return self.service.post(self.endpoint + f'/{board_id}/lanes', data=payload)
 
     def get(self, board_id: int, lane_id: int, *args, **kwargs) -> dict:
         """
@@ -50,7 +56,7 @@ class Lanes(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{board_id}/lanes/{lane_id}')
 
-    def update(self, board_id: int, lane_id: int, body: LanesUpdateBody,  *args, **kwargs) -> dict:
+    def update(self, board_id: int, lane_id: int, body: LanesUpdateBody | dict,  *args, **kwargs) -> dict:
         """
         This method is responsible to update a lane from the board into the platform.
 
@@ -61,7 +67,10 @@ class Lanes(GenericRequestMethod):
         Returns:
             A lane object with the basic information data
         """
-        return self.service.patch(self.endpoint + f'/{board_id}/lanes/{lane_id}', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, LanesUpdateBody) else body
+
+        return self.service.patch(self.endpoint + f'/{board_id}/lanes/{lane_id}', data=payload)
 
     def delete(self, board_id: int, lane_id: int, *args, **kwargs) -> None:
         """

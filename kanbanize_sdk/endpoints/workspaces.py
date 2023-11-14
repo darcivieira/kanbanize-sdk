@@ -8,7 +8,7 @@ class Workspaces(GenericRequestMethod):
     """
     endpoint = '/workspaces'
 
-    def list(self, params: WorkspacesListParams | None = None) -> list:
+    def list(self, params: WorkspacesListParams | dict | None = None) -> list:
         """
         This method is responsible to list all workspaces in the platform.
 
@@ -18,9 +18,12 @@ class Workspaces(GenericRequestMethod):
         Returns:
             An array of objects that represents the workspaces
         """
+
+        params = params.to_dict() if isinstance(params, WorkspacesListParams) else params
+
         return self.service.get(self.endpoint, params=params)
     
-    def insert(self, body: WorkspacesInsertBody) -> dict:
+    def insert(self, body: WorkspacesInsertBody | dict) -> dict:
         """
         This method is responsible to add a workspace to the platform.
 
@@ -30,7 +33,10 @@ class Workspaces(GenericRequestMethod):
         Returns:
             An workspace object with the basic information data
         """
-        return self.service.post(self.endpoint, data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, WorkspacesInsertBody) else body
+
+        return self.service.post(self.endpoint, data=payload)
 
     def get(self, workspace_id: int) -> dict:
         """
@@ -44,7 +50,7 @@ class Workspaces(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{workspace_id}')
 
-    def update(self, workspace_id: int, body: WorkspacesUpdateBody) -> dict:
+    def update(self, workspace_id: int, body: WorkspacesUpdateBody | dict) -> dict:
         """
         This method is responsible to update an workspace in the platform.
 
@@ -55,4 +61,7 @@ class Workspaces(GenericRequestMethod):
         Returns:
             The updated workspace object
         """
-        return self.service.patch(self.endpoint + f'/{workspace_id}', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, WorkspacesUpdateBody) else body
+
+        return self.service.patch(self.endpoint + f'/{workspace_id}', data=payload)

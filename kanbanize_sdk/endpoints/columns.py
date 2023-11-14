@@ -9,7 +9,7 @@ class Columns(GenericRequestMethod):
 
     endpoint = '/boards'
 
-    def list(self, board_id: int, params: ColumnsListParams | None = None, *args, **kwargs) -> list:
+    def list(self, board_id: int, params: ColumnsListParams | dict | None = None, *args, **kwargs) -> list:
         """
         This method is responsible to list all columns from board in the platform.
 
@@ -20,12 +20,15 @@ class Columns(GenericRequestMethod):
         Returns:
             An array of objects that represents the columns
         """
+
+        params = params.to_dict() if isinstance(params, ColumnsListParams) else params
+
         return self.service.get(
             self.endpoint + f'/{board_id}/columns',
-            params=params.to_dict() if isinstance(params, ColumnsListParams) else params
+            params=params
         )
 
-    def insert(self, board_id: int, body: ColumnsInsertBody, *args, **kwargs) -> dict:
+    def insert(self, board_id: int, body: ColumnsInsertBody | dict, *args, **kwargs) -> dict:
         """
         This method is responsible to add a column to the board into the platform.
 
@@ -37,7 +40,10 @@ class Columns(GenericRequestMethod):
         Returns:
             A column object with the basic information data.
         """
-        return self.service.post(self.endpoint + f'/{board_id}/columns', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, ColumnsInsertBody) else body
+
+        return self.service.post(self.endpoint + f'/{board_id}/columns', data=payload)
 
     def get(self, board_id: int, column_id: int, *args, **kwargs) -> dict:
         """
@@ -53,7 +59,7 @@ class Columns(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{board_id}/columns/{column_id}')
 
-    def update(self, board_id: int, column_id: int, body: ColumnsUpdateBody, *args, **kwargs) -> dict:
+    def update(self, board_id: int, column_id: int, body: ColumnsUpdateBody | dict, *args, **kwargs) -> dict:
         """
         This method is responsible to update one column object from the board into the platform.
 
@@ -66,7 +72,10 @@ class Columns(GenericRequestMethod):
         Returns:
             A column object with the basic information data.
         """
-        return self.service.patch(self.endpoint + f'/{board_id}/columns/{column_id}', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, ColumnsUpdateBody) else body
+
+        return self.service.patch(self.endpoint + f'/{board_id}/columns/{column_id}', data=payload)
 
     def delete(self, board_id: int, column_id: int, *args, **kwargs) -> None:
         """

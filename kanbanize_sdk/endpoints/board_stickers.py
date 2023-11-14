@@ -35,7 +35,7 @@ class BoardStickers(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{board_id}/stickers/{sticker_id}')
 
-    def insert(self, board_id: int, sticker_id: int, body: BoardStickersInsertBody, *args, **kwargs) -> dict:
+    def insert(self, board_id: int, sticker_id: int, body: BoardStickersInsertBody | dict, *args, **kwargs) -> dict:
 
         """
         This method is responsible to get a board stickers from the board into the platform.
@@ -50,9 +50,12 @@ class BoardStickers(GenericRequestMethod):
               An object that represents the board sticker.
 
         """
-        return self.service.put(self.endpoint + f'/{board_id}/stickers/{sticker_id}', data=body.to_dict())
 
-    def update(self, board_id: int, sticker_id: int, body: BoardStickersUpdateBody, *args, **kwargs) -> dict:
+        payload = body.to_dict() if isinstance(body, BoardStickersInsertBody) else body
+
+        return self.service.put(self.endpoint + f'/{board_id}/stickers/{sticker_id}', data=payload)
+
+    def update(self, board_id: int, sticker_id: int, body: BoardStickersUpdateBody | dict, *args, **kwargs) -> dict:
 
         """
         This method is responsible to get a board stickers from the board into the platform.
@@ -63,7 +66,10 @@ class BoardStickers(GenericRequestMethod):
             body: It's a dataclass object that provide the essential request body needed to update a board stickers to the
                 board into the platform.
         """
-        return self.service.patch(self.endpoint + f'/{board_id}/stickers/{sticker_id}', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, BoardStickersUpdateBody) else body
+
+        return self.service.patch(self.endpoint + f'/{board_id}/stickers/{sticker_id}', data=payload)
 
     def delete(self, board_id: int, sticker_id: int, *args, **kwargs) -> None:
 

@@ -48,7 +48,7 @@ class BoardCardTypes(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{board_id}/cardTypes/{type_id}/effectiveSettings')
 
-    def insert(self, board_id: int, type_id: int, body: BoardCardTypesInsertBody, *args, **kwargs) -> dict:
+    def insert(self, board_id: int, type_id: int, body: BoardCardTypesInsertBody | dict, *args, **kwargs) -> dict:
 
         """
         This method is responsible to get a board card types from the board into the platform.
@@ -63,9 +63,12 @@ class BoardCardTypes(GenericRequestMethod):
               An object that represents the board card type.
 
         """
-        return self.service.put(self.endpoint + f'/{board_id}/cardTypes/{type_id}', data=body.to_dict())
 
-    def update(self, board_id: int, type_id: int, body: BoardCardTypesUpdateBody, *args, **kwargs) -> dict:
+        payload = body.to_dict() if isinstance(body, BoardCardTypesInsertBody) else body
+
+        return self.service.put(self.endpoint + f'/{board_id}/cardTypes/{type_id}', data=payload)
+
+    def update(self, board_id: int, type_id: int, body: BoardCardTypesUpdateBody | dict, *args, **kwargs) -> dict:
 
         """
         This method is responsible to get a board card types from the board into the platform.
@@ -76,7 +79,10 @@ class BoardCardTypes(GenericRequestMethod):
             body: It's a dataclass object that provide the essential request body needed to update a board card types to the
                 board into the platform.
         """
-        return self.service.patch(self.endpoint + f'/{board_id}/cardTypes/{type_id}', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, BoardCardTypesUpdateBody) else body
+
+        return self.service.patch(self.endpoint + f'/{board_id}/cardTypes/{type_id}', data=payload)
 
     def delete(self, board_id: int, type_id: int, *args, **kwargs) -> None:
 

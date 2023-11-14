@@ -22,7 +22,7 @@ class MergedAreas(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{board_id}/mergedAreas')
 
-    def insert(self, board_id: int, body: MergedAreasInsertBody, *args, **kwargs) -> dict:
+    def insert(self, board_id: int, body: MergedAreasInsertBody | dict, *args, **kwargs) -> dict:
         """
         This method is responsible to insert a merged areas to the board into the platform.
 
@@ -34,7 +34,10 @@ class MergedAreas(GenericRequestMethod):
         Returns:
             A merged area object with the basic information data
         """
-        return self.service.post(self.endpoint + f'/{board_id}/mergedAreas', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, MergedAreasInsertBody) else body
+
+        return self.service.post(self.endpoint + f'/{board_id}/mergedAreas', data=payload)
 
     def get(self, board_id: int, area_id: int, *args, **kwargs) -> dict:
         """
@@ -49,7 +52,7 @@ class MergedAreas(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{board_id}/mergedAreas/{area_id}')
 
-    def update(self, board_id: int, area_id: int, body: MergedAreasUpdateBody, *args, **kwargs) -> dict:
+    def update(self, board_id: int, area_id: int, body: MergedAreasUpdateBody | dict, *args, **kwargs) -> dict:
 
         """
         This method is responsible to get a merged areas from the board into the platform.
@@ -63,7 +66,10 @@ class MergedAreas(GenericRequestMethod):
         Returns:
             A merged area object with the basic information data.
         """
-        return self.service.patch(self.endpoint + f'/{board_id}/mergedAreas/{area_id}', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, MergedAreasUpdateBody) else body
+
+        return self.service.patch(self.endpoint + f'/{board_id}/mergedAreas/{area_id}', data=payload)
 
     def delete(self, board_id: int, area_id: int, *args, **kwargs) -> None:
 

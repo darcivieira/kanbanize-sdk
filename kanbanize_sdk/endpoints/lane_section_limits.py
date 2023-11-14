@@ -29,7 +29,7 @@ class LaneSectionLimits(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{board_id}/laneSectionLimits')
 
-    def update(self, board_id: int, body: LaneSectionLimitsUpdateBody, *args, **kwargs) -> dict:
+    def update(self, board_id: int, body: LaneSectionLimitsUpdateBody | dict, *args, **kwargs) -> dict:
         """
         This method is responsible to update one lane section limit from the board into the platform.
 
@@ -41,4 +41,7 @@ class LaneSectionLimits(GenericRequestMethod):
              An lane section limit object with the basic information data.
 
         """
-        return self.service.put(self.endpoint + f'/{board_id}/laneSectionLimits', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, LaneSectionLimitsUpdateBody) else body
+
+        return self.service.put(self.endpoint + f'/{board_id}/laneSectionLimits', data=payload)

@@ -36,7 +36,7 @@ class BoardTeams(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{board_id}/teams/{team_id}')
 
-    def update(self, board_id: int, team_id: int, body: BoardTeamsUpdateBody,  *args, **kwargs) -> None:
+    def update(self, board_id: int, team_id: int, body: BoardTeamsUpdateBody | dict,  *args, **kwargs) -> None:
 
         """
         This method is responsible to get a board team from the board into the platform.
@@ -47,7 +47,10 @@ class BoardTeams(GenericRequestMethod):
             body: It's a dataclass object that provide the essential request body needed to update a board team fields
                 to the board into the platform.
         """
-        return self.service.put(self.endpoint + f'/{board_id}/teams/{team_id}', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, BoardTeamsUpdateBody) else body
+
+        return self.service.put(self.endpoint + f'/{board_id}/teams/{team_id}', data=payload)
 
     def delete(self, board_id: int, team_id: int, *args, **kwargs) -> None:
 

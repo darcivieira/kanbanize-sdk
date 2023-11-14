@@ -20,7 +20,7 @@ class Workflows(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{board_id}/workflows')
 
-    def insert(self, board_id: int, body: WorkflowsInsetBody) -> dict:
+    def insert(self, board_id: int, body: WorkflowsInsetBody | dict) -> dict:
         """
         This method is responsible to insert a workflow to the board into the platform.
 
@@ -31,7 +31,10 @@ class Workflows(GenericRequestMethod):
         Returns:
             A workflow object with the basic information data
         """
-        return self.service.post(self.endpoint + f'/{board_id}/workflows', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, WorkflowsInsetBody) else body
+
+        return self.service.post(self.endpoint + f'/{board_id}/workflows', data=payload)
 
     def get(self, board_id: int, workflow_id: int) -> dict:
         """
@@ -46,7 +49,7 @@ class Workflows(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{board_id}/workflows/{workflow_id}')
 
-    def update(self, board_id: int, workflow_id: int, body: WorkflowsUpdateBody) -> dict:
+    def update(self, board_id: int, workflow_id: int, body: WorkflowsUpdateBody | dict) -> dict:
         """
         This method is responsible to update one workflow from a board into the platform.
 
@@ -58,7 +61,10 @@ class Workflows(GenericRequestMethod):
         Returns:
             The updated workflow object
         """
-        return self.service.patch(self.endpoint + f'/{board_id}/workflows/{workflow_id}', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, WorkflowsUpdateBody) else body
+
+        return self.service.patch(self.endpoint + f'/{board_id}/workflows/{workflow_id}', data=payload)
 
     def delete(self, board_id: int, workflow_id: int) -> None:
         """
@@ -71,7 +77,7 @@ class Workflows(GenericRequestMethod):
         """
         return self.service.delete(self.endpoint + f'/{board_id}/workflows/{workflow_id}')
 
-    def copy(self, board_id: int, workflow_id: int, body: WorkflowsCopyBody) -> dict:
+    def copy(self, board_id: int, workflow_id: int, body: WorkflowsCopyBody | dict) -> dict:
         """
         This method is responsible to make a copy of one workflow from the board into the platform.
 
@@ -83,4 +89,7 @@ class Workflows(GenericRequestMethod):
         Returns:
             A workflow object with the basic information data
         """
-        return self.service.post(self.endpoint + f'/{board_id}/workflows/{workflow_id}/copy', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, WorkflowsCopyBody) else body
+
+        return self.service.post(self.endpoint + f'/{board_id}/workflows/{workflow_id}/copy', data=payload)

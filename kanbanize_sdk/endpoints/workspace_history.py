@@ -12,7 +12,7 @@ class WorkspaceHistory(Workspaces):
     # get = private
     # update = private
 
-    def list(self, params: WorkspaceHistoryListParams | None = None) -> list:
+    def list(self, params: WorkspaceHistoryListParams | dict | None = None) -> list:
         """
         This method is responsible for listing all workspace histories.
 
@@ -22,4 +22,7 @@ class WorkspaceHistory(Workspaces):
         Returns:
             An array of objects representing the workspace histories
         """
+
+        params = params.to_dict() if isinstance(params, WorkspaceHistoryListParams) else params
+
         return self.service.get(self.endpoint + '/history', params=params)

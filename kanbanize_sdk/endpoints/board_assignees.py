@@ -35,7 +35,7 @@ class BoardAssignees(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{board_id}/userRoles/{user_id}')
 
-    def update(self, board_id: int, user_id: int, body: BoardAssigneesUpdateBody, *args, **kwargs) -> None:
+    def update(self, board_id: int, user_id: int, body: BoardAssigneesUpdateBody | dict, *args, **kwargs) -> None:
 
         """
         This method is responsible to get a board assignees from the board into the platform.
@@ -46,7 +46,13 @@ class BoardAssignees(GenericRequestMethod):
             body: It's a dataclass object that provide the essential request body needed to update a board assignees to the
                 board into the platform.
         """
-        return self.service.put(self.endpoint + f'/{board_id}/userRoles/{user_id}', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, BoardAssigneesUpdateBody) else body
+
+        return self.service.put(
+            self.endpoint + f'/{board_id}/userRoles/{user_id}',
+            data=payload
+        )
 
     def delete(self, board_id: int, user_id: int, *args, **kwargs) -> None:
 

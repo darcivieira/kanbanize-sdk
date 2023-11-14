@@ -29,7 +29,7 @@ class CellLimits(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{board_id}/cellLimits')
 
-    def update(self, board_id: int, body: CellLimitsUpdateBody, *args, **kwargs) -> dict:
+    def update(self, board_id: int, body: CellLimitsUpdateBody | dict, *args, **kwargs) -> dict:
         """
         This method is responsible to update one cell limit from the board into the platform.
 
@@ -41,4 +41,7 @@ class CellLimits(GenericRequestMethod):
              An cell limit object with the basic information data.
 
         """
-        return self.service.put(self.endpoint + f'/{board_id}/cellLimits', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, CellLimitsUpdateBody) else body
+
+        return self.service.put(self.endpoint + f'/{board_id}/cellLimits', data=payload)

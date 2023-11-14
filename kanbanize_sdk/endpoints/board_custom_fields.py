@@ -35,7 +35,7 @@ class BoardCustomFields(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{board_id}/customFields/{field_id}')
 
-    def insert(self, board_id: int, field_id: int, body: BoardCustomFieldsInsertBody, *args, **kwargs) -> dict:
+    def insert(self, board_id: int, field_id: int, body: BoardCustomFieldsInsertBody | dict, *args, **kwargs) -> dict:
 
         """
         This method is responsible to get a board custom fields from the board into the platform.
@@ -50,9 +50,12 @@ class BoardCustomFields(GenericRequestMethod):
               An object that represents the board custom field.
 
         """
-        return self.service.put(self.endpoint + f'/{board_id}/customFields/{field_id}', data=body.to_dict())
 
-    def update(self, board_id: int, field_id: int, body: BoardCustomFieldsUpdateBody, *args, **kwargs) -> dict:
+        payload = body.to_dict() if isinstance(body, BoardCustomFieldsInsertBody) else body
+
+        return self.service.put(self.endpoint + f'/{board_id}/customFields/{field_id}', data=payload)
+
+    def update(self, board_id: int, field_id: int, body: BoardCustomFieldsUpdateBody | dict, *args, **kwargs) -> dict:
 
         """
         This method is responsible to get a board custom fields from the board into the platform.
@@ -63,7 +66,10 @@ class BoardCustomFields(GenericRequestMethod):
             body: It's a dataclass object that provide the essential request body needed to update a board custom fields to the
                 board into the platform.
         """
-        return self.service.patch(self.endpoint + f'/{board_id}/customFields/{field_id}', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, BoardCustomFieldsUpdateBody) else body
+
+        return self.service.patch(self.endpoint + f'/{board_id}/customFields/{field_id}', data=payload)
 
     def delete(self, board_id: int, field_id: int, *args, **kwargs) -> None:
 

@@ -1,5 +1,5 @@
-from .boards import Boards
+from .generics import GenericRequestMethod
 
 
-class BoardChildParentCards(Boards):
+class BoardChildParentCards(GenericRequestMethod):
     ...
