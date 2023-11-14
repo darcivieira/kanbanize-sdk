@@ -1,1 +1,1 @@
-::: board_structure
+::: endpoints.board_structure

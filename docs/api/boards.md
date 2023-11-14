@@ -1,1 +1,1 @@
-::: boards
+::: endpoints.boards

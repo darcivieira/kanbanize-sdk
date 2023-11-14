@@ -1,5 +1,5 @@
-from .generics import GenericRequestMethod
-from .dataclasses import BoardsListParams, BoardsInsertBody, BoardsUpdateBody
+from kanbanize_sdk.endpoints.generics import GenericRequestMethod
+from kanbanize_sdk.dataclasses import BoardsListParams, BoardsInsertBody, BoardsUpdateBody
 
 
 class Boards(GenericRequestMethod):
@@ -8,7 +8,7 @@ class Boards(GenericRequestMethod):
     """
     endpoint = '/boards'
 
-    def list(self, params: BoardsListParams | None = None) -> list:
+    def list(self, params: BoardsListParams | dict | None = None, **kwargs) -> list:
         """
         This method is responsible to list all board in the platform.
 
@@ -18,12 +18,12 @@ class Boards(GenericRequestMethod):
         Returns:
             An array of objects that represents the boards
         """
-        params = params.to_dict() if params else None
+        params = params.to_dict() if isinstance(params, BoardsListParams) else params
         return self.service.get(self.endpoint, params=params)
 
-    def insert(self, body: BoardsInsertBody) -> dict:
+    def insert(self, body: BoardsInsertBody | dict) -> dict:
         """
-        This method is responsible to invite a board to the platform.
+        This method is responsible to insert a board to the platform.
 
         Parameters:
             body: It's a dataclass object that provide the essential request body needed to invite an board to the platform.
@@ -31,7 +31,10 @@ class Boards(GenericRequestMethod):
         Returns:
             An board object with the basic information data
         """
-        return self.service.post(self.endpoint, data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, BoardsInsertBody) else body
+
+        return self.service.post(self.endpoint, data=payload)
 
     def get(self, board_id: int) -> dict:
         """
@@ -45,7 +48,7 @@ class Boards(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{board_id}')
 
-    def update(self, board_id: int, body: BoardsUpdateBody) -> dict:
+    def update(self, board_id: int, body: BoardsUpdateBody | dict) -> dict:
         """
         This method is responsible to update an board in the platform.
 
@@ -56,14 +59,17 @@ class Boards(GenericRequestMethod):
         Returns:
             The updated board object
         """
-        return self.service.patch(self.endpoint + f'/{board_id}', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, BoardsUpdateBody) else body
+
+        return self.service.patch(self.endpoint + f'/{board_id}', data=payload)
 
     def delete(self, board_id: int) -> None:
         """
         This method is responsible to remove an board from the platform.
 
         Parameters:
-            board_id: Teste
+            board_id: An integer parameter that represents the board identification.
 
         """
         return self.service.delete(self.endpoint + f'/{board_id}')

@@ -1,1 +1,1 @@
-::: workspaces
+::: endpoints.workspaces

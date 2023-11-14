@@ -1,5 +1,4 @@
-from kanbanize_sdk.workspaces import Workspaces
-
+from .workspaces import Workspaces
 
 
 class WorkspaceManagers(Workspaces):

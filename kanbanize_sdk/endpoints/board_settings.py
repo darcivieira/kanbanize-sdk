@@ -1,6 +1,6 @@
 from .boards import Boards
-from .dataclasses import BoardSettingsUpdateBody
-from .utils import private
+from kanbanize_sdk.dataclasses import BoardSettingsUpdateBody
+from kanbanize_sdk.utils import private
 
 
 class BoardSettings(Boards):
@@ -26,7 +26,7 @@ class BoardSettings(Boards):
         """
         return self.service.get(self.endpoint + f'/{board_id}/settings')
 
-    def update(self, board_id: int, body: BoardSettingsUpdateBody) -> dict:
+    def update(self, board_id: int, body: BoardSettingsUpdateBody | dict) -> dict:
         """
         This method is responsible to update one board settings in the platform.
 
@@ -37,4 +37,7 @@ class BoardSettings(Boards):
         Returns:
             The updated board object
         """
-        return self.service.patch(self.endpoint + f'/{board_id}/settings', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, BoardSettingsUpdateBody) else body
+
+        return self.service.patch(self.endpoint + f'/{board_id}/settings', data=payload)

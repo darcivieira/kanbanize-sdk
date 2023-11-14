@@ -1,0 +1,1 @@
+::: endpoints.board_visible_standard_fields

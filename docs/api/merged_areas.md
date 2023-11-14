@@ -1,0 +1,1 @@
+::: endpoints.merged_areas

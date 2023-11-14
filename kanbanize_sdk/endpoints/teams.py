@@ -1,5 +1,5 @@
-from .generics import GenericRequestMethod
-from .dataclasses import TeamsListParams, TeamsInsertBody, TeamsUpdateBody
+from kanbanize_sdk.endpoints.generics import GenericRequestMethod
+from kanbanize_sdk.dataclasses import TeamsListParams, TeamsInsertBody, TeamsUpdateBody
 
 
 class Teams(GenericRequestMethod):
@@ -8,7 +8,7 @@ class Teams(GenericRequestMethod):
     """
     endpoint = '/teams'
 
-    def list(self, params: TeamsListParams | None = None) -> list:
+    def list(self, params: TeamsListParams | dict | None = None) -> list:
         """
         This method is responsible to list all teams in the platform.
 
@@ -18,10 +18,12 @@ class Teams(GenericRequestMethod):
         Returns:
             An array of objects that represents the teams
         """
-        params = params.to_dict() if params else None
+
+        params = params.to_dict() if isinstance(params, TeamsListParams) else params
+
         return self.service.get(self.endpoint, params=params)
 
-    def insert(self, body: TeamsInsertBody) -> dict:
+    def insert(self, body: TeamsInsertBody | dict) -> dict:
         """
         This method is responsible to invite a team to the platform.
 
@@ -31,7 +33,10 @@ class Teams(GenericRequestMethod):
         Returns:
             A team object with the basic information data
         """
-        return self.service.post(self.endpoint, data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, TeamsInsertBody) else body
+
+        return self.service.post(self.endpoint, data=payload)
 
     def get(self, team_id: int) -> dict:
         """
@@ -45,7 +50,7 @@ class Teams(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{team_id}')
 
-    def update(self, team_id: int, body: TeamsUpdateBody) -> dict:
+    def update(self, team_id: int, body: TeamsUpdateBody | dict) -> dict:
         """
         This method is responsible to update a team in the platform.
 
@@ -56,7 +61,10 @@ class Teams(GenericRequestMethod):
         Returns:
             The updated team object
         """
-        return self.service.patch(self.endpoint + f'/{team_id}', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, TeamsUpdateBody) else body
+
+        return self.service.patch(self.endpoint + f'/{team_id}', data=payload)
 
     def delete(self, team_id: int) -> None:
         """

@@ -1,5 +1,5 @@
-from .generics import GenericRequestMethod
-from .dataclasses import UsersListParams, UsersInsertBody, UsersUpdateBody
+from kanbanize_sdk.endpoints.generics import GenericRequestMethod
+from kanbanize_sdk.dataclasses import UsersListParams, UsersInsertBody, UsersUpdateBody
 
 
 class Users(GenericRequestMethod):
@@ -8,7 +8,7 @@ class Users(GenericRequestMethod):
     """
     endpoint = '/users'
 
-    def list(self, params: UsersListParams | None = None) -> list:
+    def list(self, params: UsersListParams | dict | None = None) -> list:
         """
         This method is responsible to list all user in the platform.
 
@@ -18,10 +18,15 @@ class Users(GenericRequestMethod):
         Returns:
             An array of objects that represents the users
         """
-        params = params.to_dict() if params else None
-        return self.service.get(self.endpoint, params=params)
 
-    def insert(self, body: UsersInsertBody) -> dict:
+        params = params.to_dict() if isinstance(params, UsersListParams) else params
+
+        return self.service.get(
+            self.endpoint,
+            params=params
+        )
+
+    def insert(self, body: UsersInsertBody | dict) -> dict:
         """
         This method is responsible to invite a user to the platform.
 
@@ -31,7 +36,10 @@ class Users(GenericRequestMethod):
         Returns:
             An user object with the basic information data
         """
-        return self.service.post(self.endpoint, data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, UsersInsertBody) else body
+
+        return self.service.post(self.endpoint, data=payload)
 
     def get(self, user_id: int) -> dict:
         """
@@ -45,7 +53,7 @@ class Users(GenericRequestMethod):
         """
         return self.service.get(self.endpoint + f'/{user_id}')
 
-    def update(self, user_id: int, body: UsersUpdateBody) -> dict:
+    def update(self, user_id: int, body: UsersUpdateBody | dict) -> dict:
         """
         This method is responsible to update an user in the platform.
 
@@ -56,7 +64,10 @@ class Users(GenericRequestMethod):
         Returns:
             The updated user object
         """
-        return self.service.patch(self.endpoint + f'/{user_id}', data=body.to_dict())
+
+        payload = body.to_dict() if isinstance(body, UsersUpdateBody) else body
+
+        return self.service.patch(self.endpoint + f'/{user_id}', data=payload)
 
     def delete(self, user_id: int) -> None:
         """
