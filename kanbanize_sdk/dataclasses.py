@@ -13,7 +13,10 @@ class BaseDataClasse:
 
 
 @dataclass
-class UsersListParams:
+class UsersListParams(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     user_ids: Optional[List] = None
     is_enabled: Optional[Literal[0, 1]] = None
     is_confirmed: Optional[Literal[0, 1]] = None
@@ -21,60 +24,60 @@ class UsersListParams:
     fields: Optional[List] = None
     expand: Optional[List] = None
 
-    def to_dict(self):
-        return {key: value for key, value in self.__dict__.items() if value is not None}
-
 
 @dataclass
-class UsersInsertBody:
+class UsersInsertBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     email: str
 
-    def to_dict(self):
-        return {key: value for key, value in self.__dict__.items() if value is not None}
-
 
 @dataclass
-class UsersUpdateBody:
+class UsersUpdateBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     email: Optional[str] = None
     username: Optional[str] = None
     is_enabled: Optional[Literal[0, 1]] = None
     is_tfa_enabled: Optional[Literal[0, 1]] = None
 
-    def to_dict(self):
-        return {key: value for key, value in self.__dict__.items() if value is not None}
-
 
 @dataclass
-class TeamsListParams:
+class TeamsListParams(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     team_ids: Optional[List] = None
     name: Optional[str] = None
     fields: Optional[List] = None
     expand: Optional[List] = None
 
-    def to_dict(self):
-        return {key: value for key, value in self.__dict__.items() if value is not None}
-
 
 @dataclass
-class TeamsInsertBody:
+class TeamsInsertBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     name: str
     description: Optional[str] = None
 
-    def to_dict(self):
-        return {key: value for key, value in self.__dict__.items() if value is not None}
-
 
 @dataclass
-class TeamsUpdateBody:
+class TeamsUpdateBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     name: Optional[str] = None
     description: Optional[str] = None
 
-    def to_dict(self):
-        return {key: value for key, value in self.__dict__.items() if value is not None}
-
 
 @dataclass
-class WorkspacesListParams:
+class WorkspacesListParams(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     workspace_ids: Optional[List] = None
     type: Optional[Literal[1, 2]] = None
     is_archived: Optional[Literal[0, 1]] = None
@@ -83,30 +86,30 @@ class WorkspacesListParams:
     board_filter_is_archived: Optional[Literal[0, 1]] = None
     board_filter_if_assigned: Optional[Literal[0, 1]] = None
 
-    def to_dict(self):
-        return {key: value for key, value in self.__dict__.items() if value is not None}
-
 
 @dataclass
-class WorkspacesInsertBody:
+class WorkspacesInsertBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     name: str
     type: Literal[1, 2]
 
-    def to_dict(self):
-        return {key: value for key, value in self.__dict__.items() if value is not None}
-
 
 @dataclass
-class WorkspacesUpdateBody:
+class WorkspacesUpdateBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     name: Optional[str] = None
     is_archived: Optional[Literal[0, 1]] = None
 
-    def to_dict(self):
-        return {key: value for key, value in self.__dict__.items() if value is not None}
-
     
 @dataclass
-class WorkspaceHistoryListParams:
+class WorkspaceHistoryListParams(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     workspace_ids: Optional[List] = None
     user_ids: Optional[List] = None
     event_types: Optional[List] = None
@@ -117,14 +120,11 @@ class WorkspaceHistoryListParams:
     page: Optional[int] = None
     per_page: Optional[int] = None
 
-    def to_dict(self):
-        return {
-            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
-            for key, value in self.__dict__.items() if value is not None
-        }
-
     
-class BoardsListParams:
+class BoardsListParams(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     board_ids: Optional[List] = None
     workspace_ids: Optional[List] = None
     is_archived: Optional[Literal[0, 1]] = None
@@ -132,32 +132,32 @@ class BoardsListParams:
     fields: Optional[List] = None
     expand: Optional[List] = None
 
-    def to_dict(self):
-        return {key: value for key, value in self.__dict__.items() if value is not None}
-
 
 @dataclass
-class BoardsInsertBody:
+class BoardsInsertBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     workspace_id: int
     name: str
     description: str
 
-    def to_dict(self):
-        return {key: value for key, value in self.__dict__.items() if value is not None}
-
 
 @dataclass
-class BoardsUpdateBody:
+class BoardsUpdateBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     name: Optional[str] = None
     description: Optional[str] = None
     is_archived: Optional[Literal[0, 1]] = None
 
-    def to_dict(self):
-        return {key: value for key, value in self.__dict__.items() if value is not None}
-
 
 @dataclass
-class BoardSettingsUpdateBody:
+class BoardSettingsUpdateBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     size_type: Optional[int] = None
     allow_exceeding: Optional[int] = None
     autoarchive_cards_after: Optional[int] = None
@@ -165,12 +165,9 @@ class BoardSettingsUpdateBody:
     allow_repeating_custom_card_ids: Optional[int] = None
     is_discard_reason_required: Optional[int] = None
 
-    def to_dict(self):
-        return {key: value for key, value in self.__dict__.items() if value is not None}
-
 
 @dataclass
-class BoardHistoryListParams:
+class BoardHistoryListParams(BaseDataClasse):
     """
     Set here a documentation
 
@@ -187,15 +184,9 @@ class BoardHistoryListParams:
     page: Optional[int] = None
     per_page: Optional[int] = None
 
-    def to_dict(self):
-        return {
-            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
-            for key, value in self.__dict__.items() if value is not None
-        }
-
 
 @dataclass
-class WorkflowsInsetBody:
+class WorkflowsInsetBody(BaseDataClasse):
     """
     Set here a documentation
     """
@@ -205,15 +196,9 @@ class WorkflowsInsetBody:
     name: str
     _type: int
 
-    def to_dict(self):
-        return {
-            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
-            for key, value in self.__dict__.items() if value is not None
-        }
-
 
 @dataclass
-class WorkflowsCopyBody:
+class WorkflowsCopyBody(BaseDataClasse):
     """
     Set here a documentation
     """
@@ -222,15 +207,9 @@ class WorkflowsCopyBody:
     copy_service_level_expectations: int
     copy_column_checklist_items: int
 
-    def to_dict(self):
-        return {
-            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
-            for key, value in self.__dict__.items() if value is not None
-        }
-
 
 @dataclass
-class WorkflowsUpdateBody:
+class WorkflowsUpdateBody(BaseDataClasse):
     """
     Set here a documentation
     """
@@ -240,26 +219,20 @@ class WorkflowsUpdateBody:
     name: Optional[str] = None
     _type: Optional[int] = None
 
-    def to_dict(self):
-        return {
-            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
-            for key, value in self.__dict__.items() if value is not None
-        }
+
+@dataclass
+class LanesListParams(BaseDataClasse):
+    """
+    Set here a documentation
+    """
+    fields: Optional[List[str]] = None
 
 
 @dataclass
-class LanesListParams:
-    fields: Optional[List[str]]
-
-    def to_dict(self):
-        return {
-            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
-            for key, value in self.__dict__.items() if value is not None
-        }
-
-
-@dataclass
-class LanesInsertBody:
+class LanesInsertBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     workflow_id: int
     parent_lane_id: int
     position: int
@@ -267,35 +240,32 @@ class LanesInsertBody:
     color: str
     description: Optional[str] = None
 
-    def to_dict(self):
-        return {
-            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
-            for key, value in self.__dict__.items() if value is not None
-        }
-
 
 @dataclass
-class LanesUpdateBody:
+class LanesUpdateBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     parent_lane_id: Optional[int] = None
     position: Optional[int] = None
     name: Optional[str] = None
     description: Optional[str] = None
     color: Optional[str] = None
 
-    def to_dict(self):
-        return {
-            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
-            for key, value in self.__dict__.items() if value is not None
-        }
-
 
 @dataclass
 class ColumnsListParams(LanesListParams):
+    """
+    Set here a documentation
+    """
     ...
 
 
 @dataclass
-class ColumnsInsertBody:
+class ColumnsInsertBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     workflow_id: int
     section: int
     parent_column_id: int
@@ -307,15 +277,12 @@ class ColumnsInsertBody:
     description: Optional[str] = None
     color: Optional[str] = None
 
-    def to_dict(self):
-        return {
-            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
-            for key, value in self.__dict__.items() if value is not None
-        }
-
 
 @dataclass
-class ColumnsUpdateBody:
+class ColumnsUpdateBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     section: Optional[int] = None
     parent_column_id: Optional[int] = None
     position: Optional[int] = None
@@ -326,28 +293,22 @@ class ColumnsUpdateBody:
     description: Optional[str] = None
     color: Optional[str] = None
 
-    def to_dict(self):
-        return {
-            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
-            for key, value in self.__dict__.items() if value is not None
-        }
-
 
 @dataclass
-class CellLimitsUpdateBody:
+class CellLimitsUpdateBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     lane_id: int
     column_id: int
     limit: int
 
-    def to_dict(self):
-        return {
-            key.strip('_'): list(map(str, value)) if isinstance(value, list) else value
-            for key, value in self.__dict__.items() if value is not None
-        }
-
 
 @dataclass
 class MergedAreasInsertBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     lane_ids: list
     column_ids: list
     primary_column_id: int
@@ -356,6 +317,9 @@ class MergedAreasInsertBody(BaseDataClasse):
 
 @dataclass
 class MergedAreasUpdateBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     lane_ids: Optional[List] = None
     column_ids: Optional[List] = None
     primary_column_id: Optional[int] = None
@@ -364,6 +328,9 @@ class MergedAreasUpdateBody(BaseDataClasse):
 
 @dataclass
 class LaneSectionLimitsUpdateBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     lane_id: int
     section: list
     limit: int
@@ -371,23 +338,35 @@ class LaneSectionLimitsUpdateBody(BaseDataClasse):
 
 @dataclass
 class BoardAssigneesUpdateBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     role_id: int
 
 
 @dataclass
 class BoardStickersInsertBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     limit_per_board: int
     limit_per_card: int
 
 
 @dataclass
 class BoardStickersUpdateBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     limit_per_board: Optional[int] = None
     limit_per_card: Optional[int] = None
 
 
 @dataclass
 class BoardCardTypesInsertBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     icon_type: int
     icon_id: int
     color: str
@@ -396,6 +375,9 @@ class BoardCardTypesInsertBody(BaseDataClasse):
 
 @dataclass
 class BoardCardTypesUpdateBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     icon_type: Optional[int] = None
     icon_id: Optional[int] = None
     color: Optional[str] = None
@@ -404,6 +386,9 @@ class BoardCardTypesUpdateBody(BaseDataClasse):
 
 @dataclass
 class BoardCustomFieldsInsertBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     is_always_present: int
     position: int
     display_width: int
@@ -418,6 +403,9 @@ class BoardCustomFieldsInsertBody(BaseDataClasse):
 
 @dataclass
 class BoardCustomFieldsUpdateBody(BoardCustomFieldsInsertBody):
+    """
+    Set here a documentation
+    """
     is_always_present: Optional[int] = None
     position: Optional[int] = None
     display_width: Optional[int] = None
@@ -431,16 +419,25 @@ class BoardCustomFieldsUpdateBody(BoardCustomFieldsInsertBody):
 
 @dataclass
 class BoardCustomFieldAllowedValuesInsertBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     position: int
     is_default: int
 
 
 @dataclass
 class BoardCustomFieldAllowedValuesUpdateBody(BoardCustomFieldAllowedValuesInsertBody):
+    """
+    Set here a documentation
+    """
     position: Optional[int] = None
     is_default: Optional[int] = None
 
 
 @dataclass
 class BoardTeamsUpdateBody(BaseDataClasse):
+    """
+    Set here a documentation
+    """
     role_id: int
