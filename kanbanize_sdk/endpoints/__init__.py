@@ -4,7 +4,8 @@ from .board_card_templates import BoardCardTemplates
 from .board_card_types import BoardCardTypes
 from .board_child_parent_cards import BoardChildParentCards
 from .board_custom_field_allowed_values import BoardCustomFieldAllowedValues
-from .board_custom_field_default_contributors import BoardCustomFieldDefaultContributors
+from .board_custom_field_default_contributors import \
+    BoardCustomFieldDefaultContributors
 from .board_custom_fields import BoardCustomFields
 from .board_discard_reasons import BoardDiscardReasons
 from .board_history import BoardHistory
@@ -18,6 +19,10 @@ from .board_visible_standard_fields import BoardVisibleStandardFields
 from .boards import Boards
 from .cell_limits import CellLimits
 from .columns import Columns
+from .dashboard_pages import DashboardPages
+from .dashboard_pages_teams import DashboardPagesTeams
+from .dashboard_pages_users import DashboardPagesUsers
+from .dashboard_pages_workspaces import DashboardPagesWorkspaces
 from .lane_section_limits import LaneSectionLimits
 from .lanes import Lanes
 from .managed_workspaces import ManagedWorkspaces

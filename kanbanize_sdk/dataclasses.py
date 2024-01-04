@@ -441,3 +441,28 @@ class BoardTeamsUpdateBody(BaseDataClasse):
     Set here a documentation
     """
     role_id: int
+
+
+@dataclass
+class DashboardPagesListParams(BaseDataClasse):
+    """
+    Ste here a documentation
+    """
+    dashboard_page_ids: Optional[List[int]] = None
+    fields: Optional[List[str]] = None
+
+
+@dataclass
+class DashboardPagesInsetBody(BaseDataClasse):
+    """
+    Ste here a documentation
+    """
+    name: str
+
+
+@dataclass
+class DashboardPagesUpdateBody(BaseDataClasse):
+    """
+    Ste here a documentation
+    """
+    name: str

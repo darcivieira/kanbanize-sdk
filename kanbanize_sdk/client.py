@@ -1,35 +1,16 @@
-from .endpoints import (
-    Users,
-    Teams,
-    ManagedWorkspaces,
-    Workspaces,
-    WorkspaceManagers,
-    WorkspaceHistory,
-    Boards,
-    BoardSettings,
-    BoardStructure,
-    BoardStructureRevisions,
-    BoardHistory,
-    Workflows,
-    Lanes,
-    Columns,
-    CellLimits,
-    MergedAreas,
-    LaneSectionLimits,
-    BoardAssignees,
-    BoardTeams,
-    BoardTags,
-    BoardVisibleStandardFields,
-    BoardStickers,
-    BoardCustomFields,
-    BoardDiscardReasons,
-    BoardCardTypes,
-    BoardCustomFieldAllowedValues,
-    BoardCustomFieldDefaultContributors,
-    BoardChildParentCards,
-    BoardCardTemplates,
-    BoardBlockReasons,
-)
+from .endpoints import (BoardAssignees, BoardBlockReasons, BoardCardTemplates,
+                        BoardCardTypes, BoardChildParentCards,
+                        BoardCustomFieldAllowedValues,
+                        BoardCustomFieldDefaultContributors, BoardCustomFields,
+                        BoardDiscardReasons, BoardHistory, Boards,
+                        BoardSettings, BoardStickers, BoardStructure,
+                        BoardStructureRevisions, BoardTags, BoardTeams,
+                        BoardVisibleStandardFields, CellLimits, Columns,
+                        DashboardPages, DashboardPagesTeams,
+                        DashboardPagesUsers, DashboardPagesWorkspaces, Lanes,
+                        LaneSectionLimits, ManagedWorkspaces, MergedAreas,
+                        Teams, Users, Workflows, WorkspaceHistory,
+                        WorkspaceManagers, Workspaces)
 from .wrapper import KanbanizeSession
 
 
@@ -126,3 +107,15 @@ class Kanbanize:
 
     def board_block_reasons(self):
         return BoardBlockReasons(self.service)
+
+    def dashboard_pages(self):
+        return DashboardPages(self.service)
+
+    def dashboard_pages_teams(self):
+        return DashboardPagesTeams(self.service)
+
+    def dashboard_pages_users(self):
+        return DashboardPagesUsers(self.service)
+
+    def dashboard_pages_workspaces(self):
+        return DashboardPagesWorkspaces(self.service)
