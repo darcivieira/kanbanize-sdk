@@ -1,5 +1,4 @@
 from kanbanize_sdk.endpoints.generics import GenericRequestMethod
-from kanbanize_sdk.dataclasses import UsersListParams, UsersInsertBody, UsersUpdateBody
 
 
 class DashboardPagesTeams(GenericRequestMethod):
@@ -8,73 +7,55 @@ class DashboardPagesTeams(GenericRequestMethod):
     """
     endpoint = '/dashboardPages'
 
-    def list(self, params: UsersListParams | dict | None = None) -> list:
+    def list(self, dashboard_page_id: int) -> list:
         """
-        This method is responsible to list all user in the platform.
+        This method is responsible to get a list of the teams having access to a dashboard page.
 
         Parameters:
-            params: It's a dataclass object that provide all possible parameters to be used to list the users.
+            dashboard_page_id: An integer parameter that represents the dashboard page identification.
 
         Returns:
-            An array of objects that represents the users
+            A list of the teams having access to a dashboard page
         """
-
-        params = params.to_dict() if isinstance(params, UsersListParams) else params
 
         return self.service.get(
-            self.endpoint,
-            params=params
+            self.endpoint + f'/{dashboard_page_id}/teams'
         )
 
-    def insert(self, body: UsersInsertBody | dict) -> dict:
+    def get(self, dashboard_page_id: int, team_id: int) -> None:
         """
-        This method is responsible to invite a user to the platform.
+        This method is responsible to check if a team is added to a dashboard page.
 
         Parameters:
-            body: It's a dataclass object that provide the essential request body needed to invite an user to the platform.
+            dashboard_page_id: A dashboard page id.
+            team_id: A team id.
 
         Returns:
-            An user object with the basic information data
+            The team is added to the dashboard page! Otherwise, you would have gotten a 404 error
         """
+        self.service.get(self.endpoint + f'/{dashboard_page_id}/teams/{team_id}')
 
-        payload = body.to_dict() if isinstance(body, UsersInsertBody) else body
-
-        return self.service.post(self.endpoint, data=payload)
-
-    def get(self, user_id: int) -> dict:
+    def update(self, dashboard_page_id: int, team_id: int) -> None:
         """
-        This method is responsible to get one user from the platform.
+        This method is responsible to give a team access to a dashboard page or set/unset as a manager of a dashboard page.
 
         Parameters:
-            user_id: An integer parameter that represents the user identification.
+            dashboard_page_id: A dashboard page id.
+            team_id: A team id.
 
         Returns:
-            A searched user object
+            The team is added to the dashboard page or is set/unset as a manager of the dashboard page! Otherwise, you would have gotten a 404 error.
         """
-        return self.service.get(self.endpoint + f'/{user_id}')
 
-    def update(self, user_id: int, body: UsersUpdateBody | dict) -> dict:
+        self.service.put(self.endpoint + f'/{dashboard_page_id}/teams/{team_id}')
+
+    def delete(self, dashboard_page_id: int, team_id: int) -> None:
         """
-        This method is responsible to update an user in the platform.
+        This method is responsible to deny a team access to a dashboard page.
 
         Parameters:
-            user_id: An integer parameter that represents the user identification.
-            body: It's a dataclass object that represent the body option to be updated.
-
-        Returns:
-            The updated user object
+            dashboard_page_id: A dashboard page id.
+            team_id: A team id.
         """
 
-        payload = body.to_dict() if isinstance(body, UsersUpdateBody) else body
-
-        return self.service.patch(self.endpoint + f'/{user_id}', data=payload)
-
-    def delete(self, user_id: int) -> None:
-        """
-        This method is responsible to remove an user from the platform.
-
-        Parameters:
-            user_id: An integer parameter that represents the user identification.
-
-        """
-        self.service.delete(self.endpoint + f'/{user_id}')
+        self.service.delete(self.endpoint + f'/{dashboard_page_id}/teams/{team_id}')
