@@ -3,7 +3,7 @@ from kanbanize_sdk.endpoints.generics import GenericRequestMethod
 
 class DashboardPagesTeams(GenericRequestMethod):
     """
-    Class responsible to make calls to Kanbanize users endpoints
+    Class responsible to make calls to Kanbanize teams' dashboard pages endpoints
     """
     endpoint = '/dashboardPages'
 
