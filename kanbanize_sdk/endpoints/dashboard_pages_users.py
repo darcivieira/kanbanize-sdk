@@ -1,80 +1,61 @@
 from kanbanize_sdk.endpoints.generics import GenericRequestMethod
-from kanbanize_sdk.dataclasses import UsersListParams, UsersInsertBody, UsersUpdateBody
 
 
 class DashboardPagesUsers(GenericRequestMethod):
     """
-    Class responsible to make calls to Kanbanize users endpoints
+    Class responsible to make calls to Kanbanize users dashboard pages endpoints
     """
     endpoint = '/dashboardPages'
 
-    def list(self, params: UsersListParams | dict | None = None) -> list:
+    def list(self, dashboard_page_id: int) -> list:
         """
-        This method is responsible to list all user in the platform.
+        This method is responsible to get a list of the users having access to a dashboard page.
 
         Parameters:
-            params: It's a dataclass object that provide all possible parameters to be used to list the users.
+            dashboard_page_id: A dashboard page id.
 
         Returns:
-            An array of objects that represents the users
+            A list of the users having access to a dashboard page.
         """
-
-        params = params.to_dict() if isinstance(params, UsersListParams) else params
 
         return self.service.get(
-            self.endpoint,
-            params=params
+            self.endpoint + f'/{dashboard_page_id}/users',
         )
 
-    def insert(self, body: UsersInsertBody | dict) -> dict:
-        """
-        This method is responsible to invite a user to the platform.
-
-        Parameters:
-            body: It's a dataclass object that provide the essential request body needed to invite an user to the platform.
-
-        Returns:
-            An user object with the basic information data
-        """
-
-        payload = body.to_dict() if isinstance(body, UsersInsertBody) else body
-
-        return self.service.post(self.endpoint, data=payload)
-
-    def get(self, user_id: int) -> dict:
+    def get(self, dashboard_page_id: int, user_id: int) -> dict:
         """
         This method is responsible to get one user from the platform.
 
         Parameters:
-            user_id: An integer parameter that represents the user identification.
+            dashboard_page_id: A dashboard page id.
+            user_id: A user id.
 
         Returns:
-            A searched user object
+            The user is added to the dashboard page! Otherwise, you would have gotten a 404 error.
         """
-        return self.service.get(self.endpoint + f'/{user_id}')
+        return self.service.get(self.endpoint + f'/{dashboard_page_id}/users/{user_id}')
 
-    def update(self, user_id: int, body: UsersUpdateBody | dict) -> dict:
+    def update(self, dashboard_page_id: int, user_id: int) -> dict:
         """
-        This method is responsible to update an user in the platform.
+        This method is responsible to give a user access to a dashboard page or set/unset as a manager of a dashboard page.
 
         Parameters:
-            user_id: An integer parameter that represents the user identification.
-            body: It's a dataclass object that represent the body option to be updated.
+            dashboard_page_id: A dashboard page id.
+            user_id: A user id.
 
         Returns:
-            The updated user object
+            The user is added to the dashboard page or is set/unset as a manager of the dashboard page! Otherwise, you would have gotten a 404 error.
         """
 
-        payload = body.to_dict() if isinstance(body, UsersUpdateBody) else body
+        return self.service.put(self.endpoint + f'/{dashboard_page_id}/users/{user_id}')
 
-        return self.service.patch(self.endpoint + f'/{user_id}', data=payload)
-
-    def delete(self, user_id: int) -> None:
+    def delete(self, dashboard_page_id: int, user_id: int) -> None:
         """
-        This method is responsible to remove an user from the platform.
+        This method is responsible to deny a user access to a dashboard page.
 
         Parameters:
-            user_id: An integer parameter that represents the user identification.
+            dashboard_page_id: A dashboard page id.
+            user_id: A user id.
 
         """
-        self.service.delete(self.endpoint + f'/{user_id}')
+        self.service.delete(self.endpoint + f'/{dashboard_page_id}/users/{user_id}')
