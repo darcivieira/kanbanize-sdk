@@ -56,7 +56,7 @@ def test_invite_user(requests_mock):
             'registration_date': '2023-10-24'
         }
     }
-    requests_mock.post('https://teste.kanbanize.com/api/v2/users', json=test_json)
+    requests_mock.post('https://teste.kanbanize.com/api/v2/users/invite', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = UsersInsertBody(email='teste@teste.com')
     assert service.users().insert(body) == test_json.get('data')
