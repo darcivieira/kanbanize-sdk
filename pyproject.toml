@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "kanbanize-sdk"
-version = "0.2.11"
+version = "0.2.12"
 description = "Kanbanize-sdk is a python library for interacting with the official Kanbanize tool environment in version 2."
 authors = ["darcivieira <darcivieira.junior@gmail.com>"]
 readme = "README.md"

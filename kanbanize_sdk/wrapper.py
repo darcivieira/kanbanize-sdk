@@ -34,15 +34,15 @@ class KanbanizeSession(Session):
         return self.__middleware_response(r)
 
     def post(self, url, data=None, json=None, **kwargs) -> dict:
-        r = super().post(url, data=None, json=None, **kwargs)
+        r = super().post(url, data=data, json=json, **kwargs)
         return self.__middleware_response(r)
 
     def put(self, url, data=None, **kwargs) -> Any:
-        r = super().put(url, data=None, **kwargs)
+        r = super().put(url, data=data, **kwargs)
         return self.__middleware_response(r)
 
     def patch(self, url, data=None, **kwargs) -> dict:
-        r = super().patch(url, data=None, **kwargs)
+        r = super().patch(url, data=data, **kwargs)
         return self.__middleware_response(r)
 
     def delete(self, url, **kwargs) -> None:
