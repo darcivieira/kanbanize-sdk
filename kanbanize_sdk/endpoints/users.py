@@ -37,6 +37,8 @@ class Users(GenericRequestMethod):
             An user object with the basic information data
         """
 
+        print(isinstance(body, UsersInsertBody), body.to_dict() if isinstance(body, UsersInsertBody) else body)
+
         payload = body.to_dict() if isinstance(body, UsersInsertBody) else body
 
         return self.service.post(self.endpoint + '/invite', data=payload)
