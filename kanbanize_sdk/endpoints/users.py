@@ -1,3 +1,5 @@
+import json
+
 from kanbanize_sdk.endpoints.generics import GenericRequestMethod
 from kanbanize_sdk.dataclasses import UsersListParams, UsersInsertBody, UsersUpdateBody
 
@@ -37,11 +39,9 @@ class Users(GenericRequestMethod):
             An user object with the basic information data
         """
 
-        print(isinstance(body, UsersInsertBody), body.to_dict() if isinstance(body, UsersInsertBody) else body)
-
         payload = body.to_dict() if isinstance(body, UsersInsertBody) else body
 
-        return self.service.post(self.endpoint + '/invite', data=payload)
+        return self.service.post(self.endpoint + '/invite', data=json.dumps(payload))
 
     def get(self, user_id: int) -> dict:
         """
