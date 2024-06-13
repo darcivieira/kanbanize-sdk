@@ -39,7 +39,7 @@ class Users(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, UsersInsertBody) else body
 
-        return self.service.post(self.endpoint, data=payload)
+        return self.service.post(self.endpoint + '/invite', data=payload)
 
     def get(self, user_id: int) -> dict:
         """
