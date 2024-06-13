@@ -34,7 +34,9 @@ class KanbanizeSession(Session):
         return self.__middleware_response(r)
 
     def post(self, url, data=None, json=None, **kwargs) -> dict:
+        print(data, json)
         r = super().post(url, data=None, json=None, **kwargs)
+        print(r.content)
         return self.__middleware_response(r)
 
     def put(self, url, data=None, **kwargs) -> Any:
