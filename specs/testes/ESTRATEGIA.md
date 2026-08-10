@@ -34,7 +34,8 @@ path errado passa em 100% dos testes.
 - Nome do teste descreve o comportamento esperado, não o método chamado.
 - **Um arquivo de teste por recurso**: `tests/test_<recurso_snake>.py`.
 - **Todo teste leva o marker do recurso** (`@mark.<recurso_snake>`), e o marker é declarado em
-  `[tool.pytest.ini_options]` de `pyproject.toml`. Marker não declarado gera warning e some do
+  `[tool.pytest.ini_options]` de `pyproject.toml`. São 30 markers: 29 de recurso mais
+  `wrapper`, que cobre a camada de transporte. Marker não declarado gera warning e some do
   filtro — é falha silenciosa.
 - **Nenhum subdomínio ou api_key real** em teste, fixture ou docstring. O padrão vigente é o
   par fictício `subdomain='teste'`, `api_key='teste_key'`.

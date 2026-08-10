@@ -29,3 +29,5 @@ contrato, modelo de autenticação, decisão de comprar vs construir, aceitaçã
 | # | Decisão | Estado | Data |
 |---|---|---|---|
 | [0001](0001-kanbanize-session-compoe-o-cliente-http.md) | Compor o cliente HTTP dentro de `KanbanizeSession` em vez de herdar dele | aceito | 2026-08-07 |
+| [0002](0002-uv-build-como-backend-de-empacotamento.md) | Usar `uv_build` como backend de empacotamento | aceito | 2026-08-10 |
+| [0003](0003-congelar-a-pilha-de-documentacao-com-pins-transitivos.md) | Congelar a pilha de documentação com pins transitivos em vez de modernizá-la | aceito | 2026-08-10 |

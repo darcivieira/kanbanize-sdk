@@ -13,9 +13,9 @@ importa a lib.
 | Runtime | Python | `>=3.13` — `.python-version` fixa 3.13 no dev, CI e Read the Docs em 3.13 | |
 | Transporte HTTP | `httpx` | `>=0.27,<1.0` (lock 0.27.2) | **Única** dependência de runtime |
 | Modelagem de payload | `dataclasses` da stdlib | — | Sem Pydantic, por escolha |
-| Empacotamento | uv + `uv_build` | uv 0.9.x | `pyproject.toml` em PEP 621, lockfile `uv.lock` |
+| Empacotamento | uv + `uv_build` | uv 0.9.x | `pyproject.toml` em PEP 621, lockfile `uv.lock`. Ver ADR 0002 |
 | Testes | `pytest`, `pytest-cov`, `pytest-httpx` | 7.4.x / 4.1.x / 0.30.x | |
-| Docs | MkDocs Material + mkdocstrings | 9.4.x / 0.23.x | Build no Read the Docs |
+| Docs | MkDocs Material + mkdocstrings | 9.4.x / 0.23.x | Build no Read the Docs. Pilha congelada por três pins transitivos — ver ADR 0003 |
 | CI | GitHub Actions (`.github/workflows/pipeline.yml`) | — | Só testes + Codecov |
 | Banco / Fila / Deploy | **não se aplica** | — | Sem persistência e sem processo servidor |
 
@@ -186,6 +186,5 @@ Dívidas assumidas conscientemente. Nenhuma deve ser "consertada de surpresa" �
 | `BoardChildParentCards` exportada e vazia | `endpoints/board_child_parent_cards.py` | Ver `visao/ROADMAP.md` |
 | Exemplo do README usa `UserListParams` inexistente | `README.md:28`, `docs/index.md:23` | Ver `visao/ROADMAP.md` |
 
-Nenhum ADR foi escrito ainda — `arquitetura/adr/` está vazio. As decisões acima estão
-descritas aqui, mas seus **porquês** não foram registrados. Ver os 3 próximos passos ao fim do
-bootstrap.
+Os porquês das decisões tomadas até aqui estão em `adr/`: 0001 (composição sobre herança em
+`KanbanizeSession`), 0002 (backend `uv_build`) e 0003 (pilha de documentação congelada).
