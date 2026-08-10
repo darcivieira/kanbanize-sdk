@@ -7,15 +7,17 @@ version: 2
 
 # Set the OS, Python version and other tools you might need
 build:
-  os: ubuntu-22.04
+  os: ubuntu-24.04
   tools:
-    python: "3.10"
+    python: "3.13"
   jobs:
     post_create_environment:
-      - pip install poetry
-      - poetry config virtualenvs.create false
+      - pip install uv
     post_install:
-      - poetry install --only doc
+      # Installs only the doc group into the environment Read the Docs created,
+      # mirroring what `poetry install --only doc` used to do. The project itself
+      # is not installed: mkdocstrings reads kanbanize_sdk from `paths` in mkdocs.yml.
+      - UV_PROJECT_ENVIRONMENT=$READTHEDOCS_VIRTUALENV_PATH uv sync --only-group doc
 
     # You can also specify other tool versions:
     # nodejs: "19"
