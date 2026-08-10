@@ -3,7 +3,7 @@ from kanbanize_sdk import Kanbanize, BoardCustomFieldsInsertBody, BoardCustomFie
 
 
 @mark.board_custom_fields
-def test_list_board_custom_fields(requests_mock):
+def test_list_board_custom_fields(httpx_mock):
     test_json = {
         'data': [
             {
@@ -21,13 +21,13 @@ def test_list_board_custom_fields(requests_mock):
             }
         ]
     }
-    requests_mock.get('https://teste.kanbanize.com/api/v2/boards/1/customFields', json=test_json)
+    httpx_mock.add_response(method='GET', url='https://teste.kanbanize.com/api/v2/boards/1/customFields', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     assert service.board_custom_fields().list(board_id=1) == test_json.get('data')
 
 
 @mark.board_custom_fields
-def test_get_board_custom_fields(requests_mock):
+def test_get_board_custom_fields(httpx_mock):
     test_json = {
         'data': {
             "position": 0,
@@ -42,13 +42,13 @@ def test_get_board_custom_fields(requests_mock):
             "inherit_default_value": 0,
         }
     }
-    requests_mock.get('https://teste.kanbanize.com/api/v2/boards/1/customFields/1', json=test_json)
+    httpx_mock.add_response(method='GET', url='https://teste.kanbanize.com/api/v2/boards/1/customFields/1', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     assert service.board_custom_fields().get(board_id=1, field_id=1) == test_json.get('data')
 
 
 @mark.board_custom_fields
-def test_insert_board_custom_fields(requests_mock):
+def test_insert_board_custom_fields(httpx_mock):
     test_json = {
         'data': {
             "position": 0,
@@ -63,7 +63,7 @@ def test_insert_board_custom_fields(requests_mock):
             "inherit_default_value": 0,
         }
     }
-    requests_mock.put('https://teste.kanbanize.com/api/v2/boards/1/customFields/1', json=test_json)
+    httpx_mock.add_response(method='PUT', url='https://teste.kanbanize.com/api/v2/boards/1/customFields/1', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = BoardCustomFieldsInsertBody(
         is_always_present=0,
@@ -80,7 +80,7 @@ def test_insert_board_custom_fields(requests_mock):
 
 
 @mark.board_custom_fields
-def test_update_board_custom_fields(requests_mock):
+def test_update_board_custom_fields(httpx_mock):
     test_json = {
         'data': {
             "position": 0,
@@ -95,14 +95,14 @@ def test_update_board_custom_fields(requests_mock):
             "inherit_default_value": 0,
         }
     }
-    requests_mock.patch('https://teste.kanbanize.com/api/v2/boards/1/customFields/1', json=test_json)
+    httpx_mock.add_response(method='PATCH', url='https://teste.kanbanize.com/api/v2/boards/1/customFields/1', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = BoardCustomFieldsUpdateBody(is_always_present=0)
     assert service.board_custom_fields().update(1, 1, body) == test_json.get('data')
 
 
 @mark.board_custom_fields
-def test_delete_board_custom_fields(requests_mock):
-    requests_mock.delete('https://teste.kanbanize.com/api/v2/boards/1/customFields/1', status_code=204)
+def test_delete_board_custom_fields(httpx_mock):
+    httpx_mock.add_response(method='DELETE', url='https://teste.kanbanize.com/api/v2/boards/1/customFields/1', status_code=204)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     assert service.board_custom_fields().delete(1, 1) is None

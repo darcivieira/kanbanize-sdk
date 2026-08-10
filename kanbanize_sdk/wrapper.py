@@ -1,9 +1,7 @@
 import json
 from typing import Any, TypedDict
-from dataclasses import dataclass
 
-from requests import Session, Response, RequestException
-from requests.structures import CaseInsensitiveDict
+import httpx
 
 
 class DefaultOptions(TypedDict):
@@ -11,11 +9,22 @@ class DefaultOptions(TypedDict):
     api_key: str
 
 
-class KanbanizeSession(Session):
+class KanbanizeSession:
+    """
+    Transport layer for the Kanbanize API v2.
+
+    This class composes an httpx client instead of inheriting from it, so the
+    public surface of the SDK stays limited to what it actually promises. See
+    specs/arquitetura/adr/ for the decision record.
+    """
+
     def __init__(self, options: DefaultOptions, **kwargs):
         self.__uri = f'https://{options.get("subdomain")}.kanbanize.com/api/v2'
         self.__api_key = options.get("api_key")
-        super(KanbanizeSession, self).__init__(**kwargs)
+        self.__client = httpx.Client(
+            headers={'Content-Type': 'application/json', 'apikey': self.__api_key},
+            **kwargs
+        )
 
     @property
     def uri(self):
@@ -25,36 +34,31 @@ class KanbanizeSession(Session):
     def api_key(self):
         return self.__api_key
 
-    def request(self, method, url=None, data=None, headers=None, **kwargs) -> Response:
-        headers = {'Content-Type': 'application/json', 'apikey': self.api_key}
-        return super(KanbanizeSession, self).request(method, url=self.uri + url, data=data, headers=headers, **kwargs)
+    def request(self, method, url=None, data=None, headers=None, **kwargs) -> httpx.Response:
+        return self.__client.request(method, self.uri + url, data=data, **kwargs)
 
     def get(self, url, **kwargs) -> Any:
-        r = super().get(url, **kwargs)
+        r = self.request('GET', url, **kwargs)
         return self.__middleware_response(r)
 
     def post(self, url, data=None, json=None, **kwargs) -> dict:
-        r = super().post(url, data=data, json=json, **kwargs)
+        r = self.request('POST', url, data=data, json=json, **kwargs)
         return self.__middleware_response(r)
 
     def put(self, url, data=None, **kwargs) -> Any:
-        r = super().put(url, data=data, **kwargs)
+        r = self.request('PUT', url, data=data, **kwargs)
         return self.__middleware_response(r)
 
     def patch(self, url, data=None, **kwargs) -> dict:
-        r = super().patch(url, data=data, **kwargs)
+        r = self.request('PATCH', url, data=data, **kwargs)
         return self.__middleware_response(r)
 
     def delete(self, url, **kwargs) -> None:
-        r = super().delete(url, **kwargs)
+        r = self.request('DELETE', url, **kwargs)
         return self.__middleware_response(r)
 
-    # def send(self, request, **kwargs) -> dict:
-    #     r = super().send(request, **kwargs)
-    #     return self.__middleware_response(r)
-
     @staticmethod
-    def __middleware_response(r: Response) -> dict | None | list:
+    def __middleware_response(r: httpx.Response) -> dict | None | list:
         status_message = {
             500: {'code': 500, 'message': 'The request failed due to an internal server error.'},
             503: {'code': 503, 'message': 'The service is temporarily unavailable.'},
@@ -74,6 +78,9 @@ class KanbanizeSession(Session):
         response = json.loads(r.content) \
             if r.status_code in [400, 401, 403, 404, 409, 429] else status_message.get(r.status_code)
 
+        # Behaviour preserved as-is from the requests-based implementation: for 500 and 503 the
+        # dict above has no 'error' key, so this raises ValueError(None) and the message is never
+        # delivered. Changing it would change what callers observe. Tracked in visao/ROADMAP.md.
         raise ValueError(
             response.get('error') if response else {'code': r.status_code, 'message': status_message.get(0)}
         )

@@ -3,7 +3,7 @@ from kanbanize_sdk import Kanbanize
 
 
 @mark.board_history
-def test_list_board_history(requests_mock):
+def test_list_board_history(httpx_mock):
     test_json = {
         'pagination': {
           'all_pages': 0,
@@ -36,6 +36,6 @@ def test_list_board_history(requests_mock):
             }
         ]
     }
-    requests_mock.get('https://teste.kanbanize.com/api/v2/boards/history', json=test_json)
+    httpx_mock.add_response(method='GET', url='https://teste.kanbanize.com/api/v2/boards/history', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     assert service.board_history().list() == response

@@ -4,7 +4,7 @@ from kanbanize_sdk import Kanbanize, CellLimitsUpdateBody
 
 
 @mark.cell_limits
-def test_list_cell_limits(requests_mock):
+def test_list_cell_limits(httpx_mock):
     test_json = {
         'data': [
             {
@@ -15,13 +15,13 @@ def test_list_cell_limits(requests_mock):
             }
         ]
     }
-    requests_mock.get('https://test.kanbanize.com/api/v2/boards/1/cellLimits', json=test_json)
-    service = Kanbanize({'subdomain': 'test', 'apy_key': 'token'})
+    httpx_mock.add_response(method='GET', url='https://test.kanbanize.com/api/v2/boards/1/cellLimits', json=test_json)
+    service = Kanbanize({'subdomain': 'test', 'api_key': 'token'})
     assert service.cell_limits().list(board_id=1) == test_json.get('data')
 
 
 @mark.cell_limits
-def test_update_cell_limits(requests_mock):
+def test_update_cell_limits(httpx_mock):
     test_json = {
         'data': {
             'board_id': 0,
@@ -30,7 +30,7 @@ def test_update_cell_limits(requests_mock):
             'limit': 1000
         }
     }
-    requests_mock.put('https://test.kanbanize.com/api/v2/boards/1/cellLimits', json=test_json)
-    service = Kanbanize({'subdomain': 'test', 'apy_key': 'token'})
+    httpx_mock.add_response(method='PUT', url='https://test.kanbanize.com/api/v2/boards/1/cellLimits', json=test_json)
+    service = Kanbanize({'subdomain': 'test', 'api_key': 'token'})
     body = CellLimitsUpdateBody(lane_id=1, column_id=1, limit=1000)
     assert service.cell_limits().update(board_id=1, body=body) == test_json.get('data')
