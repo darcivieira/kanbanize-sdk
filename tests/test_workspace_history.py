@@ -3,7 +3,7 @@ from pytest import mark
 
 
 @mark.workspaces_history
-def test_list_workspaces_history(requests_mock):
+def test_list_workspaces_history(httpx_mock):
     test_json = {
         'pagination': {
             'all_pages': 0,
@@ -36,6 +36,6 @@ def test_list_workspaces_history(requests_mock):
             }
         ]
     }
-    requests_mock.get('https://teste.kanbanize.com/api/v2/workspaces/history', json=test_json)
+    httpx_mock.add_response(method='GET', url='https://teste.kanbanize.com/api/v2/workspaces/history', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     assert service.workspace_history().list() == response

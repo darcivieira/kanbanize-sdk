@@ -9,19 +9,19 @@ jobs:
       - name: Clone repo
         uses: actions/checkout@v4
 
-      - name: Install python
-        uses: actions/setup-python@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: '3.10'
+          enable-cache: true
 
-      - name: Install poetry
-        run: pip install poetry
+      - name: Install python
+        run: uv python install 3.13
 
       - name: Install project dependencies
-        run: poetry install --without doc
+        run: uv sync --no-group doc
 
       - name: Run tests
-        run: poetry run pytest -s -x --cov=kanbanize_sdk -vv --cov-report=xml
+        run: uv run pytest -s -x --cov=kanbanize_sdk -vv --cov-report=xml
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3

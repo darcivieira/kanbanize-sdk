@@ -1,42 +1,62 @@
-[tool.poetry]
+[project]
 name = "kanbanize-sdk"
-version = "0.2.12"
+version = "0.3.0"
 description = "Kanbanize-sdk is a python library for interacting with the official Kanbanize tool environment in version 2."
-authors = ["darcivieira <darcivieira.junior@gmail.com>"]
+authors = [{ name = "darcivieira", email = "darcivieira.junior@gmail.com" }]
 readme = "README.md"
 license = "MIT"
-packages = [{include = "kanbanize_sdk"}]
+license-files = ["LICENSE"]
+requires-python = ">=3.13"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Natural Language :: English",
-    "Programming Language :: Python :: 3.10",
-    "Environment :: Plugins"
-
+    "Programming Language :: Python :: 3.13",
+    "Environment :: Plugins",
+]
+dependencies = [
+    "httpx>=0.27,<1.0",
 ]
 
-[tool.poetry.urls]
-"Docs" = "https://kanbanize-sdk.readthedocs.io/en/latest/"
-"GitHub" = "https://github.com/darcivieira/kanbanize-sdk/tree/main"
+[project.urls]
+Docs = "https://kanbanize-sdk.readthedocs.io/en/latest/"
+GitHub = "https://github.com/darcivieira/kanbanize-sdk/tree/main"
 
-[tool.poetry.dependencies]
-python = "^3.10"
-requests = "^2.31.0"
+[dependency-groups]
+dev = [
+    "pytest>=7.4.2,<8.0.0",
+    "isort>=5.12.0,<6.0.0",
+    "pytest-cov>=4.1.0,<5.0.0",
+    "pytest-httpx>=0.30.0",
+]
+doc = [
+    "mkdocs-material>=9.4.6,<10.0.0",
+    "mkdocstrings>=0.23.0,<0.24.0",
+    "mkdocstrings-python>=1.7.3,<2.0.0",
+    # Pin transitivo: mkdocstrings 0.23.x usa a API antiga de mkdocs-autorefs.
+    # A partir de 1.1 o autorefs quebra o build com
+    # AttributeError: 'dict' object has no attribute 'link_titles'.
+    # O poetry.lock mascarava isto travando 1.0.1. Remover só ao subir mkdocstrings.
+    "mkdocs-autorefs>=1.0.1,<1.1.0",
+    # Pin transitivo: mkdocstrings-python 1.x importa `griffe.collections`,
+    # removido no griffe 1.0. O poetry.lock travava 0.45.3.
+    "griffe>=0.45.3,<1.0.0",
+    # Pin transitivo: pygments 2.19+ com pymdown-extensions 10.7.x quebra o
+    # realce de código com AttributeError: 'NoneType' object has no attribute
+    # 'replace'. O poetry.lock travava 2.18.0.
+    "pygments>=2.18.0,<2.19.0",
+]
 
+[build-system]
+requires = ["uv_build>=0.9.0,<0.10.0"]
+build-backend = "uv_build"
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.4.2"
-isort = "^5.12.0"
-requests-mock = "^1.11.0"
-pytest-cov = "^4.1.0"
-
-
-[tool.poetry.group.doc.dependencies]
-mkdocs-material = "^9.4.6"
-mkdocstrings = "^0.23.0"
-mkdocstrings-python = "^1.7.3"
+[tool.uv.build-backend]
+module-root = ""
+module-name = "kanbanize_sdk"
 
 [tool.pytest.ini_options]
 markers = [
+    "wrapper",
     "users",
     "teams",
     "boards",
@@ -67,7 +87,3 @@ markers = [
     "board_visible_standard_fields",
     "board_teams",
 ]
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
