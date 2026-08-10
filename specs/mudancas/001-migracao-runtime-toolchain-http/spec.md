@@ -2,7 +2,7 @@
 id: 001-migracao-runtime-toolchain-http
 titulo: Migração de runtime, gerenciador de pacotes e cliente HTTP
 classificacao: 🔴 RED
-status: aprovada
+status: concluida
 criada: 2026-08-07
 modulos: [boards, users, "+ os 25 recursos restantes, indiretamente"]
 telas: []

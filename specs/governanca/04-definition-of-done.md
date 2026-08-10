@@ -3,6 +3,25 @@
 Uma tarefa só está pronta quando **todos** os itens aplicáveis estão marcados.
 Declarar concluído com item pendente é violação — sinalize o que falta.
 
+## Ordem de encerramento
+
+Dono deste fato. A sequência é fixa:
+
+```
+implementar → push da branch → CI verde → spec-fechar → abrir a PR → revisar → merge
+```
+
+**`spec-fechar` roda ANTES de abrir a PR, não depois do merge.** O motivo é concreto: os ADRs
+que explicam as decisões tomadas durante a implementação nascem no fechamento. Se o fechamento
+vier depois, o revisor lê o código sem o porquê ao lado — que é justamente o que ele precisa
+para revisar. Isso já aconteceu na mudança 001: os ADRs 0002 e 0003 ficaram fora da PR #6 e
+tiveram de entrar em uma PR de remendo.
+
+O push antes do fechamento é necessário porque parte da verificação só existe no remoto. Ao
+montar o `plan.md`, **separe os itens de checkpoint em dois grupos** — o que se verifica na
+máquina (testes, cobertura, build local) e o que só o remoto responde (CI, Read the Docs,
+publicação). Um checkpoint que mistura os dois trava o fechamento sem necessidade.
+
 ## Sempre
 
 - [ ] Comportamento bate com o que está em `mudancas/NNN/spec.md`

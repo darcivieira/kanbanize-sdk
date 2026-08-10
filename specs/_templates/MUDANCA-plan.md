@@ -34,6 +34,10 @@ Preencher esta tabela **antes** da próxima. Criar sem ter procurado é violaç�
 | Nível | O que cobre | Cobre qual RF |
 |---|---|---|
 
+> Ao escrever os checkpoints, separe **o que se verifica na máquina** (testes, cobertura,
+> build local) do **que só o remoto responde** (CI, Read the Docs, publicação). Misturar os
+> dois trava o fechamento à toa — ver `governanca/04-definition-of-done.md`.
+
 ## Pontos de falha
 | O que pode dar errado | Detectado por | Resposta |
 |---|---|---|

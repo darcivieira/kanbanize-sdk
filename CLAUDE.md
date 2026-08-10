@@ -114,6 +114,11 @@ Subagente de exploração é read-only por padrão.
 Nada é "pronto" antes de `specs/governanca/04-definition-of-done.md` verificado item a item
 e da skill `spec-fechar` executada. Item não verificado fica desmarcado e é reportado.
 
+A ordem é fixa e `04-definition-of-done.md` é o dono dela:
+**implementar → push → CI verde → `spec-fechar` → abrir a PR → merge.**
+O fechamento vem **antes** da PR, porque é ele que produz os ADRs que o revisor precisa ler
+junto com o código.
+
 ### Invariantes
 
 Valem sempre, sem exceção: `specs/governanca/01-constituicao.md`.
