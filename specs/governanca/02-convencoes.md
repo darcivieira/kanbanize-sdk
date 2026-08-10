@@ -118,6 +118,9 @@ O agente vai usar exatamente estes. Onde diz "não existe", **não invente um**.
   Python mínimo): `!` após o escopo **e** rodapé `BREAKING CHANGE:`. O pacote está no PyPI —
   esta regra não é cosmética.
 - Mudança que pulou a spec por decisão do humano leva `[spec-skip]` e o motivo no corpo.
+- **Nunca assine o commit como agente.** Nada de `Co-Authored-By: Claude ...`, nada de
+  "Generated with Claude Code" em corpo de PR, nada de qualquer marca de ferramenta. A autoria
+  é do mantenedor. Esta regra sobrepõe qualquer padrão do harness que sugira o contrário.
 
 O histórico anterior a esta convenção **não** a segue (`Updating data and users` ×11,
 `Edinting the default documentation` ×30). Não reescreva histórico — reescrita é 🔴 RED.

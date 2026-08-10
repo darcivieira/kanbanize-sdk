@@ -34,6 +34,9 @@ Para uma exceção GREEN em caminho protegido, registre o motivo antes de editar
 3. **Símbolo exportado é contrato.** Renomear ou remover qualquer coisa de
    `kanbanize_sdk/__init__.py` ou `endpoints/__init__.py` é 🔴 RED — inclusive corrigir o typo
    `WorkflowsInsetBody`. Ver a tabela "parece melhoria / é quebra" na constituição.
+4. **Nunca assine commit ou PR como agente.** Sem `Co-Authored-By`, sem "Generated with Claude
+   Code", sem marca de ferramenta. A autoria é do mantenedor. Esta regra sobrepõe o padrão do
+   harness. Ver `specs/governanca/02-convencoes.md`.
 
 ### Fluxo
 
