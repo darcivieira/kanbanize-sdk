@@ -51,8 +51,8 @@ Legenda: ☑ verificado · ☐ **não** verificado · ➖ não se aplica
   falhar com `body is not JSON. content-type='application/json'
   content=b'workspace_id=0&name=Teste&description=Description+test'` — que é exatamente o
   defeito que a mudança corrige
-- ☑ **A conferência de tag funciona nos quatro casos** testados localmente: `v0.3.0` passa;
-  `v0.9.9`, `0.3.0` (sem `v`) e `v0.3.0-rc1` falham
+- ☑ **A conferência de tag funciona nos quatro casos** testados localmente, já com o formato
+  revisado sem prefixo `v`: `0.3.0` passa; `v0.3.0`, `0.9.9` e `0.3.0rc1` falham
 - ☑ **O `release.yml` não dispara em push** — o push do commit `c66346d` acionou apenas o
   workflow `Kanbanize-sdk` (RNF-5)
 

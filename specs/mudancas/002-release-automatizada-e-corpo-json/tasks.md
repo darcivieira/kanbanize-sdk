@@ -95,7 +95,7 @@ Branch: `release_automation_and_json_body`
   1. checkout
   2. **encerrar sem publicar se a release for pre-release** (RF-16)
   3. instalar uv e Python 3.13, como no `pipeline.yml`
-  4. **conferir que a tag `vX.Y.Z` bate com a `version` do `pyproject.toml`** — falhar se não (RF-9)
+  4. **conferir que a tag `X.Y.Z` bate com a `version` do `pyproject.toml`**, sem prefixo `v` — falhar se não (RF-9)
   5. `uv sync --no-group doc` e `uv run pytest` (RF-11)
   6. `uv build`
   7. publicar por OIDC — **último passo** (RF-12)
@@ -146,7 +146,7 @@ Branch: `release_automation_and_json_body`
 - **Arquivos:** nenhum — ação no GitHub
 - **Depende de:** merge da PR, Checkpoint 2, e T-7 confirmada
 - **Cobre:** RF-13
-- **Detalhe:** **tarefa do humano.** Criar a release no GitHub com tag `v0.3.0`, **não**
+- **Detalhe:** **tarefa do humano.** Criar a release no GitHub com tag `0.3.0` — **sem o `v`** —, **não**
   marcada como pre-release. Aprovar o environment quando o workflow pedir. É o **único passo
   irreversível do plano**: o PyPI não permite republicar uma versão.
 - **Pronto quando:** em ambiente limpo, `pip install kanbanize-sdk==0.3.0` instala e
