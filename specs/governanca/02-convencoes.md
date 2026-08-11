@@ -99,7 +99,7 @@ O agente vai usar exatamente estes. Onde diz "não existe", **não invente um**.
 | Lint | **não existe hoje.** `isort` está instalado, sem config e sem invocação |
 | Type-check | **não existe hoje.** `mypy` não é dependência |
 | Build | `uv build` — não referenciado em nenhum workflow, mas é o comando do toolchain |
-| Publicar | **automático.** Publicar uma release no GitHub com tag `vX.Y.Z` dispara `.github/workflows/release.yml`, que confere a tag contra a `version`, roda os testes, faz `uv build` e envia ao PyPI por Trusted Publishing. Não há comando manual, e não há token no repositório |
+| Publicar | **automático.** Publicar uma release no GitHub com tag `X.Y.Z` — **sem o prefixo `v`** — dispara `.github/workflows/release.yml`, que confere a tag contra a `version`, roda os testes, faz `uv build` e envia ao PyPI por Trusted Publishing. Não há comando manual, e não há token no repositório |
 | Migrations | não se aplica — sem persistência |
 | Docs | build automática no Read the Docs via `.readthedocs.yaml`. Sem comando local declarado |
 

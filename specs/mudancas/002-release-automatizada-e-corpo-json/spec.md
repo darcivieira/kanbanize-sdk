@@ -56,7 +56,7 @@ Para quem consome: `pip install kanbanize-sdk==0.3.0` passa a funcionar, e os m�
 escrita mandam JSON de verdade — coerente com o header que o SDK sempre anunciou.
 
 Para quem mantém: publicar deixa de ser um comando decorado. Publicar uma release no GitHub,
-com tag `v0.3.0`, dispara o workflow que constrói e envia o pacote ao PyPI sem nenhum segredo
+com tag `0.3.0`, dispara o workflow que constrói e envia o pacote ao PyPI sem nenhum segredo
 guardado no repositório.
 
 ## Fora de escopo
@@ -91,7 +91,7 @@ guardado no repositório.
 |---|---|---|
 | RF-7 | Existe workflow em `.github/workflows/` disparado por `on: release: types: [published]` | leitura do arquivo |
 | RF-8 | A autenticação é **Trusted Publishing** (OIDC). Nenhum token do PyPI é guardado em secrets | ausência de `PYPI_API_TOKEN`; presença de `permissions: id-token: write` |
-| RF-9 | O workflow **falha** se a tag da release não corresponder à `version` do `pyproject.toml`, comparando a tag `vX.Y.Z` com `X.Y.Z` | execução com tag divergente falha antes de publicar |
+| RF-9 | O workflow **falha** se a tag da release não corresponder à `version` do `pyproject.toml`. A tag é `X.Y.Z`, **sem prefixo `v`**, e a comparação é literal | execução com tag divergente falha antes de publicar |
 | RF-10 | O workflow constrói com `uv build` e publica os artefatos gerados | leitura + execução |
 | RF-11 | O workflow roda a suíte de testes **antes** de publicar, e não publica se ela falhar | leitura + execução |
 | RF-12 | Publicar é o **último** passo; nenhum passo posterior pode falhar depois de o pacote estar no PyPI | leitura da ordem dos steps |
@@ -132,13 +132,13 @@ Então o workflow falha e nada é enviado ao PyPI
 
 ```
 Dado que pyproject.toml declara version = "0.3.0"
-Quando uma release for publicada com a tag v0.9.9
+Quando uma release for publicada com a tag 0.9.9
 Então o workflow falha na conferência de versão, antes de construir ou publicar
 ```
 
 ```
 Dado que pyproject.toml declara version = "0.3.0"
-Quando uma release for publicada com a tag v0.3.0
+Quando uma release for publicada com a tag 0.3.0
 Então o pacote é construído, publicado no PyPI por Trusted Publishing, e `pip install kanbanize-sdk==0.3.0` funciona
 ```
 
@@ -188,6 +188,15 @@ Todas resolvidas com o mantenedor em 2026-08-10. Nenhuma pendente.
 | D-2 | O workflow de publicação roda a suíte de novo? | **Sim** | Custa poucos segundos e fecha uma janela real: a release pode ser criada de uma tag antiga ou de um commit cujo CI nunca rodou. Confiar no CI do commit assume uma correspondência que o GitHub não garante |
 | D-3 | Pré-releases publicam? | **Não** — o workflow encerra sem publicar quando a release está marcada como *pre-release* | Evita mandar um `rc` ao PyPI por clique errado. Contrapartida assumida: soltar um `rc` de propósito exigirá alterar o workflow |
 | D-4 | A release da 0.3.0 espera a verificação real do corpo JSON? | **Não espera** — mas a **primeira** release passa pela aprovação manual do environment do D-1 | Não há cenário plausível em que mudar para `json=` piore as coisas: ou a API aceita as duas formas, ou só JSON, e nesse caso as escritas já estão quebradas. Ainda assim, a primeira release do fluxo novo é o pior momento para descobrir um erro, porque a 0.3.0 não pode ser republicada |
+
+### D-5 — formato da tag, revisado em 2026-08-11
+
+O formato acordado antes de a spec ser escrita era `vX.Y.Z`. O mantenedor reviu durante a
+implementação: a tag é **`X.Y.Z`, sem o prefixo `v`**, igual à `version` do `pyproject.toml`.
+A comparação de RF-9 passa a ser literal, sem tirar prefixo — o que também elimina a única
+transformação de string do passo, e portanto a única forma de ele errar sozinho.
+
+Consequência: uma tag `v0.3.0` agora **falha** na conferência, em vez de passar.
 
 ### Consequência operacional do D-4
 
