@@ -60,7 +60,7 @@ def test_insert_lane(httpx_mock, assert_json_body):
 
 
 @mark.lanes
-def test_update_board(httpx_mock, assert_json_body):
+def test_update_lane(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'board_id': 1,
@@ -78,7 +78,7 @@ def test_update_board(httpx_mock, assert_json_body):
 
 
 @mark.lanes
-def test_delete_board(httpx_mock):
+def test_delete_lane(httpx_mock):
     httpx_mock.add_response(method='DELETE', url='https://teste.kanbanize.com/api/v2/boards/1/lanes/1', status_code=204)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     assert service.lanes().delete(1, 1) is None
