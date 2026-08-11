@@ -31,3 +31,5 @@ contrato, modelo de autenticação, decisão de comprar vs construir, aceitaçã
 | [0001](0001-kanbanize-session-compoe-o-cliente-http.md) | Compor o cliente HTTP dentro de `KanbanizeSession` em vez de herdar dele | aceito | 2026-08-07 |
 | [0002](0002-uv-build-como-backend-de-empacotamento.md) | Usar `uv_build` como backend de empacotamento | aceito | 2026-08-10 |
 | [0003](0003-congelar-a-pilha-de-documentacao-com-pins-transitivos.md) | Congelar a pilha de documentação com pins transitivos em vez de modernizá-la | aceito | 2026-08-10 |
+| [0004](0004-converter-o-corpo-para-json-no-endpoint.md) | Converter o corpo para JSON no endpoint, não no wrapper | aceito | 2026-08-11 |
+| [0005](0005-introduzir-conftest-para-a-assercao-de-corpo.md) | Introduzir `tests/conftest.py` para a asserção de corpo, revogando a proibição anterior | aceito | 2026-08-11 |

@@ -21,7 +21,7 @@ def test_list_lane_section_limits(httpx_mock):
 
 
 @mark.lane_section_limits
-def test_update_lane_section_limits(httpx_mock):
+def test_update_lane_section_limits(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             "board_id": 0,
@@ -34,3 +34,4 @@ def test_update_lane_section_limits(httpx_mock):
     service = Kanbanize({'subdomain': 'test', 'api_key': 'token'})
     body = LaneSectionLimitsUpdateBody(lane_id=1, section=1, limit=1000)
     assert service.lane_section_limits().update(board_id=1, body=body) == test_json.get('data')
+    assert_json_body(body.to_dict())

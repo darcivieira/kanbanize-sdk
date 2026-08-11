@@ -27,7 +27,7 @@ def test_list_columns(httpx_mock):
 
 
 @mark.columns
-def test_inset_column(httpx_mock):
+def test_inset_column(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'column_id': 0,
@@ -49,6 +49,7 @@ def test_inset_column(httpx_mock):
         workflow_id=1, section=1, parent_column_id=1, position=1, name='Test', limit=0, cards_per_row=0, flow_type=0
     )
     assert service.columns().insert(board_id=1, body=body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.columns
@@ -73,7 +74,7 @@ def test_get_column(httpx_mock):
 
 
 @mark.columns
-def test_update_column(httpx_mock):
+def test_update_column(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'workflow': 0,
@@ -92,6 +93,7 @@ def test_update_column(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = ColumnsUpdateBody(position=2)
     assert service.columns().update(board_id=1, column_id=1, body=body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.columns

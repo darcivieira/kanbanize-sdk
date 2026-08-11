@@ -21,7 +21,7 @@ def test_list_cell_limits(httpx_mock):
 
 
 @mark.cell_limits
-def test_update_cell_limits(httpx_mock):
+def test_update_cell_limits(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'board_id': 0,
@@ -34,3 +34,4 @@ def test_update_cell_limits(httpx_mock):
     service = Kanbanize({'subdomain': 'test', 'api_key': 'token'})
     body = CellLimitsUpdateBody(lane_id=1, column_id=1, limit=1000)
     assert service.cell_limits().update(board_id=1, body=body) == test_json.get('data')
+    assert_json_body(body.to_dict())

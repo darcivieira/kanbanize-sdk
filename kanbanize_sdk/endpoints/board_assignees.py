@@ -51,7 +51,7 @@ class BoardAssignees(GenericRequestMethod):
 
         return self.service.put(
             self.endpoint + f'/{board_id}/userRoles/{user_id}',
-            data=payload
+            json=payload
         )
 
     def delete(self, board_id: int, user_id: int, *args, **kwargs) -> None:

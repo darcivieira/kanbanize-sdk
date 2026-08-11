@@ -48,7 +48,7 @@ def test_get_board_custom_fields(httpx_mock):
 
 
 @mark.board_custom_fields
-def test_insert_board_custom_fields(httpx_mock):
+def test_insert_board_custom_fields(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             "position": 0,
@@ -77,10 +77,11 @@ def test_insert_board_custom_fields(httpx_mock):
         inherit_default_value=0
     )
     assert service.board_custom_fields().insert(board_id=1, field_id=1, body=body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.board_custom_fields
-def test_update_board_custom_fields(httpx_mock):
+def test_update_board_custom_fields(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             "position": 0,
@@ -99,6 +100,7 @@ def test_update_board_custom_fields(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = BoardCustomFieldsUpdateBody(is_always_present=0)
     assert service.board_custom_fields().update(1, 1, body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.board_custom_fields

@@ -66,7 +66,7 @@ class BoardCardTypes(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, BoardCardTypesInsertBody) else body
 
-        return self.service.put(self.endpoint + f'/{board_id}/cardTypes/{type_id}', data=payload)
+        return self.service.put(self.endpoint + f'/{board_id}/cardTypes/{type_id}', json=payload)
 
     def update(self, board_id: int, type_id: int, body: BoardCardTypesUpdateBody | dict, *args, **kwargs) -> dict:
 
@@ -82,7 +82,7 @@ class BoardCardTypes(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, BoardCardTypesUpdateBody) else body
 
-        return self.service.patch(self.endpoint + f'/{board_id}/cardTypes/{type_id}', data=payload)
+        return self.service.patch(self.endpoint + f'/{board_id}/cardTypes/{type_id}', json=payload)
 
     def delete(self, board_id: int, type_id: int, *args, **kwargs) -> None:
 

@@ -40,4 +40,4 @@ class BoardSettings(Boards):
 
         payload = body.to_dict() if isinstance(body, BoardSettingsUpdateBody) else body
 
-        return self.service.patch(self.endpoint + f'/{board_id}/settings', data=payload)
+        return self.service.patch(self.endpoint + f'/{board_id}/settings', json=payload)

@@ -44,4 +44,4 @@ class CellLimits(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, CellLimitsUpdateBody) else body
 
-        return self.service.put(self.endpoint + f'/{board_id}/cellLimits', data=payload)
+        return self.service.put(self.endpoint + f'/{board_id}/cellLimits', json=payload)

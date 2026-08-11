@@ -20,7 +20,7 @@ def test_list_workflows(httpx_mock):
 
 
 @mark.workflows
-def test_insert_workflow(httpx_mock):
+def test_insert_workflow(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'workflow_id': 0,
@@ -35,6 +35,7 @@ def test_insert_workflow(httpx_mock):
     body = WorkflowsInsetBody(position=0, is_enabled=0, is_collapsible=0, name='Teste', _type=0)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     assert service.workflows().insert(board_id=1, body=body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.workflows
@@ -54,7 +55,7 @@ def test_get_workflow(httpx_mock):
 
 
 @mark.workflows
-def test_update_workflow(httpx_mock):
+def test_update_workflow(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'type': 0,
@@ -68,6 +69,7 @@ def test_update_workflow(httpx_mock):
     body = WorkflowsUpdateBody(position=1)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     assert service.workflows().update(board_id=1, workflow_id=1, body=body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.workflows
@@ -78,7 +80,7 @@ def test_delete_workflow(httpx_mock):
 
 
 @mark.workflows
-def test_copy_workflow(httpx_mock):
+def test_copy_workflow(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'board_structure': {},
@@ -103,3 +105,4 @@ def test_copy_workflow(httpx_mock):
     )
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     assert service.workflows().copy(board_id=1, workflow_id=1, body=body) == test_json.get('data')
+    assert_json_body(body.to_dict())

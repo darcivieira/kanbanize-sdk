@@ -33,7 +33,7 @@ def test_get_team(httpx_mock):
 
 
 @mark.teams
-def test_invite_team(httpx_mock):
+def test_invite_team(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'team_id': 1,
@@ -45,10 +45,11 @@ def test_invite_team(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = TeamsInsertBody(name='Team name')
     assert service.teams().insert(body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.teams
-def test_update_team(httpx_mock):
+def test_update_team(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'team_id': 1,
@@ -60,6 +61,7 @@ def test_update_team(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = TeamsUpdateBody(description='Other team name')
     assert service.teams().update(1, body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.teams

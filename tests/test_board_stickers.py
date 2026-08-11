@@ -30,7 +30,7 @@ def test_get_board_stickers(httpx_mock):
 
 
 @mark.board_stickers
-def test_insert_board_stickers(httpx_mock):
+def test_insert_board_stickers(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             "limit_per_board": 0,
@@ -41,10 +41,11 @@ def test_insert_board_stickers(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = BoardStickersInsertBody(limit_per_board=0, limit_per_card=0)
     assert service.board_stickers().insert(board_id=1, sticker_id=1, body=body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.board_stickers
-def test_update_board_stickers(httpx_mock):
+def test_update_board_stickers(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             "limit_per_board": 0,
@@ -55,6 +56,7 @@ def test_update_board_stickers(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = BoardStickersUpdateBody(limit_per_board=0)
     assert service.board_stickers().update(1, 1, body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.board_stickers

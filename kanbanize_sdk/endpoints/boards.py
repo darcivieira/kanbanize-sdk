@@ -34,7 +34,7 @@ class Boards(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, BoardsInsertBody) else body
 
-        return self.service.post(self.endpoint, data=payload)
+        return self.service.post(self.endpoint, json=payload)
 
     def get(self, board_id: int) -> dict:
         """
@@ -62,7 +62,7 @@ class Boards(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, BoardsUpdateBody) else body
 
-        return self.service.patch(self.endpoint + f'/{board_id}', data=payload)
+        return self.service.patch(self.endpoint + f'/{board_id}', json=payload)
 
     def delete(self, board_id: int) -> None:
         """

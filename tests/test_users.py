@@ -42,7 +42,7 @@ def test_get_user(httpx_mock):
     assert service.users().get(user_id=1) == test_json.get('data')
 
 @mark.users
-def test_invite_user(httpx_mock):
+def test_invite_user(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'user_id': 1,
@@ -60,9 +60,10 @@ def test_invite_user(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = UsersInsertBody(email='teste@teste.com')
     assert service.users().insert(body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 @mark.users
-def test_update_user(httpx_mock):
+def test_update_user(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'user_id': 1,
@@ -80,6 +81,7 @@ def test_update_user(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = UsersUpdateBody(is_enabled=1)
     assert service.users().update(1, body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 @mark.users
 def test_delete_user(httpx_mock):

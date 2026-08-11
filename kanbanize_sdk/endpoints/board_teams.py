@@ -50,7 +50,7 @@ class BoardTeams(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, BoardTeamsUpdateBody) else body
 
-        return self.service.put(self.endpoint + f'/{board_id}/teams/{team_id}', data=payload)
+        return self.service.put(self.endpoint + f'/{board_id}/teams/{team_id}', json=payload)
 
     def delete(self, board_id: int, team_id: int, *args, **kwargs) -> None:
 

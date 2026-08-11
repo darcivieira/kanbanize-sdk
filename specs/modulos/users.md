@@ -91,7 +91,6 @@ tabela completa em `arquitetura/VISAO_TECNICA.md`, fluxo 4.
 
 | Item | Motivo | Situação |
 |---|---|---|
-| `insert` usa `json=`, todos os outros recursos usam `data=` | Inconsistência histórica. `json=` é o correto para um corpo JSON; `data=` com `dict` urlencoda | Preservado na mudança 001. Padronizar depende de verificação do mantenedor contra a API real |
 | `delete` não faz `return` | Destoa do padrão dos outros recursos | Cosmético |
 | Docstrings das dataclasses são placeholder | Dívida aberta | Ver `governanca/01-constituicao.md` |
 | Campos sem descrição de regra | O significado de cada filtro está no OpenAPI da conta, que o agente não acessa | <<PREENCHER: colar o trecho da doc de `/users` para completar a coluna de regra>> |

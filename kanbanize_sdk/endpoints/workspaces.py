@@ -36,7 +36,7 @@ class Workspaces(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, WorkspacesInsertBody) else body
 
-        return self.service.post(self.endpoint, data=payload)
+        return self.service.post(self.endpoint, json=payload)
 
     def get(self, workspace_id: int) -> dict:
         """
@@ -64,4 +64,4 @@ class Workspaces(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, WorkspacesUpdateBody) else body
 
-        return self.service.patch(self.endpoint + f'/{workspace_id}', data=payload)
+        return self.service.patch(self.endpoint + f'/{workspace_id}', json=payload)

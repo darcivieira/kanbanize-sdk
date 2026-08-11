@@ -63,7 +63,7 @@ class BoardCustomFieldAllowedValues(GenericRequestMethod):
         payload = body.to_dict() if isinstance(body, BoardCustomFieldAllowedValuesInsertBody) else body
 
         return self.service.put(
-            self.endpoint + f'/{board_id}/customFields/{field_id}/allowedValues/{value_id}', data=payload
+            self.endpoint + f'/{board_id}/customFields/{field_id}/allowedValues/{value_id}', json=payload
         )
 
     def update(self,
@@ -88,7 +88,7 @@ class BoardCustomFieldAllowedValues(GenericRequestMethod):
         payload = body.to_dict() if isinstance(body, BoardCustomFieldAllowedValuesUpdateBody) else body
 
         return self.service.patch(
-            self.endpoint + f'/{board_id}/customFields/{field_id}/allowedValues/{value_id}', data=payload
+            self.endpoint + f'/{board_id}/customFields/{field_id}/allowedValues/{value_id}', json=payload
         )
 
     def delete(self, board_id: int, field_id: int, value_id: int, *args, **kwargs) -> None:

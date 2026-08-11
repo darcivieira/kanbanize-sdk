@@ -51,7 +51,7 @@ def test_get_board_card_types_settings(httpx_mock):
 
 
 @mark.board_card_types
-def test_insert_board_card_types(httpx_mock):
+def test_insert_board_card_types(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             "limit_per_board": 0,
@@ -62,10 +62,11 @@ def test_insert_board_card_types(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = BoardCardTypesInsertBody(icon_type=0, icon_id=0, color='ffffff', card_color_sync=0)
     assert service.board_card_types().insert(board_id=1, type_id=1, body=body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.board_card_types
-def test_update_board_card_types(httpx_mock):
+def test_update_board_card_types(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             "limit_per_board": 0,
@@ -76,6 +77,7 @@ def test_update_board_card_types(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = BoardCardTypesUpdateBody(card_color_sync=0)
     assert service.board_card_types().update(1, 1, body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.board_card_types

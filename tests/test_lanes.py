@@ -40,7 +40,7 @@ def test_get_lane(httpx_mock):
 
 
 @mark.lanes
-def test_insert_lane(httpx_mock):
+def test_insert_lane(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'lane_id': 1,
@@ -56,10 +56,11 @@ def test_insert_lane(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = LanesInsertBody(workflow_id=1, parent_lane_id=1, position=0, name='Test', description='Test', color='ffffff')
     assert service.lanes().insert(1, body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.lanes
-def test_update_board(httpx_mock):
+def test_update_board(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'board_id': 1,
@@ -73,6 +74,7 @@ def test_update_board(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = LanesUpdateBody(position=1)
     assert service.lanes().update(1, 1, body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.lanes
