@@ -114,7 +114,7 @@ Branch: `release_automation_and_json_body`
   2. Nas configurações do repositório, criar o environment `pypi` **com regra de proteção
      ativa** — exigida na primeira release pela decisão D-4.
 - **Pronto quando:** o mantenedor confirma os dois. Sem isso, T-9 falha na autenticação.
-- [ ] feito
+- [x] feito
 
 ## T-8 [P] — Atualizar specs e convenções
 - **Arquivos:** `specs/governanca/02-convencoes.md`, `specs/visao/ROADMAP.md`,
@@ -151,7 +151,7 @@ Branch: `release_automation_and_json_body`
   irreversível do plano**: o PyPI não permite republicar uma versão.
 - **Pronto quando:** em ambiente limpo, `pip install kanbanize-sdk==0.3.0` instala e
   `python -c "import kanbanize_sdk"` funciona em Python 3.13.
-- [ ] feito
+- [x] feito
 
 ## Cobertura dos requisitos
 
