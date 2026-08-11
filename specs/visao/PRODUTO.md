@@ -58,7 +58,7 @@ contrato incorreto, cobertura de testes. Nenhuma foi confirmada pelo mantenedor.
 
 | Restrição | Natureza |
 |---|---|
-| Pacote público no PyPI em `0.3.x` — renomear ou remover símbolo exportado quebra consumidores desconhecidos | Contrato público |
+| Pacote público no PyPI em `0.3.0`, publicado por CI com Trusted Publishing — renomear ou remover símbolo exportado quebra consumidores desconhecidos | Contrato público |
 | Python 3.13 como mínimo suportado, fixado no CI e no Read the Docs | Ambiente |
 | `httpx` é a única dependência de runtime — manter assim é decisão, não acaso | Arquitetura |
 | A API v2 da Kanbanize é externa e não versionada pelo mantenedor — mudança lá quebra aqui, sem aviso | Dependência externa |

@@ -27,7 +27,7 @@ de runtime ou de contrato) e exige spec + ADR antes de qualquer código.
 | 1 | Migrar runtime para **Python 3.13** | ☑ mudança 001 | Deixou de suportar 3.10–3.12 para quem instala do PyPI |
 | 2 | Migrar gerenciador de pacote de **Poetry para uv** | ☑ mudança 001 | Interno — mudou CI, `.readthedocs.yaml` e os comandos de `governanca/02-convencoes.md` |
 | 3 | Migrar dependência de runtime de **`requests` para `httpx`** | ☑ mudança 001 | `KanbanizeSession` deixou de herdar cliente de terceiro — ver ADR 0001 |
-| 4 | Criar **modo async** | ☐ | Aditivo se convivendo com a API síncrona; ver ADR quando decidido |
+| 4 | Criar **modo async** | ☐ — **único item aberto desta fase** | Aditivo se convivendo com a API síncrona; ver ADR quando decidido |
 | 5 | Converter a **publicação no PyPI de manual para CI** | ☑ mudança 002 | Interno — `release.yml` com Trusted Publishing, sem segredo no repositório |
 
 O item 4 foi destravado pelo item 3: `httpx` é o que viabiliza o async sem uma segunda

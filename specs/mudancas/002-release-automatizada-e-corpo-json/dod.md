@@ -56,12 +56,19 @@ Legenda: ☑ verificado · ☐ **não** verificado · ➖ não se aplica
 - ☑ **O `release.yml` não dispara em push** — o push do commit `c66346d` acionou apenas o
   workflow `Kanbanize-sdk` (RNF-5)
 
-## Itens que ficaram por verificar
+## Verificado após a release, em 2026-08-11
 
-- ☐ **RF-13** — `pip install kanbanize-sdk==0.3.0` só é verificável depois da release (T-9).
-- ☐ **RF-8 e RF-15 em execução real** — o Trusted Publishing e o environment `pypi` estão
-  declarados no workflow, mas só a primeira release prova que a autenticação OIDC funciona.
-  Depende da T-7, que é do mantenedor.
+A release `0.3.0` disparou o workflow (run `31484824989`), que passou em todos os passos:
+
+- ☑ **RF-9 em execução real** — `tag '0.3.0' matches pyproject version '0.3.0'`
+- ☑ **RF-11** — 128 testes verdes dentro do workflow, antes do build
+- ☑ **RF-8 e RF-15 em execução real** — Trusted Publishing autenticou por OIDC, no environment
+  `pypi`, sem nenhum token. `Publishing 2 files to https://upload.pypi.org/legacy/`
+- ☑ **RF-13** — em venv limpo com Python 3.13.11, `pip install kanbanize-sdk==0.3.0` instala,
+  importa, e traz `httpx>=0.27,<1.0` como única dependência de runtime. O PyPI serve
+  `requires_python >=3.13`
+
+## Itens que ficaram por verificar
 - ☐ **A API aceitar corpo JSON.** Os 34 pontos de asserção provam o que o SDK **envia**;
   nenhum teste prova o que a Kanbanize **aceita**. Registrado como dívida permanente em
   `visao/ROADMAP.md`.
