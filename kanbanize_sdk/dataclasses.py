@@ -120,7 +120,8 @@ class WorkspaceHistoryListParams(BaseDataClasse):
     page: Optional[int] = None
     per_page: Optional[int] = None
 
-    
+
+@dataclass
 class BoardsListParams(BaseDataClasse):
     """
     Set here a documentation
