@@ -38,8 +38,8 @@ jobs:
           tag="${{ github.event.release.tag_name }}"
           declared=$(uv run --no-project python -c \
             "import tomllib,pathlib;print(tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version'])")
-          if [ "$tag" != "v$declared" ]; then
-            echo "::error::release tag '$tag' does not match pyproject version '$declared' (expected 'v$declared')"
+          if [ "$tag" != "$declared" ]; then
+            echo "::error::release tag '$tag' does not match pyproject version '$declared' (expected '$declared')"
             exit 1
           fi
           echo "tag '$tag' matches pyproject version '$declared'"
