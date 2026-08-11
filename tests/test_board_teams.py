@@ -33,11 +33,12 @@ def test_get_board_teams(httpx_mock):
 
 
 @mark.board_teams
-def test_update_board_teams(httpx_mock):
+def test_update_board_teams(httpx_mock, assert_json_body):
     httpx_mock.add_response(method='PUT', url='https://teste.kanbanize.com/api/v2/boards/1/teams/1', status_code=204)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = BoardTeamsUpdateBody(role_id=0)
     assert service.board_teams().update(1, 1, body) is None
+    assert_json_body(body.to_dict())
 
 
 @mark.board_teams

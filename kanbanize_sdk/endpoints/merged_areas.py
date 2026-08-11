@@ -37,7 +37,7 @@ class MergedAreas(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, MergedAreasInsertBody) else body
 
-        return self.service.post(self.endpoint + f'/{board_id}/mergedAreas', data=payload)
+        return self.service.post(self.endpoint + f'/{board_id}/mergedAreas', json=payload)
 
     def get(self, board_id: int, area_id: int, *args, **kwargs) -> dict:
         """
@@ -69,7 +69,7 @@ class MergedAreas(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, MergedAreasUpdateBody) else body
 
-        return self.service.patch(self.endpoint + f'/{board_id}/mergedAreas/{area_id}', data=payload)
+        return self.service.patch(self.endpoint + f'/{board_id}/mergedAreas/{area_id}', json=payload)
 
     def delete(self, board_id: int, area_id: int, *args, **kwargs) -> None:
 

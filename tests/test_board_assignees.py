@@ -30,7 +30,7 @@ def test_get_board_assignees(httpx_mock):
 
 
 @mark.board_assignees
-def test_update_board_assignees(httpx_mock):
+def test_update_board_assignees(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             "role_id": 0
@@ -40,6 +40,7 @@ def test_update_board_assignees(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = BoardAssigneesUpdateBody(role_id=0)
     assert service.board_assignees().update(1, 1, body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.board_assignees

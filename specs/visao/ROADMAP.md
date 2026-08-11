@@ -28,7 +28,7 @@ de runtime ou de contrato) e exige spec + ADR antes de qualquer código.
 | 2 | Migrar gerenciador de pacote de **Poetry para uv** | ☑ mudança 001 | Interno — mudou CI, `.readthedocs.yaml` e os comandos de `governanca/02-convencoes.md` |
 | 3 | Migrar dependência de runtime de **`requests` para `httpx`** | ☑ mudança 001 | `KanbanizeSession` deixou de herdar cliente de terceiro — ver ADR 0001 |
 | 4 | Criar **modo async** | ☐ | Aditivo se convivendo com a API síncrona; ver ADR quando decidido |
-| 5 | Converter a **publicação no PyPI de manual para CI** | ☐ | Interno — novo job em `.github/workflows/`; toca segredo de repositório 🔴 |
+| 5 | Converter a **publicação no PyPI de manual para CI** | ☑ mudança 002 | Interno — `release.yml` com Trusted Publishing, sem segredo no repositório |
 
 O item 4 foi destravado pelo item 3: `httpx` é o que viabiliza o async sem uma segunda
 dependência de runtime.
@@ -59,5 +59,6 @@ Parking lot. Registrado aqui para **não** voltar como escopo acidental:
 | `WorkspaceManagers.list` sem teste (`workspace_managers.py:21`) | Único método de recurso ativo sem cobertura | Nenhum. Lacuna a fechar |
 | `Kanbanize` sem `api_key` agora falha na construção | Com `requests`, header de valor `None` era omitido e a requisição saía sem `apikey`. O `httpx` levanta `AttributeError`. Falha cedo em vez de tarde, mas é comportamento observável diferente | Passar `api_key` — que sempre foi obrigatório na prática |
 | Alguns testes não têm marker (`test_workspaces.py`) | O filtro `-m workspaces` não os alcança; passam despercebidos em execução seletiva | Rodar por caminho de arquivo |
+| O `pipeline.yml` não cobre o build do Read the Docs | Quebra na documentação só aparece depois do merge, olhando o site publicado. Foi assim que se verificou a mudança 001 | Conferir a página publicada após mudanças que toquem `.readthedocs.yaml`, `mkdocs.yml` ou o grupo `doc` |
 | Sem lint, sem type-check e sem gate de cobertura no CI | Regressão de estilo e de tipo não é detectada; a meta de 95% de `testes/ESTRATEGIA.md` não é aplicada por ninguém | Revisão manual |
-| Publicação no PyPI não é automatizada em nenhum workflow | Release depende de passo manual fora do repositório | Publicação manual pelo mantenedor. <<PREENCHER: comando exato usado>> — conversão para CI é o item 5 da próxima fase |
+| A escrita em JSON nunca foi confirmada contra a API real | Desde a mudança 002 todas as escritas mandam JSON, e 30 testes afirmam isso. Mas os testes mockam o transporte: eles provam o que o SDK **envia**, não o que a Kanbanize **aceita** | Nenhum. Uma chamada real de escrita do mantenedor encerraria a dúvida; o agente está proibido de fazê-la |

@@ -42,8 +42,8 @@ path errado passa em 100% dos testes.
 
 ## Dados de teste
 
-Não há fixtures compartilhadas, factories nem `conftest.py`. Cada teste declara seu próprio
-JSON literal e registra a rota mockada no corpo do próprio teste:
+Cada teste declara seu próprio JSON literal e registra a rota mockada no corpo do próprio
+teste. Não há factories nem fixtures de dado:
 
 ```python
 @mark.boards
@@ -54,8 +54,12 @@ def test_list_boards(httpx_mock):
     assert service.boards().list() == test_json.get('data')
 ```
 
-Isso é verboso de propósito: o JSON esperado fica ao lado da asserção, sem indireção. Mantenha
-o padrão — não introduza `conftest.py` nem factory sem spec de mudança.
+Isso é verboso de propósito: o JSON esperado fica ao lado da asserção, sem indireção.
+
+**`tests/conftest.py` existe, com um limite escrito** (ver ADR 0005): ele abriga **apenas**
+asserções sobre a requisição enviada, que não cabem inline. Hoje contém uma única fixture,
+`assert_json_body`. Continua proibido usar `conftest.py` para fixture de dado, factory ou
+construção de payload — o valor esperado fica no corpo do teste.
 
 **Dados sensíveis: nunca reais.** Não existe conta de teste, api_key de teste nem subdomínio
 real neste ambiente. Se você encontrar algo que pareça credencial, pare e avise.

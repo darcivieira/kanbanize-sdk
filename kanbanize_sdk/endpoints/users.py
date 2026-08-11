@@ -69,7 +69,7 @@ class Users(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, UsersUpdateBody) else body
 
-        return self.service.patch(self.endpoint + f'/{user_id}', data=payload)
+        return self.service.patch(self.endpoint + f'/{user_id}', json=payload)
 
     def delete(self, user_id: int) -> None:
         """

@@ -32,7 +32,7 @@ def test_get_board_custom_field_allowed_values(httpx_mock):
 
 
 @mark.board_custom_field_allowed_values
-def test_insert_board_custom_field_allowed_values(httpx_mock):
+def test_insert_board_custom_field_allowed_values(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             "position": 0,
@@ -44,10 +44,11 @@ def test_insert_board_custom_field_allowed_values(httpx_mock):
     body = BoardCustomFieldAllowedValuesInsertBody(position=0, is_default=0)
     assert service.board_custom_field_allowed_values().insert(
         board_id=1, field_id=1, value_id=1, body=body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.board_custom_field_allowed_values
-def test_update_board_custom_field_allowed_values(httpx_mock):
+def test_update_board_custom_field_allowed_values(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             "position": 0,
@@ -58,6 +59,7 @@ def test_update_board_custom_field_allowed_values(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = BoardCustomFieldAllowedValuesUpdateBody(position=0)
     assert service.board_custom_field_allowed_values().update(1, 1, 1, body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.board_custom_field_allowed_values

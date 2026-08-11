@@ -53,7 +53,7 @@ class BoardStickers(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, BoardStickersInsertBody) else body
 
-        return self.service.put(self.endpoint + f'/{board_id}/stickers/{sticker_id}', data=payload)
+        return self.service.put(self.endpoint + f'/{board_id}/stickers/{sticker_id}', json=payload)
 
     def update(self, board_id: int, sticker_id: int, body: BoardStickersUpdateBody | dict, *args, **kwargs) -> dict:
 
@@ -69,7 +69,7 @@ class BoardStickers(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, BoardStickersUpdateBody) else body
 
-        return self.service.patch(self.endpoint + f'/{board_id}/stickers/{sticker_id}', data=payload)
+        return self.service.patch(self.endpoint + f'/{board_id}/stickers/{sticker_id}', json=payload)
 
     def delete(self, board_id: int, sticker_id: int, *args, **kwargs) -> None:
 

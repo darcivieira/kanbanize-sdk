@@ -20,7 +20,7 @@ def test_get_board_settings(httpx_mock):
 
 
 @mark.board_settings
-def test_update_board_settings(httpx_mock):
+def test_update_board_settings(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'size_type': 0,
@@ -35,3 +35,4 @@ def test_update_board_settings(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = BoardSettingsUpdateBody(size_type=0)
     assert service.board_settings().update(1, body) == test_json.get('data')
+    assert_json_body(body.to_dict())

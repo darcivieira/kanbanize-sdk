@@ -44,4 +44,4 @@ class LaneSectionLimits(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, LaneSectionLimitsUpdateBody) else body
 
-        return self.service.put(self.endpoint + f'/{board_id}/laneSectionLimits', data=payload)
+        return self.service.put(self.endpoint + f'/{board_id}/laneSectionLimits', json=payload)

@@ -36,7 +36,7 @@ class Teams(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, TeamsInsertBody) else body
 
-        return self.service.post(self.endpoint, data=payload)
+        return self.service.post(self.endpoint, json=payload)
 
     def get(self, team_id: int) -> dict:
         """
@@ -64,7 +64,7 @@ class Teams(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, TeamsUpdateBody) else body
 
-        return self.service.patch(self.endpoint + f'/{team_id}', data=payload)
+        return self.service.patch(self.endpoint + f'/{team_id}', json=payload)
 
     def delete(self, team_id: int) -> None:
         """

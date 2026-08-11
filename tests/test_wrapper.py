@@ -97,6 +97,34 @@ def test_server_errors_raise_value_error_with_none(httpx_mock, status_code):
 
 
 @mark.wrapper
+@mark.parametrize('verb', ['put', 'patch'])
+def test_put_and_patch_send_a_json_body(httpx_mock, assert_json_body, verb):
+    httpx_mock.add_response(method=verb.upper(), url=URL, json={'data': {}})
+    session = KanbanizeSession({'subdomain': 'teste', 'api_key': 'teste_key'})
+
+    getattr(session, verb)('/boards/1', json={'name': 'Teste'})
+
+    assert_json_body({'name': 'Teste'})
+
+
+@mark.wrapper
+def test_the_body_assertion_rejects_a_form_urlencoded_body(httpx_mock, assert_json_body):
+    """
+    Guards the guard.
+
+    Without this, `assert_json_body` could pass for both encodings and prove nothing. Sending
+    a dict through `data=` is exactly what every write method did before change 002.
+    """
+    httpx_mock.add_response(method='PUT', url=URL, json={'data': {}})
+    session = KanbanizeSession({'subdomain': 'teste', 'api_key': 'teste_key'})
+
+    session.put('/boards/1', data={'name': 'Teste'})
+
+    with raises(AssertionError, match='body is not JSON'):
+        assert_json_body({'name': 'Teste'})
+
+
+@mark.wrapper
 def test_unmapped_status_raises_value_error_with_the_generic_message(httpx_mock):
     httpx_mock.add_response(url=URL, status_code=418, text='')
 

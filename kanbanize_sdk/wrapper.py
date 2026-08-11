@@ -45,12 +45,12 @@ class KanbanizeSession:
         r = self.request('POST', url, data=data, json=json, **kwargs)
         return self.__middleware_response(r)
 
-    def put(self, url, data=None, **kwargs) -> Any:
-        r = self.request('PUT', url, data=data, **kwargs)
+    def put(self, url, data=None, json=None, **kwargs) -> Any:
+        r = self.request('PUT', url, data=data, json=json, **kwargs)
         return self.__middleware_response(r)
 
-    def patch(self, url, data=None, **kwargs) -> dict:
-        r = self.request('PATCH', url, data=data, **kwargs)
+    def patch(self, url, data=None, json=None, **kwargs) -> dict:
+        r = self.request('PATCH', url, data=data, json=json, **kwargs)
         return self.__middleware_response(r)
 
     def delete(self, url, **kwargs) -> None:

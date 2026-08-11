@@ -47,7 +47,7 @@ def test_get_merged_area(httpx_mock):
 
 
 @mark.merged_areas
-def test_insert_merged_area(httpx_mock):
+def test_insert_merged_area(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             "area_id": 0,
@@ -66,10 +66,11 @@ def test_insert_merged_area(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = MergedAreasInsertBody(lane_ids=[0], column_ids=[0], primary_column_id=0, limit=0)
     assert service.merged_areas().insert(1, body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.merged_areas
-def test_update_merged_area(httpx_mock):
+def test_update_merged_area(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             "area_id": 0,
@@ -88,6 +89,7 @@ def test_update_merged_area(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = MergedAreasUpdateBody(lane_ids=[0])
     assert service.merged_areas().update(1, 1, body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.merged_areas

@@ -1,0 +1,59 @@
+name: Release
+
+# Publishing is irreversible: PyPI does not allow re-uploading a version. Every step that can
+# fail runs before the publish step, and the publish step is the last one.
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    # Pre-releases never reach PyPI. Removing this guard means a mistaken checkbox publishes
+    # a release candidate as if it were final.
+    if: github.event.release.prerelease == false
+
+    environment: pypi
+
+    permissions:
+      # Trusted Publishing (OIDC). No PyPI token is stored in this repository.
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Install python
+        run: uv python install 3.13
+
+      - name: Check that the release tag matches the declared version
+        run: |
+          tag="${{ github.event.release.tag_name }}"
+          declared=$(uv run --no-project python -c \
+            "import tomllib,pathlib;print(tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version'])")
+          if [ "$tag" != "v$declared" ]; then
+            echo "::error::release tag '$tag' does not match pyproject version '$declared' (expected 'v$declared')"
+            exit 1
+          fi
+          echo "tag '$tag' matches pyproject version '$declared'"
+
+      - name: Install project dependencies
+        run: uv sync --no-group doc
+
+      - name: Run tests
+        run: uv run pytest -s -x -vv
+
+      - name: Build the distribution
+        run: uv build
+
+      # Last step on purpose. Nothing after this point may fail: once the package is on PyPI,
+      # that version number is spent forever.
+      - name: Publish to PyPI
+        run: uv publish

@@ -126,7 +126,7 @@ e não a registra em log.
 
 Igual ao fluxo de leitura, com duas diferenças:
 
-- O payload vai em `data=payload`.
+- O payload vai em `json=payload` — corpo JSON, coerente com o header. Ver ADR 0004.
 - O verbo varia por recurso e **não segue convenção uniforme** — `insert` é `POST` em
   `Boards`/`Teams`/`Workflows`/`Lanes`/`Columns`/`MergedAreas`, mas é **`PUT` em um id fornecido
   pelo chamador** em `BoardStickers`, `BoardCustomFields`, `BoardCustomFieldAllowedValues` e
@@ -179,7 +179,7 @@ Dívidas assumidas conscientemente. Nenhuma deve ser "consertada de surpresa" �
 | Suíte verde não prova compatibilidade com a API | 124/124 testes usam `pytest-httpx` | Aceito. Detecção é reativa, por relato de usuário |
 | `ValueError` como exceção única | `wrapper.py:77` | Aceito. Trocar por hierarquia própria é quebra de contrato 🔴 |
 | Verbo HTTP inconsistente entre `insert`/`update` de recursos diferentes | ver Fluxo 3 | Aceito. Uniformizar quebraria contrato público |
-| Escrita usa `data=payload` com um `dict`, sob header `Content-Type: application/json` — **exceto `Users.insert`, que usa `json=`** | `wrapper.py:29`, `boards.py:37`, `users.py:44` | **Não avaliado.** `requests` codifica `dict` em `data=` como form-urlencoded, não como JSON; com `json=` codifica JSON de verdade. Os dois convivem no mesmo pacote. Os testes não detectam a diferença porque mockam o transporte. <<PREENCHER: o mantenedor precisa confirmar contra a API real qual das duas formas ela aceita, antes de isso ser tratado como defeito.>> |
+| A suíte prova o que o SDK envia, não o que a API aceita | 30 asserções de corpo em `tests/` | Aceito. Desde a mudança 002 toda escrita manda JSON (ADR 0004) e isso é verificado por teste, mas nenhum teste toca a API real |
 | Sem lint, sem type-check, sem meta de cobertura no CI | `pipeline.yml` | Aceito hoje |
 | `BoardsListParams` sem `@dataclass` — dataclass inutilizável | `dataclasses.py:124` | **Defeito confirmado.** Ver `modulos/boards.md` |
 | `WorkflowsInsetBody` com typo em símbolo público | `dataclasses.py`, `__init__.py` | Corrigir é 🔴 quebra de contrato |

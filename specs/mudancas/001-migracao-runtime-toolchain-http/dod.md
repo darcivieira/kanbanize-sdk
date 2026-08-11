@@ -54,6 +54,10 @@ Legenda: ☑ verificado · ☐ **não** verificado · ➖ não se aplica
 
 ## Itens que ficaram por verificar
 
-- ☐ **Build do Read the Docs.** A configuração está correta e o `mkdocs build` local é verde,
-  mas o job do RTD com uv nunca foi executado — não é coberto pelo `pipeline.yml`. Este é o
-  único item do DoD que o fechamento **não** consegue afirmar.
+Nenhum.
+
+- ☑ **Build do Read the Docs** — verificado em 2026-08-10, depois do merge da PR #6, pela
+  documentação publicada: `kanbanize-sdk.readthedocs.io/en/latest/` traz a seção
+  "Python 3.13 or newer" e o exemplo com `UsersListParams`/`user_ids`, conteúdo que só existe
+  na `main` pós-migração; e `/api/boards/` renderiza a classe com as cinco assinaturas, o que
+  prova que o `mkdocstrings` rodou. O build com uv funcionou.

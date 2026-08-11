@@ -41,7 +41,7 @@ class Lanes(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, LanesInsertBody) else body
 
-        return self.service.post(self.endpoint + f'/{board_id}/lanes', data=payload)
+        return self.service.post(self.endpoint + f'/{board_id}/lanes', json=payload)
 
     def get(self, board_id: int, lane_id: int, *args, **kwargs) -> dict:
         """
@@ -70,7 +70,7 @@ class Lanes(GenericRequestMethod):
 
         payload = body.to_dict() if isinstance(body, LanesUpdateBody) else body
 
-        return self.service.patch(self.endpoint + f'/{board_id}/lanes/{lane_id}', data=payload)
+        return self.service.patch(self.endpoint + f'/{board_id}/lanes/{lane_id}', json=payload)
 
     def delete(self, board_id: int, lane_id: int, *args, **kwargs) -> None:
         """

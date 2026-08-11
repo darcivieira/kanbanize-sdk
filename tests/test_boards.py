@@ -36,7 +36,7 @@ def test_get_board(httpx_mock):
 
 
 @mark.boards
-def test_insert_board(httpx_mock):
+def test_insert_board(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'board_id': 1,
@@ -50,10 +50,22 @@ def test_insert_board(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = BoardsInsertBody(workspace_id=0, name='Teste', description='Description test')
     assert service.boards().insert(body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.boards
-def test_update_board(httpx_mock):
+def test_insert_board_with_a_raw_dict_body(httpx_mock, assert_json_body):
+    """Every write method accepts a raw dict as well as a dataclass, and both must send JSON."""
+    test_json = {'data': {'board_id': 1, 'name': 'Test'}}
+    httpx_mock.add_response(method='POST', url='https://teste.kanbanize.com/api/v2/boards', json=test_json)
+    service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
+    body = {'workspace_id': 0, 'name': 'Teste', 'description': 'Description test'}
+    assert service.boards().insert(body) == test_json.get('data')
+    assert_json_body(body)
+
+
+@mark.boards
+def test_update_board(httpx_mock, assert_json_body):
     test_json = {
         'data': {
             'board_id': 1,
@@ -67,6 +79,7 @@ def test_update_board(httpx_mock):
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     body = BoardsUpdateBody(is_archived=0)
     assert service.boards().update(1, body) == test_json.get('data')
+    assert_json_body(body.to_dict())
 
 
 @mark.boards
