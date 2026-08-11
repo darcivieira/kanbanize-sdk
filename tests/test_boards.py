@@ -1,5 +1,5 @@
 from pytest import mark
-from kanbanize_sdk import Kanbanize, BoardsInsertBody, BoardsUpdateBody
+from kanbanize_sdk import Kanbanize, BoardsInsertBody, BoardsListParams, BoardsUpdateBody
 
 
 @mark.boards
@@ -18,6 +18,40 @@ def test_list_boards(httpx_mock):
     httpx_mock.add_response(method='GET', url='https://teste.kanbanize.com/api/v2/boards', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
     assert service.boards().list() == test_json.get('data')
+
+
+@mark.boards
+def test_list_boards_with_params(httpx_mock):
+    """`BoardsListParams` must build a usable instance and reach the wire as a query string.
+
+    `BaseDataClasse.to_dict()` stringifies every list item, so the filters travel as repeated
+    query parameters holding strings.
+    """
+    test_json = {
+        'data': [
+            {
+                'board_id': 1,
+                'name': 'Teste'
+            }
+        ]
+    }
+    httpx_mock.add_response(
+        method='GET',
+        url='https://teste.kanbanize.com/api/v2/boards'
+            '?board_ids=1&board_ids=2&is_archived=0&fields=board_id&fields=name',
+        json=test_json
+    )
+    service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
+    params = BoardsListParams(board_ids=[1, 2], is_archived=0, fields=['board_id', 'name'])
+
+    assert params.to_dict() == {'board_ids': ['1', '2'], 'is_archived': 0, 'fields': ['board_id', 'name']}
+    assert service.boards().list(params) == test_json.get('data')
+
+    request = httpx_mock.get_request()
+    assert request.url.params.get_list('board_ids') == ['1', '2']
+    assert request.url.params.get_list('fields') == ['board_id', 'name']
+    assert request.url.params.get('is_archived') == '0'
+    assert 'workspace_ids' not in request.url.params
 
 
 @mark.boards

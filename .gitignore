@@ -177,3 +177,6 @@ pyrightconfig.json
 
 # Generated using ignr.py - github.com/Antrikshy/ignr.py
 
+
+# worktrees temporários de agentes
+.claude/worktrees/
