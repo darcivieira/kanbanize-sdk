@@ -89,20 +89,15 @@ estiver no arquivo por outro motivo. Não precisa de permissão caso a caso.
 
 | Dívida | Onde |
 |---|---|
-| `BoardsListParams` sem `@dataclass` — **defeito confirmado, não cosmético**: a dataclass é inutilizável | `dataclasses.py:124`, detalhado em `modulos/boards.md` |
-| Docstrings placeholder `"""Set here a documentation"""` nas 36 dataclasses | `dataclasses.py` |
-| `LICENSE` com `[year]` e `[fullname]` literais | `LICENSE` |
 | `BoardChildParentCards` exportada e vazia | `endpoints/board_child_parent_cards.py` |
 | Ausência de lint e type-check | `pyproject.toml`, `pipeline.yml` |
 | `dataclasses.py` monolítico, 443 linhas | `dataclasses.py` |
 
 **"Aberta" não rebaixa a classificação de risco.** Continua valendo `03-limites-agente.md`:
 
-- Preencher docstring e preencher a `LICENSE` → 🟢 GREEN, faça. (O exemplo do README foi
-  corrigido na mudança 001.)
-- Adicionar `@dataclass` em `BoardsListParams` → 🟢 GREEN: é correção de defeito com causa
-  evidente, em um arquivo, e ninguém pode estar dependendo do comportamento atual, que é um
-  `TypeError`. Exige teste que falhe antes da correção.
+- Apagar o `private` comentado em `workspace_managers.py` e `workspace_history.py` → 🟢 GREEN:
+  é código comentado, e o DoD proíbe deixá-lo para trás. **Mas desligar de fato aqueles
+  métodos é outra coisa** — muda o que o consumidor pode chamar, e é mudança de contrato.
 - Implementar `BoardChildParentCards` → 🟡 YELLOW: é recurso novo, precisa de spec.
 - Adotar lint/type-check → mudança de toolchain e de CI, 🔴 RED com ADR.
 - Dividir `dataclasses.py` → muda o caminho de import de 36 símbolos públicos, 🔴 RED.

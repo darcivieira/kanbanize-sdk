@@ -85,24 +85,25 @@ Rode `uv sync --no-group doc` antes de concluir que a suíte quebrou.
   junto com a migração de toolchain.
 - **Nada é excluído da métrica** — a medição é sobre `kanbanize_sdk/` inteiro.
 
-### Medição real em 2026-08-07, após a mudança 001
+### Medição real em 2026-08-11
 
-`124 passed`, **99% de cobertura de linha** (786 statements, 3 não cobertos), em Python
-3.13.11 local.
+`200 passed`, **99% de cobertura de linha** (787 statements, **1** não coberto), em Python
+3.13.11.
 
 A contagem de statements não é comparável com medições anteriores a 2026-08-07: o `coverage`
 subiu de 7.5.3 para 7.15.4 e passou a contar corpos `...` e anotações de classe de outro modo.
 
-O número engana: os módulos de endpoint são uma linha por método, então a cobertura alta vem
-da parte trivial. O que **não** está coberto é a única parte com lógica de verdade.
-
-| Não coberto | Linhas | Por quê importa |
+| Não coberto | Linha | Por quê importa |
 |---|---|---|
-| `utils.py` | 4 | O `private` nunca é acionado — nada garante que método desligado levante `AttributeError` |
-| `client.py` | 125 | A fábrica `board_child_parent_cards()` — coerente com a classe estar vazia |
-| — | — | `wrapper.py` passou a **100%** com `tests/test_wrapper.py`, criado na mudança 001 |
-| `endpoints/workspace_managers.py` | 21 | O `list()` de gerentes de workspace não tem teste |
-| `endpoints/generics.py` | 13, 16, 19, 22, 25 | Corpos no-op da ABC — aceitável, ver "não se testa" |
+| `client.py` | 125 | A fábrica `board_child_parent_cards()` — coerente com a classe estar vazia. É a **única** lacuna que sobra, e só fecha quando o recurso for implementado |
 
-As três primeiras são **lacuna a fechar**, não decisão. Estão no `visao/ROADMAP.md`.
-O middleware de erro, que era a maior delas, foi fechado na mudança 001.
+Todas as demais lacunas foram fechadas: o caminho de erro do `wrapper.py` na mudança 001, e
+`utils.private` mais `WorkspaceManagers.list` na onda de correções GREEN de 2026-08-11.
+
+Dois defeitos de teste apareceram nessa onda e valem como alerta de padrão:
+
+- `test_workspace_managers.py` tinha **duas funções com o mesmo nome**; a segunda sombreava a
+  primeira, que nunca rodava — e a morta era justamente o teste do `list`. Nome duplicado não
+  gera erro em Python: o teste some em silêncio.
+- Onze testes carregavam nome copiado do arquivo de origem (`test_get_merged_area` dentro de
+  `test_board_block_reasons.py`). Nome errado manda quem lê a falha para o recurso errado.
