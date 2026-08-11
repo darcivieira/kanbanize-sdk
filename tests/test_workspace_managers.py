@@ -2,7 +2,7 @@ from kanbanize_sdk import Kanbanize
 from pytest import mark
 
 @mark.workspace_managers
-def test_get_workspace_managers(httpx_mock):
+def test_list_workspace_managers(httpx_mock):
     test_json = {
          "data": [
                 {
@@ -10,9 +10,9 @@ def test_get_workspace_managers(httpx_mock):
                 }
             ]
     }
-    httpx_mock.add_response(method='GET', url='https://teste.kanbanize.com/api/v2/workspaces/1/managers/56', json=test_json)
+    httpx_mock.add_response(method='GET', url='https://teste.kanbanize.com/api/v2/workspaces/1/managers', json=test_json)
     service = Kanbanize({'subdomain': 'teste', 'api_key': 'teste_key'})
-    assert service.workspace_managers().list(workspace_id=1, user_id=2) == test_json.get('data')
+    assert service.workspace_managers().list(workspace_id=1) == test_json.get('data')
 
 @mark.workspace_managers
 def test_get_workspace_managers(httpx_mock):
