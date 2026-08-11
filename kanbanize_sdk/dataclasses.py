@@ -15,7 +15,7 @@ class BaseDataClasse:
 @dataclass
 class UsersListParams(BaseDataClasse):
     """
-    Set here a documentation
+    Query parameters accepted when listing users.
     """
     user_ids: Optional[List] = None
     is_enabled: Optional[Literal[0, 1]] = None
@@ -28,7 +28,7 @@ class UsersListParams(BaseDataClasse):
 @dataclass
 class UsersInsertBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to create a user.
     """
     email: str
 
@@ -36,7 +36,7 @@ class UsersInsertBody(BaseDataClasse):
 @dataclass
 class UsersUpdateBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to update an existing user.
     """
     email: Optional[str] = None
     username: Optional[str] = None
@@ -47,7 +47,7 @@ class UsersUpdateBody(BaseDataClasse):
 @dataclass
 class TeamsListParams(BaseDataClasse):
     """
-    Set here a documentation
+    Query parameters accepted when listing teams.
     """
     team_ids: Optional[List] = None
     name: Optional[str] = None
@@ -58,7 +58,7 @@ class TeamsListParams(BaseDataClasse):
 @dataclass
 class TeamsInsertBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to create a team.
     """
     name: str
     description: Optional[str] = None
@@ -67,7 +67,7 @@ class TeamsInsertBody(BaseDataClasse):
 @dataclass
 class TeamsUpdateBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to update an existing team.
     """
     name: Optional[str] = None
     description: Optional[str] = None
@@ -76,7 +76,7 @@ class TeamsUpdateBody(BaseDataClasse):
 @dataclass
 class WorkspacesListParams(BaseDataClasse):
     """
-    Set here a documentation
+    Query parameters accepted when listing workspaces.
     """
     workspace_ids: Optional[List] = None
     type: Optional[Literal[1, 2]] = None
@@ -90,7 +90,7 @@ class WorkspacesListParams(BaseDataClasse):
 @dataclass
 class WorkspacesInsertBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to create a workspace.
     """
     name: str
     type: Literal[1, 2]
@@ -99,7 +99,7 @@ class WorkspacesInsertBody(BaseDataClasse):
 @dataclass
 class WorkspacesUpdateBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to update an existing workspace.
     """
     name: Optional[str] = None
     is_archived: Optional[Literal[0, 1]] = None
@@ -108,7 +108,7 @@ class WorkspacesUpdateBody(BaseDataClasse):
 @dataclass
 class WorkspaceHistoryListParams(BaseDataClasse):
     """
-    Set here a documentation
+    Query parameters accepted when listing the history of a workspace.
     """
     workspace_ids: Optional[List] = None
     user_ids: Optional[List] = None
@@ -124,7 +124,7 @@ class WorkspaceHistoryListParams(BaseDataClasse):
 @dataclass
 class BoardsListParams(BaseDataClasse):
     """
-    Set here a documentation
+    Query parameters accepted when listing boards.
     """
     board_ids: Optional[List] = None
     workspace_ids: Optional[List] = None
@@ -137,7 +137,7 @@ class BoardsListParams(BaseDataClasse):
 @dataclass
 class BoardsInsertBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to create a board.
     """
     workspace_id: int
     name: str
@@ -147,7 +147,7 @@ class BoardsInsertBody(BaseDataClasse):
 @dataclass
 class BoardsUpdateBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to update an existing board.
     """
     name: Optional[str] = None
     description: Optional[str] = None
@@ -157,7 +157,7 @@ class BoardsUpdateBody(BaseDataClasse):
 @dataclass
 class BoardSettingsUpdateBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to update the settings of a board.
     """
     size_type: Optional[int] = None
     allow_exceeding: Optional[int] = None
@@ -170,7 +170,7 @@ class BoardSettingsUpdateBody(BaseDataClasse):
 @dataclass
 class BoardHistoryListParams(BaseDataClasse):
     """
-    Set here a documentation
+    Query parameters accepted when listing the history of a board.
 
     Parameters:
         board_ids: It's a list of integer number and can be not specified
@@ -189,7 +189,7 @@ class BoardHistoryListParams(BaseDataClasse):
 @dataclass
 class WorkflowsInsetBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to create a workflow on a board.
     """
     position: int
     is_enabled: int
@@ -201,7 +201,7 @@ class WorkflowsInsetBody(BaseDataClasse):
 @dataclass
 class WorkflowsCopyBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to copy a workflow to a board.
     """
     name: str
     to_board_id: int
@@ -212,7 +212,7 @@ class WorkflowsCopyBody(BaseDataClasse):
 @dataclass
 class WorkflowsUpdateBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to update an existing workflow.
     """
     position: Optional[int] = None
     is_enabled: Optional[int] = None
@@ -224,7 +224,7 @@ class WorkflowsUpdateBody(BaseDataClasse):
 @dataclass
 class LanesListParams(BaseDataClasse):
     """
-    Set here a documentation
+    Query parameters accepted when listing the lanes of a board.
     """
     fields: Optional[List[str]] = None
 
@@ -232,7 +232,7 @@ class LanesListParams(BaseDataClasse):
 @dataclass
 class LanesInsertBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to create a lane on a board.
     """
     workflow_id: int
     parent_lane_id: int
@@ -245,7 +245,7 @@ class LanesInsertBody(BaseDataClasse):
 @dataclass
 class LanesUpdateBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to update an existing lane.
     """
     parent_lane_id: Optional[int] = None
     position: Optional[int] = None
@@ -257,7 +257,7 @@ class LanesUpdateBody(BaseDataClasse):
 @dataclass
 class ColumnsListParams(LanesListParams):
     """
-    Set here a documentation
+    Query parameters accepted when listing the columns of a board.
     """
     ...
 
@@ -265,7 +265,7 @@ class ColumnsListParams(LanesListParams):
 @dataclass
 class ColumnsInsertBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to create a column on a board.
     """
     workflow_id: int
     section: int
@@ -282,7 +282,7 @@ class ColumnsInsertBody(BaseDataClasse):
 @dataclass
 class ColumnsUpdateBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to update an existing column.
     """
     section: Optional[int] = None
     parent_column_id: Optional[int] = None
@@ -298,7 +298,7 @@ class ColumnsUpdateBody(BaseDataClasse):
 @dataclass
 class CellLimitsUpdateBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to update the cell limits of a board.
     """
     lane_id: int
     column_id: int
@@ -308,7 +308,7 @@ class CellLimitsUpdateBody(BaseDataClasse):
 @dataclass
 class MergedAreasInsertBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to create a merged area on a board.
     """
     lane_ids: list
     column_ids: list
@@ -319,7 +319,7 @@ class MergedAreasInsertBody(BaseDataClasse):
 @dataclass
 class MergedAreasUpdateBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to update an existing merged area.
     """
     lane_ids: Optional[List] = None
     column_ids: Optional[List] = None
@@ -330,7 +330,7 @@ class MergedAreasUpdateBody(BaseDataClasse):
 @dataclass
 class LaneSectionLimitsUpdateBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to update the lane section limits of a board.
     """
     lane_id: int
     section: list
@@ -340,7 +340,7 @@ class LaneSectionLimitsUpdateBody(BaseDataClasse):
 @dataclass
 class BoardAssigneesUpdateBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to update an assignee of a board.
     """
     role_id: int
 
@@ -348,7 +348,7 @@ class BoardAssigneesUpdateBody(BaseDataClasse):
 @dataclass
 class BoardStickersInsertBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to add a sticker to a board.
     """
     limit_per_board: int
     limit_per_card: int
@@ -357,7 +357,7 @@ class BoardStickersInsertBody(BaseDataClasse):
 @dataclass
 class BoardStickersUpdateBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to update a sticker of a board.
     """
     limit_per_board: Optional[int] = None
     limit_per_card: Optional[int] = None
@@ -366,7 +366,7 @@ class BoardStickersUpdateBody(BaseDataClasse):
 @dataclass
 class BoardCardTypesInsertBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to add a card type to a board.
     """
     icon_type: int
     icon_id: int
@@ -377,7 +377,7 @@ class BoardCardTypesInsertBody(BaseDataClasse):
 @dataclass
 class BoardCardTypesUpdateBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to update a card type of a board.
     """
     icon_type: Optional[int] = None
     icon_id: Optional[int] = None
@@ -388,7 +388,7 @@ class BoardCardTypesUpdateBody(BaseDataClasse):
 @dataclass
 class BoardCustomFieldsInsertBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to add a custom field to a board.
     """
     is_always_present: int
     position: int
@@ -405,7 +405,7 @@ class BoardCustomFieldsInsertBody(BaseDataClasse):
 @dataclass
 class BoardCustomFieldsUpdateBody(BoardCustomFieldsInsertBody):
     """
-    Set here a documentation
+    Request body used to update a custom field of a board.
     """
     is_always_present: Optional[int] = None
     position: Optional[int] = None
@@ -421,7 +421,7 @@ class BoardCustomFieldsUpdateBody(BoardCustomFieldsInsertBody):
 @dataclass
 class BoardCustomFieldAllowedValuesInsertBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to add an allowed value to a board custom field.
     """
     position: int
     is_default: int
@@ -430,7 +430,7 @@ class BoardCustomFieldAllowedValuesInsertBody(BaseDataClasse):
 @dataclass
 class BoardCustomFieldAllowedValuesUpdateBody(BoardCustomFieldAllowedValuesInsertBody):
     """
-    Set here a documentation
+    Request body used to update an allowed value of a board custom field.
     """
     position: Optional[int] = None
     is_default: Optional[int] = None
@@ -439,6 +439,6 @@ class BoardCustomFieldAllowedValuesUpdateBody(BoardCustomFieldAllowedValuesInser
 @dataclass
 class BoardTeamsUpdateBody(BaseDataClasse):
     """
-    Set here a documentation
+    Request body used to update a team assigned to a board.
     """
     role_id: int
