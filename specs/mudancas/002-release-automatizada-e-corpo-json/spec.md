@@ -2,7 +2,7 @@
 id: 002-release-automatizada-e-corpo-json
 titulo: Padronizar o corpo das escritas em JSON e automatizar a publicação no PyPI
 classificacao: 🔴 RED
-status: aprovada
+status: em-implementacao
 criada: 2026-08-10
 modulos: [boards, users, "+ 14 arquivos de endpoints com chamada de escrita"]
 telas: []
