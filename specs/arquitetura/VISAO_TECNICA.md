@@ -89,6 +89,8 @@ controle do mantenedor.
 - Não há download do spec, não há codegen, não há schema versionado no repositório.
 - Depois de publicado, a divergência é descoberta **por relato de não funcionamento** de quem
   consome a lib. Só então o mantenedor investiga se a API mudou.
+- Divergência entre o comportamento real e o documentado é **defeito da plataforma**, não do
+  SDK — ADR 0006. A correção é adaptação a um fato novo, não conserto de erro nosso.
 
 **Consequência a assumir, não a esconder:** os 30 arquivos de teste mockam a camada HTTP com
 `pytest-httpx` e afirmam que o SDK devolve o `data` do JSON que o próprio teste escreveu.
@@ -179,7 +181,7 @@ Dívidas assumidas conscientemente. Nenhuma deve ser "consertada de surpresa" �
 | Suíte verde não prova compatibilidade com a API | 124/124 testes usam `pytest-httpx` | Aceito. Detecção é reativa, por relato de usuário |
 | `ValueError` como exceção única | `wrapper.py:77` | Aceito. Trocar por hierarquia própria é quebra de contrato 🔴 |
 | Verbo HTTP inconsistente entre `insert`/`update` de recursos diferentes | ver Fluxo 3 | Aceito. Uniformizar quebraria contrato público |
-| A suíte prova o que o SDK envia, não o que a API aceita | 30 asserções de corpo em `tests/` | Aceito. Desde a mudança 002 toda escrita manda JSON (ADR 0004) e isso é verificado por teste, mas nenhum teste toca a API real |
+| A suíte prova o que o SDK envia, não o que a API aceita | 34 asserções de corpo em `tests/` | **Risco aceito por decisão — ADR 0006.** A documentação oficial é o contrato de referência; transcrição fiel é correta por definição. O risco residual é a transcrição, mitigado por registrar o trecho da doc em `specs/modulos/` |
 | Sem lint, sem type-check, sem meta de cobertura no CI | `pipeline.yml` | Aceito hoje |
 | `BoardsListParams` sem `@dataclass` — dataclass inutilizável | `dataclasses.py:124` | **Defeito confirmado.** Ver `modulos/boards.md` |
 | `WorkflowsInsetBody` com typo em símbolo público | `dataclasses.py`, `__init__.py` | Corrigir é 🔴 quebra de contrato |
