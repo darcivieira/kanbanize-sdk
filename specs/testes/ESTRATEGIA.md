@@ -18,12 +18,18 @@ há banco, processo ou interface para integrar. Todo teste mocka o transporte co
 
 - **A API real da Kanbanize.** Proibido. A divergência de contrato é detectada por relato de
   quem usa a lib, não pela suíte — ver `arquitetura/VISAO_TECNICA.md`.
-- **O comportamento interno de `requests`.** É dependência madura; testá-la é testar terceiro.
+- **O comportamento interno de `httpx`.** É dependência madura; testá-la é testar terceiro.
 - **Os corpos no-op de `GenericRequestMethod`.** São stubs abstratos sem comportamento.
 
 **Consequência que precisa estar dita:** a suíte verde **não** prova que o SDK conversa
 corretamente com a Kanbanize. Prova apenas que ele faz o que o próprio teste descreveu. Um
 path errado passa em 100% dos testes.
+
+Isso é **decisão, não lacuna** — ver ADR 0006. A documentação oficial é o contrato de
+referência, e um método transcrito fielmente dela está correto por definição. O que a suíte
+não cobre, e nenhuma suíte cobrirá enquanto chamada real for proibida, é se a **transcrição**
+foi fiel. O controle disso é registrar o trecho de documentação de cada recurso em
+`specs/modulos/<recurso>.md`. Recurso sem esse registro é recurso sem contrato auditável.
 
 ## Regras
 
