@@ -1,6 +1,6 @@
 [project]
 name = "kanbanize-sdk"
-version = "0.3.0"
+version = "0.3.1"
 description = "Kanbanize-sdk is a python library for interacting with the official Kanbanize tool environment in version 2."
 authors = [{ name = "darcivieira", email = "darcivieira.junior@gmail.com" }]
 readme = "README.md"
